@@ -1,3 +1,7 @@
+default:
+    path:     /
+    defaults: { _controller: OTBackendBundle:Security:login }
+
 login:
     path:     /backend/login
     defaults: { _controller: OTBackendBundle:Security:login }

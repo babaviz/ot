@@ -1,14 +1,17 @@
 security:
     encoders:
-        OT\BackendBundle\Entity\Teacher:
+        OT\BackendBundle\Entity\User:
             algorithm: bcrypt
 
     role_hierarchy:
         ROLE_ADMIN:       [ ADMIN ]
+        ROLE_SUPER_ADMIN: [ ROLE_ADMIN ]
+        ROLE_TEACHER:     [ TEACHER ]
+        ROLE_LEARNER:     [ LEARNER ]
 
     providers:
-        administrators:
-            entity: { class: OTBackendBundle:Teacher, property: username }
+        users:
+            entity: { class: OTBackendBundle:User, property: username }
 
     firewalls:
         secured_area:

@@ -2,14 +2,14 @@
 namespace OT\BackendBundle\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity
- * @ORM\Entity(repositoryClass="OT\BackendBundle\Entity\LearnerRepository")
- * 
+ * @ORM\Entity(repositoryClass="OT\BackendBundle\Entity\UserRepository")
  * 
  */
-class Learner
+class User implements UserInterface, \Serializable
 {
     /**
      * @ORM\Id
@@ -46,6 +46,11 @@ class Learner
     /**
      * @ORM\Column(type="string", length=16, nullable=false)
      */
+    private $roles;
+
+    /**
+     * 
+     */
     private $role;
 
     /**
@@ -69,21 +74,49 @@ class Learner
     private $introduction;
 
     /**
-     * @ORM\OneToMany(targetEntity="TransactionRecord", mappedBy="Learner")
+     * @ORM\Column(type="boolean", nullable=false)
+     */
+    private $is_admin;
+
+    /**
+     * @ORM\OneToMany(targetEntity="TransactionRecord", mappedBy="User")
      */
     private $TransactionRecords;
 
     /**
-     * @ORM\OneToMany(targetEntity="BookedTime", mappedBy="Learner")
+     * @ORM\OneToMany(targetEntity="FreeTime", mappedBy="User")
      */
-    private $BookedTimes;
+    private $FreeTimes;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Course", inversedBy="Users")
+     * @ORM\JoinTable(
+     *     name="CourseHasUser",
+     *     joinColumns={@ORM\JoinColumn(name="User_id", referencedColumnName="id", nullable=false)},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="course_id", referencedColumnName="id", nullable=false)}
+     * )
+     */
+    private $Courses;
     /**
      * Constructor
      */
     public function __construct()
     {
         $this->TransactionRecords = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->BookedTimes = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->FreeTimes = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->Courses = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    function getSalt()
+    {
+        return null;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function eraseCredentials()
+    {
     }
 
     /**
@@ -100,7 +133,7 @@ class Learner
      * Set username
      *
      * @param string $username
-     * @return Learner
+     * @return User
      */
     public function setUsername($username)
     {
@@ -123,7 +156,7 @@ class Learner
      * Set password
      *
      * @param string $password
-     * @return Learner
+     * @return User
      */
     public function setPassword($password)
     {
@@ -146,7 +179,7 @@ class Learner
      * Set name
      *
      * @param string $name
-     * @return Learner
+     * @return User
      */
     public function setName($name)
     {
@@ -163,13 +196,14 @@ class Learner
     public function getName()
     {
         return $this->name;
+
     }
 
     /**
      * Set email
      *
      * @param string $email
-     * @return Learner
+     * @return User
      */
     public function setEmail($email)
     {
@@ -187,35 +221,12 @@ class Learner
     {
         return $this->email;
     }
-
-    /**
-     * Set role
-     *
-     * @param string $role
-     * @return Learner
-     */
-    public function setRole($role)
-    {
-        $this->role = $role;
-
-        return $this;
-    }
-
-    /**
-     * Get role
-     *
-     * @return string 
-     */
-    public function getRole()
-    {
-        return $this->role;
-    }
-
+    
     /**
      * Set account_balance
      *
      * @param float $accountBalance
-     * @return Learner
+     * @return User
      */
     public function setAccountBalance($accountBalance)
     {
@@ -238,7 +249,7 @@ class Learner
      * Set create_time
      *
      * @param \DateTime $createTime
-     * @return Learner
+     * @return User
      */
     public function setCreateTime($createTime)
     {
@@ -261,7 +272,7 @@ class Learner
      * Set timezone
      *
      * @param string $timezone
-     * @return Learner
+     * @return User
      */
     public function setTimezone($timezone)
     {
@@ -284,7 +295,7 @@ class Learner
      * Set introduction
      *
      * @param string $introduction
-     * @return Learner
+     * @return User
      */
     public function setIntroduction($introduction)
     {
@@ -304,10 +315,33 @@ class Learner
     }
 
     /**
+     * Set is_admin
+     *
+     * @param boolean $isAdmin
+     * @return User
+     */
+    public function setIsAdmin($isAdmin)
+    {
+        $this->is_admin = $isAdmin;
+
+        return $this;
+    }
+
+    /**
+     * Get is_admin
+     *
+     * @return boolean 
+     */
+    public function getIsAdmin()
+    {
+        return $this->is_admin;
+    }
+
+    /**
      * Add TransactionRecords
      *
      * @param \OT\BackendBundle\Entity\TransactionRecord $transactionRecords
-     * @return Learner
+     * @return User
      */
     public function addTransactionRecord(\OT\BackendBundle\Entity\TransactionRecord $transactionRecords)
     {
@@ -337,43 +371,127 @@ class Learner
     }
 
     /**
-     * Add BookedTimes
+     * Add FreeTimes
      *
-     * @param \OT\BackendBundle\Entity\BookedTime $bookedTimes
-     * @return Learner
+     * @param \OT\BackendBundle\Entity\FreeTime $freeTimes
+     * @return User
      */
-    public function addBookedTime(\OT\BackendBundle\Entity\BookedTime $bookedTimes)
+    public function addFreeTime(\OT\BackendBundle\Entity\FreeTime $freeTimes)
     {
-        $this->BookedTimes[] = $bookedTimes;
+        $this->FreeTimes[] = $freeTimes;
 
         return $this;
     }
 
     /**
-     * Remove BookedTimes
+     * Remove FreeTimes
      *
-     * @param \OT\BackendBundle\Entity\BookedTime $bookedTimes
+     * @param \OT\BackendBundle\Entity\FreeTime $freeTimes
      */
-    public function removeBookedTime(\OT\BackendBundle\Entity\BookedTime $bookedTimes)
+    public function removeFreeTime(\OT\BackendBundle\Entity\FreeTime $freeTimes)
     {
-        $this->BookedTimes->removeElement($bookedTimes);
+        $this->FreeTimes->removeElement($freeTimes);
     }
 
     /**
-     * Get BookedTimes
+     * Get FreeTimes
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getBookedTimes()
+    public function getFreeTimes()
     {
-        return $this->BookedTimes;
+        return $this->FreeTimes;
+    }
+
+    /**
+     * Add Courses
+     *
+     * @param \OT\BackendBundle\Entity\Course $courses
+     * @return User
+     */
+    public function addCourse(\OT\BackendBundle\Entity\Course $courses)
+    {
+        $this->Courses[] = $courses;
+
+        return $this;
+    }
+
+    /**
+     * Remove Courses
+     *
+     * @param \OT\BackendBundle\Entity\Course $courses
+     */
+    public function removeCourse(\OT\BackendBundle\Entity\Course $courses)
+    {
+        $this->Courses->removeElement($courses);
+    }
+
+    /**
+     * Get Courses
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCourses()
+    {
+        return $this->Courses;
+    }
+
+    /**
+     * @see \Serializable::serialize()
+     */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->username,
+            $this->password,
+            // see section on salt below
+            // $this->salt,
+        ));
+    }
+
+    /**
+     * @see \Serializable::unserialize()
+     */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->username,
+            $this->password,
+            // see section on salt below
+            // $this->salt
+        ) = unserialize($serialized);
+    }
+
+    /**
+     * Set roles
+     *
+     * @param array $roles
+     * @return User
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * Get roles
+     *
+     * @return array 
+     */
+    public function getRoles()
+    {
+        return str_split($this->roles,16);
     }
 
     /**
      * Set phone
      *
      * @param string $phone
-     * @return Learner
+     * @return User
      */
     public function setPhone($phone)
     {
@@ -391,4 +509,5 @@ class Learner
     {
         return $this->phone;
     }
+
 }

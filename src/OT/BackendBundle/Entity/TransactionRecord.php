@@ -47,16 +47,10 @@ class TransactionRecord
     private $BookedTime;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Teacher", inversedBy="TransactionRecords")
-     * @ORM\JoinColumn(name="teacher_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="TransactionRecords")
+     * @ORM\JoinColumn(name="User_id", referencedColumnName="id")
      */
-    private $Teacher;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Learner", inversedBy="TransactionRecords")
-     * @ORM\JoinColumn(name="learner_id", referencedColumnName="id")
-     */
-    private $Learner;
+    private $User;
 
     /**
      * Get id
@@ -207,48 +201,25 @@ class TransactionRecord
     }
 
     /**
-     * Set Teacher
+     * Set User
      *
-     * @param \OT\BackendBundle\Entity\Teacher $teacher
+     * @param \OT\BackendBundle\Entity\User $User
      * @return TransactionRecord
      */
-    public function setTeacher(\OT\BackendBundle\Entity\Teacher $teacher = null)
+    public function setUser(\OT\BackendBundle\Entity\User $User = null)
     {
-        $this->Teacher = $teacher;
+        $this->User = $User;
 
         return $this;
     }
 
     /**
-     * Get Teacher
+     * Get User
      *
-     * @return \OT\BackendBundle\Entity\Teacher 
+     * @return \OT\BackendBundle\Entity\User 
      */
-    public function getTeacher()
+    public function getUser()
     {
-        return $this->Teacher;
-    }
-
-    /**
-     * Set Learner
-     *
-     * @param \OT\BackendBundle\Entity\Learner $learner
-     * @return TransactionRecord
-     */
-    public function setLearner(\OT\BackendBundle\Entity\Learner $learner = null)
-    {
-        $this->Learner = $learner;
-
-        return $this;
-    }
-
-    /**
-     * Get Learner
-     *
-     * @return \OT\BackendBundle\Entity\Learner 
-     */
-    public function getLearner()
-    {
-        return $this->Learner;
+        return $this->User;
     }
 }

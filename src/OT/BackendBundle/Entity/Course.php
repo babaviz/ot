@@ -59,16 +59,16 @@ class Course
     private $Category;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Teacher", mappedBy="Courses")
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="Courses")
      */
-    private $Teachers;
+    private $Users;
     /**
      * Constructor
      */
     public function __construct()
     {
         $this->BookedTimes = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->Teachers = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->Users = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -253,36 +253,36 @@ class Course
     }
 
     /**
-     * Add Teachers
+     * Add Users
      *
-     * @param \OT\BackendBundle\Entity\Teacher $teachers
+     * @param \OT\BackendBundle\Entity\User $Users
      * @return Course
      */
-    public function addTeacher(\OT\BackendBundle\Entity\Teacher $teachers)
+    public function addUser(\OT\BackendBundle\Entity\User $Users)
     {
-        $this->Teachers[] = $teachers;
+        $this->Users[] = $Users;
 
         return $this;
     }
 
     /**
-     * Remove Teachers
+     * Remove Users
      *
-     * @param \OT\BackendBundle\Entity\Teacher $teachers
+     * @param \OT\BackendBundle\Entity\User $Users
      */
-    public function removeTeacher(\OT\BackendBundle\Entity\Teacher $teachers)
+    public function removeUser(\OT\BackendBundle\Entity\User $Users)
     {
-        $this->Teachers->removeElement($teachers);
+        $this->Users->removeElement($Users);
     }
 
     /**
-     * Get Teachers
+     * Get Users
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getTeachers()
+    public function getUsers()
     {
-        return $this->Teachers;
+        return $this->Users;
     }
 
     /**

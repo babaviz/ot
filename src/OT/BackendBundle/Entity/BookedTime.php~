@@ -33,12 +33,12 @@ class BookedTime
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $learner_comment;
+    private $Teacher_comment;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $teacher_comment;
+    private $Learner_comment;
 
     /**
      * @ORM\OneToOne(targetEntity="TransactionRecord", mappedBy="BookedTime")
@@ -58,10 +58,10 @@ class BookedTime
     private $Course;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Learner", inversedBy="BookedTimes")
-     * @ORM\JoinColumn(name="learner_id", referencedColumnName="id", nullable=false)
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="BookedTimes")
+     * @ORM\JoinColumn(name="User_id", referencedColumnName="id", nullable=false)
      */
-    private $Learner;
+    private $User;
 
     /**
      * Get id
@@ -143,58 +143,58 @@ class BookedTime
     }
 
     /**
-     * Set learner_comment
+     * Set Teacher_comment
      *
-     * @param string $learnerComment
+     * @param string $TeacherComment
      * @return BookedTime
      */
-    public function setLearnerComment($learnerComment)
+    public function setTeacherComment($TeacherComment)
     {
-        $this->learner_comment = $learnerComment;
+        $this->Teacher_comment = $TeacherComment;
 
         return $this;
     }
 
     /**
-     * Get learner_comment
-     *
-     * @return string 
-     */
-    public function getLearnerComment()
-    {
-        return $this->learner_comment;
-    }
-
-    /**
-     * Set teacher_comment
-     *
-     * @param string $teacherComment
-     * @return BookedTime
-     */
-    public function setTeacherComment($teacherComment)
-    {
-        $this->teacher_comment = $teacherComment;
-
-        return $this;
-    }
-
-    /**
-     * Get teacher_comment
+     * Get Teacher_comment
      *
      * @return string 
      */
     public function getTeacherComment()
     {
-        return $this->teacher_comment;
+        return $this->Teacher_comment;
+    }
+
+    /**
+     * Set Learner_comment
+     *
+     * @param string $LearnerComment
+     * @return BookedTime
+     */
+    public function setLearnerComment($LearnerComment)
+    {
+        $this->Learner_comment = $LearnerComment;
+
+        return $this;
+    }
+
+    /**
+     * Get Learner_comment
+     *
+     * @return string 
+     */
+    public function getLearnerComment()
+    {
+        return $this->Learner_comment;
     }
 
     /**
      * Set TransactionRecord
      *
-     * @param \OT\CoreBundle\Entity\TransactionRecord $transactionRecord
+     * @param \OT\BackendBundle\Entity\TransactionRecord $transactionRecord
      * @return BookedTime
      */
-    public function setTransactionRecord(\OT\CoreBundle\Entity\TransactionRecord $transactionRecord = null)
+    public function setTransactionRecord(\OT\BackendBundle\Entity\TransactionRecord $transactionRecord = null)
     {
         $this->TransactionRecord = $transactionRecord;
 
@@ -204,7 +204,7 @@ class BookedTime
     /**
      * Get TransactionRecord
      *
-     * @return \OT\CoreBundle\Entity\TransactionRecord 
+     * @return \OT\BackendBundle\Entity\TransactionRecord 
      */
     public function getTransactionRecord()
     {
@@ -214,10 +214,10 @@ class BookedTime
     /**
      * Set FreeTime
      *
-     * @param \OT\CoreBundle\Entity\FreeTime $freeTime
+     * @param \OT\BackendBundle\Entity\FreeTime $freeTime
      * @return BookedTime
      */
-    public function setFreeTime(\OT\CoreBundle\Entity\FreeTime $freeTime)
+    public function setFreeTime(\OT\BackendBundle\Entity\FreeTime $freeTime)
     {
         $this->FreeTime = $freeTime;
 
@@ -227,7 +227,7 @@ class BookedTime
     /**
      * Get FreeTime
      *
-     * @return \OT\CoreBundle\Entity\FreeTime 
+     * @return \OT\BackendBundle\Entity\FreeTime 
      */
     public function getFreeTime()
     {
@@ -237,10 +237,10 @@ class BookedTime
     /**
      * Set Course
      *
-     * @param \OT\CoreBundle\Entity\Course $course
+     * @param \OT\BackendBundle\Entity\Course $course
      * @return BookedTime
      */
-    public function setCourse(\OT\CoreBundle\Entity\Course $course = null)
+    public function setCourse(\OT\BackendBundle\Entity\Course $course = null)
     {
         $this->Course = $course;
 
@@ -250,7 +250,7 @@ class BookedTime
     /**
      * Get Course
      *
-     * @return \OT\CoreBundle\Entity\Course 
+     * @return \OT\BackendBundle\Entity\Course 
      */
     public function getCourse()
     {
@@ -258,25 +258,25 @@ class BookedTime
     }
 
     /**
-     * Set Learner
+     * Set User
      *
-     * @param \OT\CoreBundle\Entity\Learner $learner
+     * @param \OT\BackendBundle\Entity\User $User
      * @return BookedTime
      */
-    public function setLearner(\OT\CoreBundle\Entity\Learner $learner)
+    public function setUser(\OT\BackendBundle\Entity\User $User)
     {
-        $this->Learner = $learner;
+        $this->User = $User;
 
         return $this;
     }
 
     /**
-     * Get Learner
+     * Get User
      *
-     * @return \OT\CoreBundle\Entity\Learner 
+     * @return \OT\BackendBundle\Entity\User 
      */
-    public function getLearner()
+    public function getUser()
     {
-        return $this->Learner;
+        return $this->User;
     }
 }

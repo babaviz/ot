@@ -36,10 +36,10 @@ class FreeTime
     private $BookedTimes;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Teacher", inversedBy="FreeTimes")
-     * @ORM\JoinColumn(name="teacher_id", referencedColumnName="id", nullable=false)
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="FreeTimes")
+     * @ORM\JoinColumn(name="User_id", referencedColumnName="id", nullable=false)
      */
-    private $Teacher;
+    private $User;
     /**
      * Constructor
      */
@@ -161,25 +161,25 @@ class FreeTime
     }
 
     /**
-     * Set Teacher
+     * Set User
      *
-     * @param \OT\BackendBundle\Entity\Teacher $teacher
+     * @param \OT\BackendBundle\Entity\User $User
      * @return FreeTime
      */
-    public function setTeacher(\OT\BackendBundle\Entity\Teacher $teacher)
+    public function setUser(\OT\BackendBundle\Entity\User $User)
     {
-        $this->Teacher = $teacher;
+        $this->User = $User;
 
         return $this;
     }
 
     /**
-     * Get Teacher
+     * Get User
      *
-     * @return \OT\BackendBundle\Entity\Teacher 
+     * @return \OT\BackendBundle\Entity\User 
      */
-    public function getTeacher()
+    public function getUser()
     {
-        return $this->Teacher;
+        return $this->User;
     }
 }

@@ -340,10 +340,10 @@ class Teacher implements UserInterface, \Serializable
     /**
      * Add TransactionRecords
      *
-     * @param \OT\CoreBundle\Entity\TransactionRecord $transactionRecords
+     * @param \OT\BackendBundle\Entity\TransactionRecord $transactionRecords
      * @return Teacher
      */
-    public function addTransactionRecord(\OT\CoreBundle\Entity\TransactionRecord $transactionRecords)
+    public function addTransactionRecord(\OT\BackendBundle\Entity\TransactionRecord $transactionRecords)
     {
         $this->TransactionRecords[] = $transactionRecords;
 
@@ -353,9 +353,9 @@ class Teacher implements UserInterface, \Serializable
     /**
      * Remove TransactionRecords
      *
-     * @param \OT\CoreBundle\Entity\TransactionRecord $transactionRecords
+     * @param \OT\BackendBundle\Entity\TransactionRecord $transactionRecords
      */
-    public function removeTransactionRecord(\OT\CoreBundle\Entity\TransactionRecord $transactionRecords)
+    public function removeTransactionRecord(\OT\BackendBundle\Entity\TransactionRecord $transactionRecords)
     {
         $this->TransactionRecords->removeElement($transactionRecords);
     }
@@ -373,10 +373,10 @@ class Teacher implements UserInterface, \Serializable
     /**
      * Add FreeTimes
      *
-     * @param \OT\CoreBundle\Entity\FreeTime $freeTimes
+     * @param \OT\BackendBundle\Entity\FreeTime $freeTimes
      * @return Teacher
      */
-    public function addFreeTime(\OT\CoreBundle\Entity\FreeTime $freeTimes)
+    public function addFreeTime(\OT\BackendBundle\Entity\FreeTime $freeTimes)
     {
         $this->FreeTimes[] = $freeTimes;
 
@@ -386,9 +386,9 @@ class Teacher implements UserInterface, \Serializable
     /**
      * Remove FreeTimes
      *
-     * @param \OT\CoreBundle\Entity\FreeTime $freeTimes
+     * @param \OT\BackendBundle\Entity\FreeTime $freeTimes
      */
-    public function removeFreeTime(\OT\CoreBundle\Entity\FreeTime $freeTimes)
+    public function removeFreeTime(\OT\BackendBundle\Entity\FreeTime $freeTimes)
     {
         $this->FreeTimes->removeElement($freeTimes);
     }
@@ -406,10 +406,10 @@ class Teacher implements UserInterface, \Serializable
     /**
      * Add Courses
      *
-     * @param \OT\CoreBundle\Entity\Course $courses
+     * @param \OT\BackendBundle\Entity\Course $courses
      * @return Teacher
      */
-    public function addCourse(\OT\CoreBundle\Entity\Course $courses)
+    public function addCourse(\OT\BackendBundle\Entity\Course $courses)
     {
         $this->Courses[] = $courses;
 
@@ -419,9 +419,9 @@ class Teacher implements UserInterface, \Serializable
     /**
      * Remove Courses
      *
-     * @param \OT\CoreBundle\Entity\Course $courses
+     * @param \OT\BackendBundle\Entity\Course $courses
      */
-    public function removeCourse(\OT\CoreBundle\Entity\Course $courses)
+    public function removeCourse(\OT\BackendBundle\Entity\Course $courses)
     {
         $this->Courses->removeElement($courses);
     }

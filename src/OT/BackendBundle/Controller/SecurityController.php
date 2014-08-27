@@ -38,6 +38,20 @@ class SecurityController extends Controller
 
     public function entranceAction()
     {
-        return $this->render('OTBackendBundle:Security:entrance.html.twig'); 
+        $user=$this->get('security.context')->getToken()->getUser();
+
+        if (is_object($user)){
+            $role=$user->getRoles()[0];
+        }
+        else{
+            $role='Visitor';
+        }
+
+        if($role=='ADMIN' || $role=='SUPER_ADMIN'){
+            return $this->render('OTBackendBundle:Security:entrance.html.twig');
+        }
+
+        throw $this->createNotFoundException('ERROR: Wrong permission or role.'. ' | Current role: ' . $role);
+
     }
 }
