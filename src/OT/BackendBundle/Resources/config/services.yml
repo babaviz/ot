@@ -1,0 +1,7 @@
+parameters:
+#    ot_backend.example.class: OT\BackendBundle\Example
+
+services:
+#    ot_backend.example:
+#        class: %ot_backend.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,0 +1,24 @@
+'Old password': 旧密码
+'New password': 新密码
+'Repeat password': 再次输入密码
+'Change password': 修改密码
+'Username': 用户名
+'Password': 密码
+'Submit': 提交
+'Login': 登入
+'Logout': 登出
+'Learner': 学生
+'Teacher': 教师
+'Administrator': 管理员
+'Data Collection Form Preview': 数据输入测试版
+'Role': 用户类型
+'Teacher or Administrator': 教师或管理员
+'User full name': 用户全名
+'Force Change': 强制修改
+'The course %course% has been set as': 课程%course%已被设置为
+'pending': 等待审核
+'active': 启用
+'From (full name)': 从 (全名)
+'To (full name)': 到 (全名)
+'T: Transfer from a learner to a teacher.': 'T: 从学生转账给教师'
+'D/W: Change the balance of a user. (deposit/withdrawal)': 'D/W: 增减特定账户金额'

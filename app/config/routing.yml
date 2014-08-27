@@ -1,0 +1,15 @@
+login:
+    path:     /backend/login
+    defaults: { _controller: OTBackendBundle:Security:login }
+
+login_check:
+    path: /backend/login_check
+
+logout:
+    path: /backend/logout
+
+ot_backend:
+    resource: "@OTBackendBundle/Resources/config/routing.yml"
+    prefix:   /backend
+
+

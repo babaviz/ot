@@ -1,0 +1,43 @@
+{# two columns template #}
+{% extends '::base.html.twig' %}
+
+{% block title %}Online Tutor System{% endblock %}
+
+{% block mainarea %}
+
+  <div class="row">
+    
+    <div class="col-sm-2 col-md-2 sidebar">
+      {% block sidebar %}
+      {% endblock %}
+      </div>
+
+    <div class="col-sm-10 col-md-10 main">
+    
+        <div class="container">
+          {% for flashMessage in app.session.flashbag.get('warning') %}
+              <p class="bg-warning">
+                  {{ flashMessage }}
+              </p>
+          {% endfor %}
+
+          {% for flashMessage in app.session.flashbag.get('success') %}
+              <p class="bg-success">
+                  {{ flashMessage }}
+              </p>
+          {% endfor %}
+
+          {% for flashMessage in app.session.flashbag.get('info') %}
+              <p class="bg-info">
+                  {{ flashMessage }}
+              </p>
+          {% endfor %}
+        </div>
+
+        {% block body %}
+          Empty main block.
+        {% endblock %}
+    </div>
+    
+  </div>
+{% endblock %}

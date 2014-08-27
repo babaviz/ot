@@ -1,0 +1,52 @@
+{% extends "::two-col.html.twig" %}
+
+{% block body %}
+
+	{% if error %}
+    	<div class="alert alert-warning">{{ error.message }}</div>
+	{% endif %}
+
+
+	<div class="panel panel-default">
+	<div class="panel-body">
+
+		<p class="lead">{% trans %}Login{% endtrans %}</p>
+
+		<form class="form-horizontal" action="{{ path('login_check') }}" method="post">
+			<fieldset>
+			<!-- Text input-->
+			<div class="form-group">
+			  <label class="col-md-4 control-label" for="username">{% trans %}Username{% endtrans %}</label>  
+			  <div class="col-md-4">
+			  <input id="username" name="_username" type="text" placeholder="username" class="form-control input-md"  value="{{ last_username }}" >
+			    
+			  </div>
+			</div>
+
+			<!-- Password input-->
+			<div class="form-group">
+			  <label class="col-md-4 control-label" for="password">{% trans %}Password{% endtrans %}</label>
+			  <div class="col-md-4">
+			    <input id="password" name="_password" type="password" placeholder="password" class="form-control input-md">
+			    
+			  </div>
+			</div>
+
+			<input type="hidden" name="_target_path" value="/backend/admin/entry" />
+
+			<!-- Button -->
+			<div class="form-group">
+			  <label class="col-md-4 control-label" for="submit"></label>
+			  <div class="col-md-4">
+			    <button id="submit" name="submit" class="btn btn-primary pull-right" type="submit">{% trans %}Login{% endtrans %}</button>
+			  </div>
+			</div>
+
+			</fieldset>
+		</form>
+
+
+	</div>
+	</div>
+
+{% endblock %}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<head>
+  {% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('../vendor/fontawesome/fontawesome/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('../vendor/twitter/bootstrap/dist/css/bootstrap.min.css') }}"/>
+    {#<link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/spacelab/bootstrap.min.css" rel="stylesheet">#}
+  {% endblock %}
+
+  {% block javascripts %}
+    <script type="text/javascript" src="{{ asset('../vendor/components/jquery/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('../vendor/twitter/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+  {% endblock %}
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Online Tutor System{% endblock %}</title>
+</head>
+
+<body role="document">
+
+  {% include 'navbar.html.twig' %} <!--nav bar -->
+
+  <div class="container" role="main"> <!--main area -->
+
+    {% block mainarea %}
+      {% block body %}
+      {% endblock %}
+    {% endblock %}
+
+  </div>
+
+  <br /> <!--footer -->
+  <div class="footer footer-fixed-bottom">
+    <div class="container">
+      {% block footer %}
+        <p class="text-muted credit">Copyright 2014 LearningTechAsia.com</p>
+      {% endblock %}
+    </div>
+  </div>
+
+</body>
+
+</html>

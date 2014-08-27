@@ -1,0 +1,30 @@
+parameters:
+    # Information on this Impletation
+    app_title: School365 Online Website
+    app_title_short: School365
+    app_support_manager_name: Han Rui
+    app_support_manager_contact: han@learningtechasia.com
+    app_client_name: 阿爾瑪有限公司
+    app_client_correspondent_name: Mr. Pan Wei Jen
+
+    # App Information
+    app_name: LearningTech Online Tutoring System
+    app_family_name: Online Tutoring 2014 Preview
+    app_version: 0.1.140722-Preview
+    app_vendor_name: Learning Tech Asia
+    app_vendor_contact: '<address><strong>Learning Tech Asia Limited (Hong Kong)</strong><br>9B Ametel Building, 148 Des Voeux Rd C,<br>Central, Hong Kong<br><abbr title="Phone">Tel </abbr>(852) 9689 5930<br><abbr title="Email">Email </abbr><a href="mailto:support@learningtechasia.com">support@learningtechasia.com</a></address>'
+
+twig:
+  globals:
+    app_title: %app_title%
+    app_title_short: %app_title_short%
+    app_support_manager_name: %app_support_manager_name%
+    app_support_manager_contact: %app_support_manager_contact%
+    app_client_name: %app_client_name%
+    app_client_correspondent_name: %app_client_correspondent_name%
+
+    app_name: %app_name%
+    app_family_name: %app_family_name%
+    app_version: %app_version%
+    app_vendor_name: %app_vendor_name%
+    app_vendor_contact: %app_vendor_contact%
