@@ -1,26 +1,27 @@
 entrance:
     path:     /entrance/
     defaults: { _controller: OTBackendBundle:Security:entrance }
-dashboard:
-    path:     /dashboard
+
+admin_dashboard:
+    path:     /admin/dashboard
     defaults: { _controller: OTBackendBundle:Admin:dashboard }
 
-teacher:
-    path:     /teacher
+admin_teacher:
+    path:     /admin/teacher
     defaults: { _controller: OTBackendBundle:Admin:teacher }
 
-learner:
-    path:     /learner
+admin_learner:
+    path:     /admin/learner
     defaults: { _controller: OTBackendBundle:Admin:learner }
 
-course:
-    path:     /course
+admin_course:
+    path:     /admin/course
     defaults: { _controller: OTBackendBundle:Admin:course }
 
-account:
-    path:     /account
+admin_account:
+    path:     /admin/account
     defaults: { _controller: OTBackendBundle:Admin:account }
 
-setting:
-    path:     /setting
+admin_setting:
+    path:     /admin/setting
     defaults: { _controller: OTBackendBundle:Admin:setting }
