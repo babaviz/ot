@@ -13,9 +13,9 @@ learner:
     path:     /learner
     defaults: { _controller: OTBackendBundle:Admin:learner }
 
-couse:
-    path:     /couse
-    defaults: { _controller: OTBackendBundle:Admin:couse }
+course:
+    path:     /course
+    defaults: { _controller: OTBackendBundle:Admin:course }
 
 account:
     path:     /account

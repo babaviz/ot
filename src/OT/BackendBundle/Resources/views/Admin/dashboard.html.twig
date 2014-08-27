@@ -1,7 +1,62 @@
-{% extends "::base.html.twig" %}
+{% extends "::two-col.html.twig" %}
 
-{% block title %}OTBackendBundle:Admin:dashboard{% endblock %}
+{% block title %}{% trans %}Dashboard{% endtrans %}{% endblock %}
+
+{% block sidebar %}
+{% include "OTBackendBundle:Admin:sidebar.html.twig" %}
+{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Admin:dashboard page</h1>
+	<div class="panel panel-default">
+	<div class="panel-heading">{% trans %}Dashboard{% endtrans %}</div>
+	<div class="panel-body">
+
+		<p class="lead">{% trans %}System Information{% endtrans %}</p>
+
+		<table class="table table-striped dropdown">
+		<thead>
+			<th>{% trans %}Item{% endtrans %}</th>
+			<th>{% trans %}Description{% endtrans %}</th>
+		</thead>
+		<tbody>
+			<tr>
+				<td>{% trans %}Application Title{% endtrans %}</td>
+				<td>{{ app_title }}</td>
+			</tr>
+			<tr>
+				<td>{% trans %}Framework Name{% endtrans %}</td>
+				<td>{{ app_family_name }}</td>
+			</tr>
+			<tr>
+				<td>{% trans %}Framework Version{% endtrans %}</td>
+				<td><p><span class="label label-info">{% trans %}BETA{% endtrans %}</span> {{ app_version }}</p></td>
+			</tr>
+			<tr>
+				<td>{% trans %}Authorised Client Name{% endtrans %}</td>
+				<td>{{ app_client_name }} | {{ app_client_correspondent_name }}</td>
+			</tr>
+			<tr>
+				<td>{% trans %}Product Support Manager{% endtrans %}</td>
+				<td>{{ app_support_manager_name }}</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>{{ app_support_manager_contact }}</td>
+			</tr>
+			<tr>
+				<td>{% trans %}Application Vendor{% endtrans %}</td>
+				<td>{{ app_vendor_name }}</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>{{ app_vendor_contact|raw }}</td>
+			</tr>
+		</tbody>
+		</table>
+
+	</div>
+	</div>
+
+<p class="help-block">{% trans %}Please contact us if you have any questions on the development of the product.{% endtrans %}</p>
+
 {% endblock %}

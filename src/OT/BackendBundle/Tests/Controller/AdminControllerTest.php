@@ -27,11 +27,11 @@ class AdminControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/learner');
     }
 
-    public function testCouse()
+    public function testCourse()
     {
         $client = static::createClient();
 
-        $crawler = $client->request('GET', '/couse');
+        $crawler = $client->request('GET', '/course');
     }
 
     public function testAccount()

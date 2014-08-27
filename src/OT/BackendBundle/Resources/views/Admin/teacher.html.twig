@@ -1,7 +1,54 @@
-{% extends "::base.html.twig" %}
+{% extends "::two-col.html.twig" %}
 
-{% block title %}OTBackendBundle:Admin:teacher{% endblock %}
+{% block title %}{% trans %}Teacher Mgt.{% endtrans %}{% endblock %}
+
+{% block sidebar %}
+{% include "OTBackendBundle:Admin:sidebar.html.twig" %}
+{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Admin:teacher page</h1>
+
+	<ul class="nav nav-tabs" role="tablist">
+		  <li class="active"><a href="#">{% trans %}Teacher List{% endtrans %}</a></li>
+	</ul>
+
+	<div class="panel-body">
+		<p class="lead">
+			{% trans %}Teacher List{% endtrans %}
+			<button class="btn btn-primary btn-sm pull-right"><i class="fa fa-plus fa-fw"> </i> {% trans %}New Teacher{% endtrans %}</button>
+		</p>
+		<table class="table table-striped table-hover">
+		<thead>
+		<th></th>
+		<th>{% trans %}Teacher ID{% endtrans %}</th>
+		<th>{% trans %}Name{% endtrans %}</th>
+		<th>{% trans %}Email{% endtrans %}</th>
+		<th>{% trans %}Phone{% endtrans %}</th>
+		<th>{% trans %}Introduction{% endtrans %}</th>
+		<th>{% trans %}Account Balance{% endtrans %}</th>
+		<th>{% trans %}Date Registered{% endtrans %}</th>
+		<th></th>
+
+		{% for teacher in teachers %}
+		<tr>
+			<td>
+				{% if (teacher.roles) == 'ADMIN' %}<span class="label label-info">{% trans %}ADM{% endtrans %}</span>{% endif %}
+			</td>
+			<td>{{ teacher.id }}</td>
+			<td>{{ teacher.Name }}</td>
+			<td>{{ teacher.email }}</td>
+			<td>{{ teacher.phone }}</td>
+			<td>{{ teacher.introduction[:20] }}</td>
+			<td>{{ teacher.AccountBalance }}</td>
+			<td>{{ teacher.CreateTime|date('Y-m-d') }}</td>
+			<td><div class="btn-toolbar"><a class="btn-sm btn-default"><i class="fa fa-edit"></i></a></div></td>
+		</tr>
+		{% endfor %}
+		</thead>
+		<tbody>
+		</tbody>
+		</table>
+	</div>
+
 {% endblock %}
+

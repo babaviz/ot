@@ -24,9 +24,9 @@ class AdminController extends Controller
                 // ...
             ));    }
 
-    public function couseAction()
+    public function courseAction()
     {
-        return $this->render('OTBackendBundle:Admin:couse.html.twig', array(
+        return $this->render('OTBackendBundle:Admin:course.html.twig', array(
                 // ...
             ));    }
 

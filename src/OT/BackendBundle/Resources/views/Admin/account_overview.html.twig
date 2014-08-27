@@ -1,0 +1,74 @@
+{% extends "::two-col.html.twig" %}
+
+{% block title %}{% trans %}Account Overview{% endtrans %}{% endblock %}
+
+{% block sidebar %}
+{% include "OTBackendBundle:Admin:sidebar.html.twig" %}
+{% endblock %}
+
+{% block body %}
+
+	<ul class="nav nav-tabs" role="tablist">
+		  <li class="active"><a href="#">{% trans %}Account Overview{% endtrans %}</a></li>
+		  <li><a href="{{ path('transaction_record') }}">{% trans %}Transaction Record{% endtrans %}</a></li>
+		  <li><a href="{{ path('transfer') }}">{% trans %}Transfer{% endtrans %}</a></li>
+	</ul>
+
+	<div class="panel-body">
+		<p class="lead">{% trans %}Account Overview{% endtrans %}</p>
+		<div class="row">
+			<div class="col-sm-5 col-md-5">
+				<div class="panel panel-default">
+					<div class="panel-heading">{% trans %}Accounts{% endtrans %}</div>
+					<div class="panel-body">
+						<table class="table">
+							<tbody>
+								<tr>
+									<td>{% trans %}Number of teachers{% endtrans %}</td>
+									<td>{{ teacher_number }}</td>
+								</tr>
+								<tr>
+									<td><em>({% trans %}Include administrators{% endtrans %})</em></td>
+									<td>{{ admin_number }}</td>
+								</tr>
+								<tr>
+									<td>{% trans %}Number of students{% endtrans %}</td>
+									<td>{{ user_number }}</td>
+								</tr>
+						    </tbody>
+						</table>
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-5 col-md-5">
+				<div class="panel panel-default">
+					<div class="panel-heading">{% trans %}Financial Statement{% endtrans %}</div>
+					<div class="panel-body">
+						<table class="table">
+							<tbody>
+								<tr>
+									<td>{% trans %}Assets: total student balance{% endtrans %}</td>
+									<td>{{ user_sum }}</td>
+								</tr>
+								<tr>
+									<td>{% trans %}Liabilities: total teacher balance{% endtrans %}</td>
+									<td>{{ teacher_sum }}</td>
+								</tr>
+								<tr>
+									<td><strong>{% trans %}Net assets{% endtrans %}</strong></td>
+									<td>{{ user_sum-teacher_sum }}</td>
+								</tr>
+						    </tbody>
+						</table>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<p class="help-block"><span class="label label-info">{% trans %}BETA{% endtrans %}</span> {% trans %} To save budget, some (or all) functions in this page are not designed to be included in this previwe version. {% endtrans %}</p>
+	</div>
+
+
+{% endblock %}
+
