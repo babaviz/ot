@@ -1,12 +1,24 @@
 security:
+    encoders:
+        OT\BackendBundle\Entity\Teacher:
+            algorithm: bcrypt
+
+    role_hierarchy:
+        ROLE_ADMIN:       [ ADMIN ]
+
     providers:
-        in_memory:
-            memory: ~
+        administrators:
+            entity: { class: OTBackendBundle:Teacher, property: username }
 
     firewalls:
-        dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
-
-        default:
+        secured_area:
+            pattern: ^/
             anonymous: ~
+            form_login:
+                login_path: /backend/login
+                check_path: /backend/login_check
+                #always_use_default_target_path: true
+                #default_target_path: /backend/entry
+            logout:
+                path: /backend/logout
+                target: /

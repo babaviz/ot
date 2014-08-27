@@ -4,6 +4,7 @@ namespace OT\BackendBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
 class SecurityController extends Controller
@@ -35,4 +36,8 @@ class SecurityController extends Controller
 			); 
     }
 
+    public function entranceAction()
+    {
+        return $this->render('OTBackendBundle:Security:entrance.html.twig'); 
+    }
 }

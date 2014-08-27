@@ -1,3 +1,26 @@
-ot_backend_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: OTBackendBundle:Default:index }
+entrance:
+    path:     /entrance/
+    defaults: { _controller: OTBackendBundle:Security:entrance }
+dashboard:
+    path:     /dashboard
+    defaults: { _controller: OTBackendBundle:Admin:dashboard }
+
+teacher:
+    path:     /teacher
+    defaults: { _controller: OTBackendBundle:Admin:teacher }
+
+learner:
+    path:     /learner
+    defaults: { _controller: OTBackendBundle:Admin:learner }
+
+couse:
+    path:     /couse
+    defaults: { _controller: OTBackendBundle:Admin:couse }
+
+account:
+    path:     /account
+    defaults: { _controller: OTBackendBundle:Admin:account }
+
+setting:
+    path:     /setting
+    defaults: { _controller: OTBackendBundle:Admin:setting }
