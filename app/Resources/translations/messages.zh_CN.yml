@@ -11,6 +11,7 @@
 'Teacher': 教师
 'Administrator': 管理员
 'Data Collection Form Preview': 数据输入测试版
+'Bad credentials': 用户名或密码错误
 'Role': 用户类型
 'Teacher or Administrator': 教师或管理员
 'User full name': 用户全名

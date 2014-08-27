@@ -1,0 +1,105 @@
+Dashboard: 管理面板
+'Course Mgt.': 课程管理
+'Teacher Mgt.': 教师管理
+'Account Mgt.': 账务管理
+Settings: 高级设置
+'System Information': 系统信息
+'Application Title': 应用名称
+'Framework Name': 框架名称
+'Framework Version': 框架版本
+'Authorised Client Name': 授权用户
+'Product Support Manager': 产品支持经理
+'Application Vendor': 开发商
+Item: 项目
+Description: 描述
+'Please contact us if you have any questions on the development of the product.': 如您对该产品的开发有任何问题，请联系我们。
+'Backend Entry': '后台入口'
+'Take me to': 带我到
+'Administration Panel': 站点管理面板
+'Teacher Panel': 教师面板
+'Transaction ID': 转账ID
+Title: '标题'
+Type: 类型
+From: 从
+To: 到
+Amount: 金额
+'Account Overview': 账户总览
+Transfer: 转账
+Accounts: 账户
+'Number of teachers': 教师数量
+'Number of students': 学生数量
+'Financial Statement': 财务报表
+'Assets: total student balance': 资产：学生账户总余额
+'Liabilities: total teacher balance': 负债：教师账户总余额
+'Net assets': 净资产
+Tranfer: 转账
+Warning: 警告
+'Please be careful when transferring money between accounts.': '进行转账操作请谨慎小心。'
+'Include administrators': '包含管理员人数'
+BETA: BETA
+'To save budget, some (or all) functions in this page are not designed to be included in this previwe version.': '为节省预算，在功能预览版本中，本页面中的部分（或全部）功能并未被设计和实现。'
+'Teacher List': 教师列表
+'New Teacher': 新建教师
+'Teacher ID': 教师ID
+Name: 姓名
+Email: 邮箱
+Phone: 电话
+Introduction: 介绍
+'Account Balance': 账户余额
+'Date Registered': 注册日期
+ADM: 管
+'New Transaction': 转账
+'Active Courses': 已启用课程
+'Pending Approval': '等待审核'
+'New course': 新建课程
+'Course ID': 课程ID
+'Course Name': 课程名称
+Duration: 时间
+Price: '价格'
+'Courses Pending Approval': '待审核的课程'
+'Transaction Record': 转账记录
+Login: 登录
+Username: 用户名
+Password: '密码'
+Note: 注释
+'Transfer from a learner to a teacher.': 转账：从学生转款至老师。
+'Deposit to a learner/teacher account.': '存款：存款入学生或老师账户。'
+'Withdraw from a learner/teacher account.': 取款：从学生或老师账户取款。
+'Sales/Payment: directly deduct from a learner/teacher account.': 销售/支付：直接从学生/老师账户中消费。
+'This account is both a site administrator and teacher, please choose which area you would like to access.': 本账户是有系统管理员权限的教师，请选择您要访问的功能区。
+'Learner Mgt.': 学生管理
+'Learner List': 学生列表
+'New Learner': 新建学生
+'Learner ID': 学生ID
+'Course Record': 课程记录
+'Edit the course.': 编辑课程
+'Assign the course to teachers.': 为课程指定教师
+'Inactivate the course.': 暂停课程
+Date: 日期
+'Start Time': 开始时间
+'End Time': 结束时间
+Status: 状态
+Teacher: 教师
+Learner: 学生
+'Activate the course.': 开启课程
+'Force reset user password': '强制重设密码'
+'Change Password': '修改密码'
+'Force Change Password': '强制修改密码'
+'You are force changing the password of another user. This operation is NOT recoverable.': '你正在强制修改其它用户的密码。本操作无法撤销。'
+'Choose Type T to transfer money from a learner to a teacher.': 'T类型：从学生转款至老师。'
+'Choose Type D/W to add / deduct money from a learner or a teacher''s account.': 'D/W类型；给学生或老师账户充值/减值。'
+'You don''t need to type anything in ''From (full name'' row.': '不需填写"从(全名)"一栏，仅填写"到(全名)"一栏即可。'
+'Type a negative amount if you want to deduct from the user''s account.': '如需账户减值，请输入负数金额。'
+'Tranfer Confirmation': '转账确认'
+'Transfer Result Confirmation': '转账结果确认'
+'The following transaction has been processed successfully:': '以下转账已被成功处理：'
+INVOICE: 发票
+'Issued by:': '签发方：'
+'Invoice Time:': '日期时间'
+'Reference No.': '参考号码'
+'Online balance transfer': '在线账户转账'
+'Online balance change': '在线余额变动'
+from: 从
+to: 到
+'on the account of': '在'
+Total: 总金额
