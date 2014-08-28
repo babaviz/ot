@@ -14,9 +14,17 @@ admin_learner:
     path:     /admin/learner
     defaults: { _controller: OTBackendBundle:Admin:learner }
 
-admin_course:
-    path:     /admin/course
-    defaults: { _controller: OTBackendBundle:Admin:course }
+admin_course_list_all:
+    path:     /admin/course/list/all
+    defaults: { _controller: OTBackendBundle:Course:adminCourseListAll }
+
+admin_course_list_pending:
+    path:     /admin/course/list/pending
+    defaults: { _controller: OTBackendBundle:Course:adminCourseListPending }
+
+admin_course_list_record:
+    path:     /admin/course/list/record
+    defaults: { _controller: OTBackendBundle:Course:adminCourseListRecord }
 
 admin_account:
     path:     /admin/account

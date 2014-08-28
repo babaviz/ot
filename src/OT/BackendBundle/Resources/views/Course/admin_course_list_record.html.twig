@@ -1,0 +1,64 @@
+{% extends "::two-col.html.twig" %}
+
+{% block title %}{% trans %}Course Record{% endtrans %}{% endblock %}
+
+{% block sidebar %}
+{% include "OTBackendBundle:Admin:sidebar.html.twig" %}
+{% endblock %}
+
+{% block body %}
+
+	<ul class="nav nav-tabs" role="tablist">
+		  <li><a href="{{ path('admin_course_list_all') }}">{% trans %}Active Courses{% endtrans %}</a></li>
+		  <li><a href="{{ path('admin_course_list_pending') }}">{% trans %}Pending Approval{% endtrans %}{% if pending_number>0 %} <span class="badge">{{ pending_number }}</span>{% endif %}</a></li>
+		  <li class="active"><a href="#">{% trans %}Course Record{% endtrans %}</a></li>
+	</ul>
+
+	<div class="panel-body">
+		<p class="lead">
+			{% trans %}Course Record{% endtrans %}
+		</p>
+		<table class="table table-striped">
+		<thead>
+		<th>{% trans %}Date{% endtrans %}</th>
+		<th>{% trans %}Start Time{% endtrans %}</th>
+		<th>{% trans %}End Time{% endtrans %}</th>
+		<th>{% trans %}Course Name{% endtrans %}</th>
+		<th>{% trans %}Status{% endtrans %}</th>
+		<th>{% trans %}Teacher{% endtrans %}</th>
+		<th>{% trans %}Learner{% endtrans %}</th>
+		<th>{% trans %}Price{% endtrans %}</th>
+		<th></th>
+		{# <th>{% trans %}Date Created{% endtrans %}</th> #}
+		</thead>
+
+		<tbody>
+		{% for courseRecord in courseRecords %}
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><div class="btn-toolbar"><a class="btn-sm btn-default" title="{% trans %}Edit the course.{% endtrans %}"><i class="fa fa-edit"></i></a> <a class="btn-sm btn-success" href="{{ path('change_course_status', {'status' : 'ACTIVE', 'courseid': course.id, 'redirect' : 'get_pending_courses'}) }}" title="{% trans %}Activate the course.{% endtrans %}"><i class="fa fa-play"></i></a></div></td>
+
+		</tr>
+		{% endfor %}
+
+		</tbody>
+		</table>
+
+		<hr />
+
+		<p class="help-block"><span class="label label-info">{% trans %}Note{% endtrans %}</span></p>
+		<ul>
+			<p class="help-block">
+			<i class="fa fa-edit"></i> : {% trans %}Edit the course.{% endtrans %} <br />
+			<i class="fa fa-play"></i> : {% trans %}Activate the course.{% endtrans %} <br />
+			</p>
+		</ul>
+
+	</div>
+
+{% endblock %}
+

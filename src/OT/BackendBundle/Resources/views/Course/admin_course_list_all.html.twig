@@ -10,8 +10,8 @@
 
 	<ul class="nav nav-tabs" role="tablist">
 		  <li class="active"><a href="#">{% trans %}Active Courses{% endtrans %}</a></li>
-		  <li><a href="{{ path('get_pending_courses') }}">{% trans %}Pending Approval{% endtrans %}{% if pending_number>0 %} <span class="badge">{{ pending_number }}</span>{% endif %}</a></li>
-		  <li><a href="{{ path('get_course_record') }}">{% trans %}Course Record{% endtrans %}</a></li>
+		  <li><a href="{{ path('admin_course_list_pending') }}">{% trans %}Pending Approval{% endtrans %}{% if pending_number>0 %} <span class="badge">{{ pending_number }}</span>{% endif %}</a></li>
+		  <li><a href="{{ path('admin_course_list_record') }}">{% trans %}Course Record{% endtrans %}</a></li>
 	</ul>
 
 	<div class="panel-body">
