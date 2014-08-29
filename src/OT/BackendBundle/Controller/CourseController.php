@@ -34,12 +34,12 @@ class CourseController extends Controller
     public function adminCourseListRecordAction()
     {
         $em = $this->getDoctrine()->getManager();
-
+            
         $pending_number = $em->getRepository('OTBackendBundle:Course')->getPendingNumber();
         return $this->render('OTBackendBundle:Course:admin_course_list_record.html.twig', array('courseRecords'=>array(),'pending_number'=>$pending_number));
     }
 
-    public function adminCourseChangeStatusAction($status, $courseid, $redirect)
+    public function adminCourseChangeStatusAction($courseid, $status, $redirect)
     {
         $em = $this->getDoctrine()->getManager();
         $course = $em->getRepository('OTBackendBundle:Course')->findOneById($courseid);
