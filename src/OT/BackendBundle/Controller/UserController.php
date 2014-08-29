@@ -15,8 +15,24 @@ use OT\BackendBundle\Form\Model\ForceChangePassword;
 
 class UserController extends Controller
 {
+
+    public function adminTeacherListAction()
+    {
+      $em = $this->getDoctrine()->getManager();
+      $admins = $em->getRepository('OTBackendBundle:User')->findByRoles('ADMIN');
+      $teachers = $em->getRepository('OTBackendBundle:User')->findByRoles('TEACHER');
+      return $this->render('OTBackendBundle:User:admin_teacher_list.html.twig', array(
+            'teachers'=>array_merge($admins,$teachers)));    
+    }
+
+    public function adminLearnerListAction()
+    {
+      $em = $this->getDoctrine()->getManager();
+      $learners = $em->getRepository('OTBackendBundle:User')->findByRoles('LEARNER');
+      return $this->render('OTBackendBundle:User:admin_learner_list.html.twig', array(
+            'learners'=>$learners));    
+    }
     /**
-     * @Route("/changePassword")
      * @Template("::two.html.twig")
      */
     public function changeCurrentPasswordAction(Request $request, $redirect="entrance")
