@@ -1,0 +1,42 @@
+{% extends "::two-col.html.twig" %}
+
+{% block title %}{% trans %}Tranfer{% endtrans %}{% endblock %}
+
+{% block sidebar %}
+{% include "OTBackendBundle:Admin:sidebar.html.twig" %}
+{% endblock %}
+
+{% block body %}
+
+	<ul class="nav nav-tabs" role="tablist">
+		  <li><a href="{{ path('admin_account_overview') }}">{% trans %}Account Overview{% endtrans %}</a></li>
+		  <li><a href="{{ path('admin_account_transactionrecord_list') }}">{% trans %}Transaction Record{% endtrans %}</a></li>
+		  <li class="active"><a href="#">{% trans %}Transfer{% endtrans %}</a></li>
+	</ul>
+
+	<div class="panel-body">
+		<p class="lead">
+			{% trans %}Transfer{% endtrans %}
+		</p>
+		<p class="help-block"><span class="label label-warning">{% trans %}Warning{% endtrans %}</span> {% trans %}Please be careful when transferring money between accounts.{% endtrans %}</p>
+
+		<hr />
+
+				{{ form(form) }}
+
+		<p class="help-block"><span class="label label-info">{% trans %}Note{% endtrans %}</span> 
+		<ul>
+			<li>{% trans %}Choose Type T to transfer money from a user to another user.{% endtrans %}</li>
+			<li>{% trans %}Choose Type D/W to add / deduct money from a user's account.{% endtrans %}</li>
+				<ul>
+					<li>{% trans %}You don't need to type anything in 'From (full name' row.{% endtrans %}</li>
+					<li>{% trans %}Type a negative amount if you want to deduct from the user's account.{% endtrans %}</li>
+				</ul>
+			</li>
+		</ul>
+		</p>
+
+
+
+{% endblock %}
+

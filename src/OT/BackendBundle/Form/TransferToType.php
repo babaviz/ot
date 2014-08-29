@@ -16,7 +16,7 @@ class TransferToType extends AbstractType
     {
         $builder
             ->add('type', 'choice', ['choices'=>[
-                'T'=>'T: Transfer from a learner to a teacher.',
+                'T'=>'T: Transfer from one user to another.',
                 'DW'=>'D/W: Change the balance of a user. (deposit/withdrawal)',
                 ]])
             ->add('from', 'text', ['label'=>'From (full name)'])

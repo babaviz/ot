@@ -11,7 +11,7 @@
 	<ul class="nav nav-tabs" role="tablist">
 		  <li><a href="{{ path('admin_account_overview') }}">{% trans %}Account Overview{% endtrans %}</a></li>
 		  <li class="active"><a href="#">{% trans %}Transaction Record{% endtrans %}</a></li>
-		  <li><a href="{{ path('entrance') }}">{% trans %}Transfer{% endtrans %}</a></li>
+		  <li><a href="{{ path('admin_account_transfer') }}">{% trans %}Transfer{% endtrans %}</a></li>
 	</ul>
 
 	<div class="panel-body">
@@ -47,10 +47,10 @@
 		<p class="help-block"><span class="label label-info">{% trans %}Note{% endtrans %}</span></p>
 		<ul>
 			<p class="help-block">
-			<tt>T <i class="fa fa-arrow-right"></i> </tt>: {% trans %}Transfer from a learner to a teacher.{% endtrans %} <br />
-			<tt>D <i class="fa fa-arrow-down"></i> </tt>: {% trans %}Deposit to a learner/teacher account.{% endtrans %} <br />
-			<tt>W <i class="fa fa-arrow-up"></i> </tt>: {% trans %}Withdraw from a learner/teacher account.{% endtrans %} <br />
-			<tt>S <i class="fa fa-money"></i> </tt>: {% trans %}Sales/Payment: directly deduct from a learner/teacher account.{% endtrans %}
+			<tt>T <i class="fa fa-arrow-right"></i> </tt>: {% trans %}Transfer from a user to another user.{% endtrans %} <br />
+			<tt>D <i class="fa fa-arrow-down"></i> </tt>: {% trans %}Deposit to a user's account.{% endtrans %} <br />
+			<tt>W <i class="fa fa-arrow-up"></i> </tt>: {% trans %}Withdraw from a user's account.{% endtrans %} <br />
+			<tt>S <i class="fa fa-money"></i> </tt>: {% trans %}Sales/Payment: directly deduct from a user's account.{% endtrans %}
 			</p>
 		</ul>
 
