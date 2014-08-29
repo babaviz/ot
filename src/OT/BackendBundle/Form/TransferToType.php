@@ -15,14 +15,10 @@ class TransferToType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('type', 'choice', ['choices'=>[
-                'T'=>'T: Transfer from one user to another.',
-                'DW'=>'D/W: Change the balance of a user. (deposit/withdrawal)',
-                ]])
             ->add('from', 'text', ['label'=>'From (full name)'])
             ->add('to','text', ['label'=>'To (full name)'])
             ->add('amount','text')
-            ->add('note','textarea')
+            ->add('note','textarea',['data'=>'Manual Transaction'])
             ->add('submit','submit',['label'=>'Transfer'])
         ;
     }

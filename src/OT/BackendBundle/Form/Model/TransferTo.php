@@ -7,8 +7,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 class TransferTo
 {
 
-     public $type;
-
+     /**
+      * @Assert\NotBlank()
+      */
      public $from;
 
      /**
@@ -17,7 +18,7 @@ class TransferTo
      public $to;
 
      /**
-      * @Assert\Type(type="numeric",message="You must enter a number as amount.")
+      * @Assert\NotBlank()\Type(type="numeric",message="You must enter a number as amount.")
       */
      public $amount;
 

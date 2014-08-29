@@ -34,8 +34,9 @@
 			<td>{{ transaction.TransactionId }}</td>
 			<td>{{ transaction.Note }}</td>
 			<td>{{ transaction.Type }}</td>
-			<td>{{ transaction.Learner.name }}</td>
-			<td>{{ transaction.Teacher.name }}</td>
+			<td>{{ transaction.From.name }}</td>
+			<td>{{ transaction.To.name }}</td>
+			
 			<td>{{ transaction.Amount }}</td>
 		</tr>
 		{% endfor %}

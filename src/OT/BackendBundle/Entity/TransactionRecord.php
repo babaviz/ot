@@ -48,9 +48,15 @@ class TransactionRecord
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="TransactionRecords")
-     * @ORM\JoinColumn(name="User_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="from_id", referencedColumnName="id")
      */
-    private $User;
+    private $From;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="TransactionRecords")
+     * @ORM\JoinColumn(name="to_id", referencedColumnName="id")
+     */
+    private $To;
 
     /**
      * Get id
@@ -221,5 +227,97 @@ class TransactionRecord
     public function getUser()
     {
         return $this->User;
+    }
+
+    /**
+     * Set from_id
+     *
+     * @param \OT\BackendBundle\Entity\User $fromId
+     * @return TransactionRecord
+     */
+    public function setFromId(\OT\BackendBundle\Entity\User $fromId = null)
+    {
+        $this->from_id = $fromId;
+
+        return $this;
+    }
+
+    /**
+     * Get from_id
+     *
+     * @return \OT\BackendBundle\Entity\User 
+     */
+    public function getFromId()
+    {
+        return $this->from_id;
+    }
+
+    /**
+     * Set to_id
+     *
+     * @param \OT\BackendBundle\Entity\User $toId
+     * @return TransactionRecord
+     */
+    public function setToId(\OT\BackendBundle\Entity\User $toId = null)
+    {
+        $this->to_id = $toId;
+
+        return $this;
+    }
+
+    /**
+     * Get to_id
+     *
+     * @return \OT\BackendBundle\Entity\User 
+     */
+    public function getToId()
+    {
+        return $this->to_id;
+    }
+
+    /**
+     * Set From
+     *
+     * @param \OT\BackendBundle\Entity\User $from
+     * @return TransactionRecord
+     */
+    public function setFrom(\OT\BackendBundle\Entity\User $from = null)
+    {
+        $this->From = $from;
+
+        return $this;
+    }
+
+    /**
+     * Get From
+     *
+     * @return \OT\BackendBundle\Entity\User 
+     */
+    public function getFrom()
+    {
+        return $this->From;
+    }
+
+    /**
+     * Set To
+     *
+     * @param \OT\BackendBundle\Entity\User $to
+     * @return TransactionRecord
+     */
+    public function setTo(\OT\BackendBundle\Entity\User $to = null)
+    {
+        $this->To = $to;
+
+        return $this;
+    }
+
+    /**
+     * Get To
+     *
+     * @return \OT\BackendBundle\Entity\User 
+     */
+    public function getTo()
+    {
+        return $this->To;
     }
 }
