@@ -10,8 +10,8 @@
 
 	<ul class="nav nav-tabs" role="tablist">
 		  <li class="active"><a href="#">{% trans %}Account Overview{% endtrans %}</a></li>
-		  <li><a href="{{ path('transaction_record') }}">{% trans %}Transaction Record{% endtrans %}</a></li>
-		  <li><a href="{{ path('transfer') }}">{% trans %}Transfer{% endtrans %}</a></li>
+		  <li><a href="{{ path('admin_account_transactionrecord_list') }}">{% trans %}Transaction Record{% endtrans %}</a></li>
+		  <li><a href="{{ path('entrance') }}">{% trans %}Transfer{% endtrans %}</a></li>
 	</ul>
 
 	<div class="panel-body">
@@ -33,7 +33,7 @@
 								</tr>
 								<tr>
 									<td>{% trans %}Number of students{% endtrans %}</td>
-									<td>{{ user_number }}</td>
+									<td>{{ learner_number }}</td>
 								</tr>
 						    </tbody>
 						</table>
@@ -49,7 +49,7 @@
 							<tbody>
 								<tr>
 									<td>{% trans %}Assets: total student balance{% endtrans %}</td>
-									<td>{{ user_sum }}</td>
+									<td>{{ learner_sum }}</td>
 								</tr>
 								<tr>
 									<td>{% trans %}Liabilities: total teacher balance{% endtrans %}</td>
@@ -57,7 +57,7 @@
 								</tr>
 								<tr>
 									<td><strong>{% trans %}Net assets{% endtrans %}</strong></td>
-									<td>{{ user_sum-teacher_sum }}</td>
+									<td>{{ learner_sum-teacher_sum }}</td>
 								</tr>
 						    </tbody>
 						</table>

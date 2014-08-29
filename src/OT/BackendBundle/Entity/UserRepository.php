@@ -12,25 +12,46 @@ use Doctrine\ORM\EntityRepository;
  */
 class UserRepository extends EntityRepository
 {
-	public function getUserBalanceSum()
+	public function getTeacherBalanceSum()
 	{
 		return $this->getEntityManager()->createQueryBuilder()
 			->select('SUM(t.account_balance)')
 			->from('OTBackendBundle:User','t')
 			->where('t.roles = :roles1 OR t.roles = :roles2')
 			->setParameter('roles1','ADMIN')
-			->setParameter('roles2','User')
+			->setParameter('roles2','TEACHER')
 			->getQuery()->getSingleResult();
 	}
 
-	public function getUserNumber()
+	public function getLearnerBalanceSum()
+	{
+		return $this->getEntityManager()->createQueryBuilder()
+			->select('SUM(t.account_balance)')
+			->from('OTBackendBundle:User','t')
+			->where('t.roles = :roles1')
+			->setParameter('roles1','LEARNER')
+			->getQuery()->getSingleResult();
+	}
+
+
+	public function getTeacherNumber()
 	{
 		return $this->getEntityManager()->createQueryBuilder()
 			->select('COUNT(t)')
 			->from('OTBackendBundle:User','t')
 			->where('t.roles = :roles1 OR t.roles = :roles2')
-			->setParameter('roles1','User')
-			->setParameter('roles2','ADMIN')
+			->setParameter('roles1','ADMIN')
+			->setParameter('roles2','TEACHER')
+			->getQuery()->getSingleResult();
+	}
+
+	public function getLearnerNumber()
+	{
+		return $this->getEntityManager()->createQueryBuilder()
+			->select('COUNT(t)')
+			->from('OTBackendBundle:User','t')
+			->where('t.roles = :roles1')
+			->setParameter('roles1','LEARNER')
 			->getQuery()->getSingleResult();
 	}
 
@@ -42,16 +63,5 @@ class UserRepository extends EntityRepository
 			->where('a.roles = :roles')
 			->setParameter('roles','ADMIN')
 			->getQuery()->getSingleResult();
-	}
-
-	public function getUserList()
-	{
-		return $this->getEntityManager()->createQueryBuilder()
-			->select('t')
-			->from('OTBackendBundle:User','t')
-			->where('t.roles = :roles1 OR t.roles = :roles2')
-			->setParameter('roles1','User')
-			->setParameter('roles2','ADMIN')
-			->getQuery()->getResult();
 	}
 }

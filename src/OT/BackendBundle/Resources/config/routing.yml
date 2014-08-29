@@ -30,9 +30,17 @@ admin_course_change_status:
     path:     /admin/course/list/changestatus/{courseid}/{status}/{redirect}
     defaults: { _controller: OTBackendBundle:Course:adminCourseChangeStatus }
 
-admin_account:
-    path:     /admin/account
-    defaults: { _controller: OTBackendBundle:Admin:account }
+admin_account_overview:
+    path:     /admin/account/overview
+    defaults: { _controller: OTBackendBundle:User:adminAccountOverview }
+
+admin_account_transactionrecord_list:
+    path:     /admin/account/transactionrecord/list
+    defaults: { _controller: OTBackendBundle:TransactionRecord:adminAccountTranscationRecordList }
+
+admin_account_transfer:
+    path:     /admin/account/transfer
+    defaults: { _controller: OTBackendBundle:TransactionRecord:adminAccountTransfer }
 
 admin_setting:
     path:     /admin/setting

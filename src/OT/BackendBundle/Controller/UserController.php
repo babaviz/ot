@@ -32,6 +32,25 @@ class UserController extends Controller
       return $this->render('OTBackendBundle:User:admin_learner_list.html.twig', array(
             'learners'=>$learners));    
     }
+
+    public function adminAccountOverviewAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $teacher_sum = $em->getRepository('OTBackendBundle:User')->getTeacherBalanceSum()[1];
+        $learner_sum = $em->getRepository('OTBackendBundle:User')->getLearnerBalanceSum()[1];
+        $teacher_number = $em->getRepository('OTBackendBundle:User')->getTeacherNumber()[1];
+        $learner_number = $em->getRepository('OTBackendBundle:User')->getLearnerNumber()[1];
+        $admin_number = $em->getRepository('OTBackendBundle:User')->getAdminNumber()[1];
+
+
+        return $this->render('OTBackendBundle:User:admin_account_overview.html.twig', array(
+                'teacher_sum'=>$teacher_sum,
+                'learner_sum'=>$learner_sum,
+                'teacher_number'=>$teacher_number,
+                'learner_number'=>$learner_number,
+                'admin_number'=>$admin_number
+            ));    
+    }
     /**
      * @Template("::two.html.twig")
      */
