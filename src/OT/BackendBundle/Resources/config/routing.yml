@@ -37,3 +37,11 @@ admin_account:
 admin_setting:
     path:     /admin/setting
     defaults: { _controller: OTBackendBundle:Admin:setting }
+
+user_change_current_password:
+    path:     /user/changecurrentpassword/
+    defaults: { _controller: OTBackendBundle:User:changeCurrentPassword }
+
+admin_force_change_password:
+    path:     /admin/forcechangepassword/
+    defaults: { _controller: OTBackendBundle:User:forcechangePassword }
