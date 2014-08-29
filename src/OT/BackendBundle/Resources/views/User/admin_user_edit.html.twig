@@ -1,0 +1,28 @@
+{% extends "::two-col.html.twig" %}
+
+{% block title %}{% trans %}Teacher Mgt.{% endtrans %}{% endblock %}
+
+{% block sidebar %}
+{% include "OTBackendBundle:Admin:sidebar.html.twig" %}
+{% endblock %}
+
+{% block body %}
+
+	<ul class="nav nav-tabs" role="tablist">
+		  <li class="active"><a href="#">{% trans %}Edit a User{% endtrans %}</a></li>
+	</ul>
+
+	<div class="panel-body">
+		<p class="lead">
+			{% trans %}Edit a User{% endtrans %}
+			<button class="btn btn-primary btn-sm pull-right"><i class="fa fa-plus fa-fw"> </i> {% trans %}XXXX{% endtrans %}</button>
+		</p>
+		
+		{{ form(form) }}
+
+		<hr />
+
+	</div>
+
+{% endblock %}
+

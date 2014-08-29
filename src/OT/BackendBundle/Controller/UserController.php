@@ -9,12 +9,22 @@ use Symfony\Component\HttpFoundation\Request;
 
 use OT\BackendBundle\Form\ChangePasswordType;
 use OT\BackendBundle\Form\ForceChangePasswordType;
+use OT\BackendBundle\Form\UserType;
+
 use OT\BackendBundle\Form\Model\ChangePassword;
 use OT\BackendBundle\Form\Model\ForceChangePassword;
 
 
 class UserController extends Controller
 {
+    public function adminUserEditAction()
+    {
+      $form = $this->createForm(new UserType());
+
+      return $this->render('OTBackendBundle:User:admin_user_edit.html.twig',
+        array('form'=>$form->createView())
+        );
+    }
 
     public function adminTeacherListAction()
     {
@@ -54,7 +64,7 @@ class UserController extends Controller
     /**
      * @Template("::two.html.twig")
      */
-    public function changeCurrentPasswordAction(Request $request, $redirect="entrance")
+    public function profileChangePasswordAction(Request $request, $redirect="entrance")
     {
 
       $changePasswordModel = new ChangePassword();
@@ -78,14 +88,14 @@ class UserController extends Controller
         return $this->redirect($this->generateUrl($redirect));
       }
 
-      return $this->render('OTBackendBundle:User:changePassword.html.twig', array(
+      return $this->render('OTBackendBundle:User:change_password.html.twig', array(
           'form' => $form->createView(),
           'redirect' => 'entrance',
           'force' => 'false',
       ));      
     }
 
-    public function forceChangePasswordAction(Request $request, $username="")
+    public function adminChangePasswordAction(Request $request, $username="")
     {
       $forceChangePasswordModel = new ForceChangepassword();
       $form = $this->createForm(new ForceChangePasswordType(), $forceChangePasswordModel);
@@ -101,7 +111,7 @@ class UserController extends Controller
             'warning',
             $this->get('translator')->trans('Cannot find user: '.$forceChangePasswordModel->username));
 
-            return $this->redirect($this->generateUrl('admin_force_change_password'));
+            return $this->redirect($this->generateUrl('admin_user_change_password'));
 
         }
 
@@ -117,7 +127,7 @@ class UserController extends Controller
 
       }
 
-      return $this->render('OTBackendBundle:User:changePassword.html.twig', array(
+      return $this->render('OTBackendBundle:User:change_password.html.twig', array(
           'form' => $form->createView(),
           'username' => $username,
           'force' => 'true',
