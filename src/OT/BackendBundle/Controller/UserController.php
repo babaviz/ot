@@ -8,6 +8,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use OT\BackendBundle\Entity\User;
 use OT\BackendBundle\Form\UserType;
 
+use OT\BackendBundle\Form\Model\ChangePassword;
+use OT\BackendBundle\Form\ChangePasswordType;
+
+use OT\BackendBundle\Form\Model\ForceChangePassword;
+use OT\BackendBundle\Form\ForceChangePasswordType;
+
 /**
  * User controller.
  *
@@ -234,9 +240,8 @@ class UserController extends Controller
                 'admin_number'=>$admin_number
             ));    
     }
-    /**
-     * @Template("::two.html.twig")
-     */
+
+
     public function profileChangePasswordAction(Request $request, $redirect="entrance")
     {
 
