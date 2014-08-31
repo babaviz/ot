@@ -3,16 +3,12 @@ entrance:
     defaults: { _controller: OTBackendBundle:Security:entrance }
 
 OTBackendBundle_admin_user:
-        resource: "@OTBackendBundle/Resources/config/routing/user.yml"
+        resource: "@OTBackendBundle/Resources/config/routing/admin_user.yml"
         prefix:   /admin/user
 
 admin_dashboard:
     path:     /admin/dashboard
     defaults: { _controller: OTBackendBundle:Admin:dashboard }
-
-admin_user_list:
-    path:     /admin/user/list
-    defaults: { _controller: OTBackendBundle:User:adminUserList }
 
 admin_course_list_all:
     path:     /admin/course/listall
@@ -49,7 +45,3 @@ admin_setting:
 user_profile_change_password:
     path:     /user/profile/changepassword
     defaults: { _controller: OTBackendBundle:User:profileChangePassword }
-
-admin_user_change_password:
-    path:     /admin/user/changepassword
-    defaults: { _controller: OTBackendBundle:User:adminChangePassword }

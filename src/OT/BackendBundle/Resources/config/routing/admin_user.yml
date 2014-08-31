@@ -2,10 +2,6 @@ admin_user:
     path:     /
     defaults: { _controller: "OTBackendBundle:User:index" }
 
-admin_user_show:
-    path:     /{id}/show
-    defaults: { _controller: "OTBackendBundle:User:show" }
-
 admin_user_new:
     path:     /new
     defaults: { _controller: "OTBackendBundle:User:new" }
@@ -19,6 +15,10 @@ admin_user_edit:
     path:     /{id}/edit
     defaults: { _controller: "OTBackendBundle:User:edit" }
 
+admin_user_list:
+    path:     /list
+    defaults: { _controller: "OTBackendBundle:User:list" }
+
 admin_user_update:
     path:     /{id}/update
     defaults: { _controller: "OTBackendBundle:User:update" }
@@ -28,3 +28,7 @@ admin_user_delete:
     path:     /{id}/delete
     defaults: { _controller: "OTBackendBundle:User:delete" }
     requirements: { _method: post|delete }
+
+admin_user_change_password:
+    path:     /changepassword
+    defaults: { _controller: OTBackendBundle:User:adminChangePassword }
