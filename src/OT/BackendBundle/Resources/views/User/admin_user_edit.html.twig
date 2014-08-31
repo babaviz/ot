@@ -1,27 +1,16 @@
-{% extends "::two-col.html.twig" %}
+{% extends '::two-col.html.twig' %}
 
-{% block title %}{% trans %}Teacher Mgt.{% endtrans %}{% endblock %}
+{% block body -%}
+    <h1>User edit</h1>
 
-{% block sidebar %}
-{% include "OTBackendBundle:Admin:sidebar.html.twig" %}
+    {{ form(edit_form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="javascript:history.back()">
+            Back
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
 {% endblock %}
-
-{% block body %}
-
-	<ul class="nav nav-tabs" role="tablist">
-		  <li class="active"><a href="#">{% trans %}Edit a User{% endtrans %}</a></li>
-	</ul>
-
-	<div class="panel-body">
-		<p class="lead">
-			{% trans %}Edit a User{% endtrans %}
-		</p>
-		
-		{{ form(form) }}
-
-		<hr />
-
-	</div>
-
-{% endblock %}
-

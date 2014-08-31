@@ -41,7 +41,7 @@
 			<td>{{ teacher.introduction[:20] }}</td>
 			<td>{{ teacher.AccountBalance }}</td>
 			<td>{{ teacher.CreateTime|date('Y-m-d') }}</td>
-			<td><div class="btn-toolbar"><a class="btn-sm btn-default"><i class="fa fa-edit"></i></a></div></td>
+			<td><div class="btn-toolbar"><a class="btn-sm btn-default" href="{{ path('admin_user_edit', { 'id': teacher.id }) }}"><i class="fa fa-edit"></i></a></div></td>
 		</tr>
 		{% endfor %}
 		</thead>

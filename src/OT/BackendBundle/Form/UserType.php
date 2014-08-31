@@ -8,24 +8,25 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class UserType extends AbstractType
 {
-    /**
+        /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-           // ->add('role','choice',['label'=>'Type','disabled'=>'true'])
-            ->add('account_balance','text',['label'=>'Account Balance','disabled'=>'true'])
-            ->add('create_time','datetime',['label'=>'Date Joined','disabled'=>'true'])
-            ->add('username','text',['label'=>'System Login Name','disabled'=>'true'])
-
-            ->add('name','text',['label'=>'Nickname'])
-            ->add('email','text',['label'=>'E-mail'])
-            ->add('phone','text',['label'=>'Phone'])
-            ->add('timezone','text',['label'=>'Timezone'])
-            ->add('introduction','textarea',['label'=>'Self Introduction'])
-            ->add('submit','submit',['label'=>'Save'])
+            ->add('username')
+            ->add('password')
+            ->add('name')
+            ->add('email')
+            ->add('phone')
+            ->add('role')
+            ->add('account_balance')
+            ->add('create_time')
+            ->add('timezone')
+            ->add('introduction')
+            ->add('is_admin')
+            //->add('Courses')
         ;
     }
     

@@ -2,9 +2,9 @@ entrance:
     path:     /entrance/
     defaults: { _controller: OTBackendBundle:Security:entrance }
 
-bookedtime:
-    resource: "@OTBackendBundle/Resources/config/routing/bookedtime.yml"
-    prefix:   /bookedtime
+OTBackendBundle_admin_user:
+        resource: "@OTBackendBundle/Resources/config/routing/user.yml"
+        prefix:   /admin/user
 
 admin_dashboard:
     path:     /admin/dashboard
@@ -57,7 +57,3 @@ user_profile_change_password:
 admin_user_change_password:
     path:     /admin/user/changepassword
     defaults: { _controller: OTBackendBundle:User:adminChangePassword }
-
-admin_user_edit:
-    path:     /admin/user/edit
-    defaults: { _controller: OTBackendBundle:User:adminUserEdit }

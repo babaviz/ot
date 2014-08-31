@@ -46,7 +46,7 @@ class User implements UserInterface, \Serializable
     /**
      * @ORM\Column(type="string", length=16, nullable=false)
      */
-    private $roles;
+    private $role;
 
     /**
      * @ORM\Column(type="float", nullable=false)
@@ -92,6 +92,7 @@ class User implements UserInterface, \Serializable
      * )
      */
     private $Courses;
+
     /**
      * Constructor
      */
@@ -100,18 +101,6 @@ class User implements UserInterface, \Serializable
         $this->TransactionRecords = new \Doctrine\Common\Collections\ArrayCollection();
         $this->FreeTimes = new \Doctrine\Common\Collections\ArrayCollection();
         $this->Courses = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    function getSalt()
-    {
-        return null;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function eraseCredentials()
-    {
     }
 
     /**
@@ -138,16 +127,6 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * Get username
-     *
-     * @return string 
-     */
-    public function getUsername()
-    {
-        return $this->username;
-    }
-
-    /**
      * Set password
      *
      * @param string $password
@@ -155,20 +134,11 @@ class User implements UserInterface, \Serializable
      */
     public function setPassword($password)
     {
-        $this->password = password_hash($password,PASSWORD_BCRYPT);
+        $this->password = $password;
 
         return $this;
     }
 
-    /**
-     * Get password
-     *
-     * @return string 
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
 
     /**
      * Set name
@@ -191,7 +161,6 @@ class User implements UserInterface, \Serializable
     public function getName()
     {
         return $this->name;
-
     }
 
     /**
@@ -216,7 +185,43 @@ class User implements UserInterface, \Serializable
     {
         return $this->email;
     }
-    
+
+    /**
+     * Set phone
+     *
+     * @param string $phone
+     * @return User
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * Get phone
+     *
+     * @return string 
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    /**
+     * Set roles
+     *
+     * @param array $roles
+     * @return User
+     */
+    public function setRoles($roles)
+    {
+        $this->role = $roles[0];
+
+        return $this;
+    }
+
     /**
      * Set account_balance
      *
@@ -432,6 +437,48 @@ class User implements UserInterface, \Serializable
     }
 
     /**
+     * @inheritDoc
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getSalt()
+    {
+        // you *may* need a real salt depending on your encoder
+        // see section on salt below
+        return null;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getRoles()
+    {
+        return [$this->role];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function eraseCredentials()
+    {
+    }
+
+
+    /**
      * @see \Serializable::serialize()
      */
     public function serialize()
@@ -460,38 +507,14 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * Set roles
-     *
-     * @param array $roles
-     * @return User
-     */
-    public function setRoles($roles)
-    {
-        $this->roles = $roles;
-
-        return $this;
-    }
-
-    /**
-     * Get roles
-     *
-     * @return array 
-     */
-    public function getRoles()
-    {
-        return str_split($this->roles,16);
-    }
-
-
-    /**
      * Set role
      *
      * @param string $role
      * @return User
      */
-    public function setRole($roles)
+    public function setRole($role)
     {
-        $this->roles = $roles[0];
+        $this->role = $role;
 
         return $this;
     }
@@ -503,30 +526,6 @@ class User implements UserInterface, \Serializable
      */
     public function getRole()
     {
-        return $this->roles;
+        return $this->role;
     }
-
-    /**
-     * Set phone
-     *
-     * @param string $phone
-     * @return User
-     */
-    public function setPhone($phone)
-    {
-        $this->phone = $phone;
-
-        return $this;
-    }
-
-    /**
-     * Get phone
-     *
-     * @return string 
-     */
-    public function getPhone()
-    {
-        return $this->phone;
-    }
-
 }

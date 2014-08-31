@@ -1,0 +1,59 @@
+{% extends '::two-col.html.twig' %}
+
+{% block body -%}
+    <h1>User list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Username</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Role</th>
+                <th>Account_balance</th>
+                <th>Create_time</th>
+                <th>Timezone</th>
+                <th>Introduction</th>
+                <th>Is_admin</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('admin_user_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.username }}</td>
+                <td>{{ entity.name }}</td>
+                <td>{{ entity.email }}</td>
+                <td>{{ entity.phone }}</td>
+                <td>{{ entity.role }}</td>
+                <td>{{ entity.accountbalance }}</td>
+                <td>{% if entity.createtime %}{{ entity.createtime|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.timezone }}</td>
+                <td>{{ entity.introduction }}</td>
+                <td>{{ entity.isadmin }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('admin_user_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('admin_user_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('admin_user_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}
