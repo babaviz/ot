@@ -61,8 +61,8 @@ class TransactionRecordController extends Controller
 	        $tr = new TransactionRecord();
 	        $tr->setNote($TransferToModel->note=''?'(Manual Transaction)':$TransferToModel->note);
 	        $tr->setType('T');
-	        $tr->setFromId($from);
-	        $tr->setToId($to);
+	        $tr->setFrom($from);
+	        $tr->setTo($to);
 	        $tr->setTransactionId(uniqid('T'));
 	        $tr->setAmount($TransferToModel->amount);
 	        $tr->setCreatedTime(new \DateTime("now"));
