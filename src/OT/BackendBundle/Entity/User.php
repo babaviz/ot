@@ -49,11 +49,6 @@ class User implements UserInterface, \Serializable
     private $roles;
 
     /**
-     * 
-     */
-    private $role;
-
-    /**
      * @ORM\Column(type="float", nullable=false)
      */
     private $account_balance;
@@ -485,6 +480,30 @@ class User implements UserInterface, \Serializable
     public function getRoles()
     {
         return str_split($this->roles,16);
+    }
+
+
+    /**
+     * Set role
+     *
+     * @param string $role
+     * @return User
+     */
+    public function setRole($roles)
+    {
+        $this->roles = $roles[0];
+
+        return $this;
+    }
+
+    /**
+     * Get role
+     *
+     * @return string 
+     */
+    public function getRole()
+    {
+        return $this->roles;
     }
 
     /**

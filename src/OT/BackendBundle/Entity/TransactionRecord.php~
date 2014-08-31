@@ -274,4 +274,50 @@ class TransactionRecord
     {
         return $this->to_id;
     }
+
+    /**
+     * Set From
+     *
+     * @param \OT\BackendBundle\Entity\User $from
+     * @return TransactionRecord
+     */
+    public function setFrom(\OT\BackendBundle\Entity\User $from = null)
+    {
+        $this->From = $from;
+
+        return $this;
+    }
+
+    /**
+     * Get From
+     *
+     * @return \OT\BackendBundle\Entity\User 
+     */
+    public function getFrom()
+    {
+        return $this->From;
+    }
+
+    /**
+     * Set To
+     *
+     * @param \OT\BackendBundle\Entity\User $to
+     * @return TransactionRecord
+     */
+    public function setTo(\OT\BackendBundle\Entity\User $to = null)
+    {
+        $this->To = $to;
+
+        return $this;
+    }
+
+    /**
+     * Get To
+     *
+     * @return \OT\BackendBundle\Entity\User 
+     */
+    public function getTo()
+    {
+        return $this->To;
+    }
 }

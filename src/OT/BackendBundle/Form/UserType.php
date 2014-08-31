@@ -8,16 +8,16 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class UserType extends AbstractType
 {
-        /**
+    /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('roles','text',['label'=>'Type','disabled'=>'true'])
+           // ->add('role','choice',['label'=>'Type','disabled'=>'true'])
             ->add('account_balance','text',['label'=>'Account Balance','disabled'=>'true'])
-            ->add('create_time','text',['label'=>'Date Joined','disabled'=>'true'])
+            ->add('create_time','datetime',['label'=>'Date Joined','disabled'=>'true'])
             ->add('username','text',['label'=>'System Login Name','disabled'=>'true'])
 
             ->add('name','text',['label'=>'Nickname'])
@@ -25,7 +25,7 @@ class UserType extends AbstractType
             ->add('phone','text',['label'=>'Phone'])
             ->add('timezone','text',['label'=>'Timezone'])
             ->add('introduction','textarea',['label'=>'Self Introduction'])
-            //->add('Courses')
+            ->add('submit','submit',['label'=>'Save'])
         ;
     }
     

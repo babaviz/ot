@@ -2,6 +2,10 @@ entrance:
     path:     /entrance/
     defaults: { _controller: OTBackendBundle:Security:entrance }
 
+bookedtime:
+    resource: "@OTBackendBundle/Resources/config/routing/bookedtime.yml"
+    prefix:   /bookedtime
+
 admin_dashboard:
     path:     /admin/dashboard
     defaults: { _controller: OTBackendBundle:Admin:dashboard }

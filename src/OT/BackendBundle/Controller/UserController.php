@@ -2,6 +2,8 @@
 
 namespace OT\BackendBundle\Controller;
 
+use OT\BackendBundle\Entity\User;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -17,9 +19,19 @@ use OT\BackendBundle\Form\Model\ForceChangePassword;
 
 class UserController extends Controller
 {
-    public function adminUserEditAction()
+    public function adminUserEditAction(Request $request, optional $id)
     {
-      $form = $this->createForm(new UserType());
+
+      $em = $this->getDoctrine()->getManager();
+      $user = $em->getRepository('OTBackendBundle:User')->find(id);
+
+      $form->handleRequest($request);
+
+      if ($form->isSubmitted() && $form->isValid()) {
+
+      }
+
+      $form = $this->createForm(new UserType(), $user);
 
       return $this->render('OTBackendBundle:User:admin_user_edit.html.twig',
         array('form'=>$form->createView())
