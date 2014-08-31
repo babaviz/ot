@@ -17,9 +17,9 @@ class UserRepository extends EntityRepository
 		return $this->getEntityManager()->createQueryBuilder()
 			->select('SUM(t.account_balance)')
 			->from('OTBackendBundle:User','t')
-			->where('t.roles = :roles1 OR t.roles = :roles2')
-			->setParameter('roles1','ADMIN')
-			->setParameter('roles2','TEACHER')
+			->where('t.role = :role1 OR t.role = :role2')
+			->setParameter('role1','ADMIN')
+			->setParameter('role2','TEACHER')
 			->getQuery()->getSingleResult();
 	}
 
@@ -28,8 +28,8 @@ class UserRepository extends EntityRepository
 		return $this->getEntityManager()->createQueryBuilder()
 			->select('SUM(t.account_balance)')
 			->from('OTBackendBundle:User','t')
-			->where('t.roles = :roles1')
-			->setParameter('roles1','LEARNER')
+			->where('t.role = :role1')
+			->setParameter('role1','LEARNER')
 			->getQuery()->getSingleResult();
 	}
 
@@ -39,9 +39,9 @@ class UserRepository extends EntityRepository
 		return $this->getEntityManager()->createQueryBuilder()
 			->select('COUNT(t)')
 			->from('OTBackendBundle:User','t')
-			->where('t.roles = :roles1 OR t.roles = :roles2')
-			->setParameter('roles1','ADMIN')
-			->setParameter('roles2','TEACHER')
+			->where('t.role = :role1 OR t.role = :role2')
+			->setParameter('role1','ADMIN')
+			->setParameter('role2','TEACHER')
 			->getQuery()->getSingleResult();
 	}
 
@@ -50,8 +50,8 @@ class UserRepository extends EntityRepository
 		return $this->getEntityManager()->createQueryBuilder()
 			->select('COUNT(t)')
 			->from('OTBackendBundle:User','t')
-			->where('t.roles = :roles1')
-			->setParameter('roles1','LEARNER')
+			->where('t.role = :role1')
+			->setParameter('role1','LEARNER')
 			->getQuery()->getSingleResult();
 	}
 
@@ -60,8 +60,8 @@ class UserRepository extends EntityRepository
 		return $this->getEntityManager()->createQueryBuilder()
 			->select('COUNT(a)')
 			->from('OTBackendBundle:User','a')
-			->where('a.roles = :roles')
-			->setParameter('roles','ADMIN')
+			->where('a.role = :role')
+			->setParameter('role','ADMIN')
 			->getQuery()->getSingleResult();
 	}
 }

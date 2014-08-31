@@ -23,7 +23,7 @@ class UserType extends AbstractType
             ->add('role')
             ->add('account_balance')
             ->add('create_time')
-            ->add('timezone')
+            ->add('timezone','text')
             ->add('introduction')
             ->add('is_admin')
             //->add('Courses')
