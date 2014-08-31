@@ -16,7 +16,6 @@ class UserType extends AbstractType
     {
         $builder
             ->add('username')
-            ->add('password')
             ->add('name')
             ->add('email')
             ->add('phone')
@@ -25,7 +24,6 @@ class UserType extends AbstractType
             ->add('create_time')
             ->add('timezone','text')
             ->add('introduction')
-            ->add('is_admin')
             //->add('Courses')
         ;
     }

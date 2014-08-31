@@ -69,11 +69,6 @@ class User implements UserInterface, \Serializable
     private $introduction;
 
     /**
-     * @ORM\Column(type="boolean", nullable=false)
-     */
-    private $is_admin;
-
-    /**
      * @ORM\OneToMany(targetEntity="TransactionRecord", mappedBy="User")
      */
     private $TransactionRecords;
@@ -312,29 +307,6 @@ class User implements UserInterface, \Serializable
     public function getIntroduction()
     {
         return $this->introduction;
-    }
-
-    /**
-     * Set is_admin
-     *
-     * @param boolean $isAdmin
-     * @return User
-     */
-    public function setIsAdmin($isAdmin)
-    {
-        $this->is_admin = $isAdmin;
-
-        return $this;
-    }
-
-    /**
-     * Get is_admin
-     *
-     * @return boolean 
-     */
-    public function getIsAdmin()
-    {
-        return $this->is_admin;
     }
 
     /**

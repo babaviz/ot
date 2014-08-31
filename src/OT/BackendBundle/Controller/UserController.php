@@ -16,20 +16,6 @@ class UserController extends Controller
 {
 
     /**
-     * Lists all User entities.
-     *
-     */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('OTBackendBundle:User')->findAll();
-
-        return $this->render('OTBackendBundle:User:admin_user_index.html.twig', array(
-            'entities' => $entities,
-        ));
-    }
-    /**
      * Creates a new User entity.
      *
      */
@@ -44,7 +30,7 @@ class UserController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('admin_user_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('admin_user_list'));
         }
 
         return $this->render('OTBackendBundle:User:admin_user_new.html.twig', array(
@@ -202,7 +188,7 @@ class UserController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('admin_user'));
+        return $this->redirect($this->generateUrl('admin_user_list'));
     }
 
     /**
@@ -222,7 +208,7 @@ class UserController extends Controller
         ;
     }
 
-        public function adminUserListAction()
+    public function adminUserListAction()
     {
       $em = $this->getDoctrine()->getManager();
       $users = $em->getRepository('OTBackendBundle:User')->findAll();

@@ -24,7 +24,6 @@
 		<th>{% trans %}Name{% endtrans %}</th>
 		<th>{% trans %}Email{% endtrans %}</th>
 		<th>{% trans %}Phone{% endtrans %}</th>
-		<th>{% trans %}Introduction{% endtrans %}</th>
 		<th>{% trans %}Account Balance{% endtrans %}</th>
 		<th>{% trans %}Date Registered{% endtrans %}</th>
 		<th></th>
@@ -38,7 +37,6 @@
 			<td>{{ user.Name }}</td>
 			<td>{{ user.email }}</td>
 			<td>{{ user.phone }}</td>
-			<td>{{ user.introduction[:20] }}</td>
 			<td>{{ user.AccountBalance }}</td>
 			<td>{{ user.CreateTime|date('Y-m-d') }}</td>
 			<td><div class="btn-toolbar"><a class="btn-sm btn-default" href="{{ path('admin_user_edit', { 'id': user.id }) }}"><i class="fa fa-edit"></i></a></div></td>
