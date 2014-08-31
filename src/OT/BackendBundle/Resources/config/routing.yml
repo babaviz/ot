@@ -10,13 +10,9 @@ admin_dashboard:
     path:     /admin/dashboard
     defaults: { _controller: OTBackendBundle:Admin:dashboard }
 
-admin_teacher_list:
-    path:     /admin/teacher/list
-    defaults: { _controller: OTBackendBundle:User:adminTeacherList }
-
-admin_learner_list:
-    path:     /admin/learner/list
-    defaults: { _controller: OTBackendBundle:User:adminLearnerList }
+admin_user_list:
+    path:     /admin/user/list
+    defaults: { _controller: OTBackendBundle:User:adminUserList }
 
 admin_course_list_all:
     path:     /admin/course/listall

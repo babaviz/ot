@@ -222,21 +222,12 @@ class UserController extends Controller
         ;
     }
 
-        public function adminTeacherListAction()
+        public function adminUserListAction()
     {
       $em = $this->getDoctrine()->getManager();
-      $admins = $em->getRepository('OTBackendBundle:User')->findByRole('ADMIN');
-      $teachers = $em->getRepository('OTBackendBundle:User')->findByRole('TEACHER');
-      return $this->render('OTBackendBundle:User:admin_teacher_list.html.twig', array(
-            'teachers'=>array_merge($admins,$teachers)));    
-    }
-
-    public function adminLearnerListAction()
-    {
-      $em = $this->getDoctrine()->getManager();
-      $learners = $em->getRepository('OTBackendBundle:User')->findByRole('LEARNER');
-      return $this->render('OTBackendBundle:User:admin_learner_list.html.twig', array(
-            'learners'=>$learners));    
+      $users = $em->getRepository('OTBackendBundle:User')->findAll();
+      return $this->render('OTBackendBundle:User:admin_user_list.html.twig', array(
+            'users'=>$users));    
     }
 
     public function adminAccountOverviewAction()
