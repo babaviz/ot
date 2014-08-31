@@ -6,25 +6,13 @@ OTBackendBundle_admin_user:
         resource: "@OTBackendBundle/Resources/config/routing/admin_user.yml"
         prefix:   /admin/user
 
+OTBackendBundle_admin_course:
+        resource: "@OTBackendBundle/Resources/config/routing/admin_course.yml"
+        prefix:   /admin/course
+
 admin_dashboard:
     path:     /admin/dashboard
     defaults: { _controller: OTBackendBundle:Admin:dashboard }
-
-admin_course_list_all:
-    path:     /admin/course/listall
-    defaults: { _controller: OTBackendBundle:Course:adminCourseListAll }
-
-admin_course_list_pending:
-    path:     /admin/course/list/pending
-    defaults: { _controller: OTBackendBundle:Course:adminCourseListPending }
-
-admin_course_list_record:
-    path:     /admin/course/list/record
-    defaults: { _controller: OTBackendBundle:Course:adminCourseListRecord }
-
-admin_course_change_status:
-    path:     /admin/course/list/changestatus/{courseid}/{status}/{redirect}
-    defaults: { _controller: OTBackendBundle:Course:adminCourseChangeStatus }
 
 admin_account_overview:
     path:     /admin/account/overview

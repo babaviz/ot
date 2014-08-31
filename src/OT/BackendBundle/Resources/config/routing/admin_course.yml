@@ -1,0 +1,47 @@
+admin_course:
+    path:     /
+    defaults: { _controller: "OTBackendBundle:Course:index" }
+
+admin_course_show:
+    path:     /{id}/show
+    defaults: { _controller: "OTBackendBundle:Course:show" }
+
+admin_course_new:
+    path:     /new
+    defaults: { _controller: "OTBackendBundle:Course:new" }
+
+admin_course_create:
+    path:     /create
+    defaults: { _controller: "OTBackendBundle:Course:create" }
+    requirements: { _method: post }
+
+admin_course_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "OTBackendBundle:Course:edit" }
+
+admin_course_update:
+    path:     /{id}/update
+    defaults: { _controller: "OTBackendBundle:Course:update" }
+    requirements: { _method: post|put }
+
+admin_course_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "OTBackendBundle:Course:delete" }
+    requirements: { _method: post|delete }
+
+admin_course_list_all:
+    path:     /list/all
+    defaults: { _controller: OTBackendBundle:Course:adminCourseListAll }
+
+admin_course_list_pending:
+    path:     /list/pending
+    defaults: { _controller: OTBackendBundle:Course:adminCourseListPending }
+
+admin_course_list_record:
+    path:     /list/record
+    defaults: { _controller: OTBackendBundle:Course:adminCourseListRecord }
+
+admin_course_change_status:
+    path:     /changestatus/{courseid}/{status}/{redirect}
+    defaults: { _controller: OTBackendBundle:Course:adminCourseChangeStatus }
+

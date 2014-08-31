@@ -17,7 +17,7 @@ admin_user_edit:
 
 admin_user_list:
     path:     /list
-    defaults: { _controller: "OTBackendBundle:User:list" }
+    defaults: { _controller: "OTBackendBundle:User:adminUserList" }
 
 admin_user_update:
     path:     /{id}/update
