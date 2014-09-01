@@ -1,14 +1,14 @@
 {% extends '::two-col.html.twig' %}
 
 {% block body -%}
-    <h1>User edit</h1>
+    <h1>{% trans %}Edit User{% endtrans %}</h1>
 
     {{ form(edit_form) }}
 
         <ul class="record_actions">
     <li>
         <a href="{{ path('admin_user_list') }}">
-            Back
+            {% trans %}Back{% endtrans %}
         </a>
     </li>
     <li>{{ form(delete_form) }}</li>
