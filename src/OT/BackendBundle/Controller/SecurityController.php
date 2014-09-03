@@ -7,10 +7,31 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
+
 class SecurityController extends Controller
 {
+    private function getRole()
+    {
+        $user=$this->get('security.context')->getToken()->getUser();
+
+        if (is_object($user)){
+            $role=$user->getRoles()[0];
+        }
+        else{
+            $role='VISITOR';
+        }
+
+        return $role;
+    }
+    
     public function loginAction(Request $request)
     {
+
+        $role=$this->getRole();
+
+        if ($role!='VISITOR')
+            return $this->render('OTBackendBundle:Security:entrance.html.twig',['role'=>$role]);
+
     	$session = $request->getSession();
         
         // get the login error if there is one
@@ -38,18 +59,12 @@ class SecurityController extends Controller
 
     public function entranceAction()
     {
-        $user=$this->get('security.context')->getToken()->getUser();
-
-        if (is_object($user)){
-            $role=$user->getRoles()[0];
-        }
-        else{
-            $role='VISITOR';
-        }
+        $role=$this->getRole();
 
         return $this->render('OTBackendBundle:Security:entrance.html.twig',['role'=>$role]);
 
         //throw $this->createNotFoundException('ERROR: Wrong permission or role.'. ' | Current role: ' . $role);
 
     }
+
 }
