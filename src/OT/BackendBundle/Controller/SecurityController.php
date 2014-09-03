@@ -10,8 +10,9 @@ use Symfony\Component\Security\Core\SecurityContextInterface;
 
 class SecurityController extends Controller
 {
-    private function getRole()
+    public function getRole()
     {
+        //get the role of current user
         $user=$this->get('security.context')->getToken()->getUser();
 
         if (is_object($user)){
@@ -22,6 +23,14 @@ class SecurityController extends Controller
         }
 
         return $role;
+    }
+
+    public function getUserId()
+    {
+        //get the id of current user
+        $user=$this->get('security.context')->getToken()->getUser();
+
+        return $user->getId();
     }
     
     public function loginAction(Request $request)
@@ -61,9 +70,10 @@ class SecurityController extends Controller
     {
         $role=$this->getRole();
 
-        return $this->render('OTBackendBundle:Security:entrance.html.twig',['role'=>$role]);
+        //throw $this->createNotFoundException($this->getUserId());
 
-        //throw $this->createNotFoundException('ERROR: Wrong permission or role.'. ' | Current role: ' . $role);
+        return $this->render('OTBackendBundle:Security:entrance.html.twig',['role'=>$role]);
+        
 
     }
 
