@@ -6,6 +6,10 @@ OTBackendBundle_admin_course:
         resource: "@OTBackendBundle/Resources/config/routing/admin_course.yml"
         prefix:   /admin/course
 
+OTBackendBundle_teacher:
+        resource: "@OTBackendBundle/Resources/config/routing/teacher.yml"
+        prefix:   /teacher
+
 admin_dashboard:
     path:     /admin/dashboard
     defaults: { _controller: OTBackendBundle:Admin:dashboard }
@@ -16,7 +20,7 @@ admin_account_overview:
 
 admin_account_transactionrecord_list:
     path:     /admin/account/transactionrecord/list
-    defaults: { _controller: OTBackendBundle:TransactionRecord:adminAccountTranscationRecordList }
+    defaults: { _controller: OTBackendBundle:TransactionRecord:AccountTranscationRecordList }
 
 admin_account_transfer:
     path:     /admin/account/transfer

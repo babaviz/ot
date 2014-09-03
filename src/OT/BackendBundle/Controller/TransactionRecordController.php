@@ -3,6 +3,7 @@
 namespace OT\BackendBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
 use OT\BackendBundle\Entity\TransactionRecord;
 use OT\BackendBundle\Entity\User;
 
@@ -13,11 +14,11 @@ use OT\BackendBundle\Form\Model\TransferTo;
 
 class TransactionRecordController extends Controller
 {
-    public function adminAccountTranscationRecordListAction()
+    public function accountTranscationRecordListAction()
     {
     	$transactions = $this->getDoctrine()->getManager()->getRepository('OTBackendBundle:TransactionRecord')->findAll();
-
-        return $this->render('OTBackendBundle:TransactionRecord:admin_account_transactionrecord_list.html.twig', array('transactions'=>$transactions));
+    
+        return $this->render('OTBackendBundle:TransactionRecord:account_transactionrecord_list.html.twig', array('transactions'=>$transactions));
     }
 
     public function adminAccountTransferAction(Request $request)
