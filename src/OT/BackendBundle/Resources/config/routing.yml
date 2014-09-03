@@ -1,7 +1,3 @@
-entrance:
-    path:     /entrance/
-    defaults: { _controller: OTBackendBundle:Security:entrance }
-
 OTBackendBundle_admin_user:
         resource: "@OTBackendBundle/Resources/config/routing/admin_user.yml"
         prefix:   /admin/user

@@ -44,14 +44,12 @@ class SecurityController extends Controller
             $role=$user->getRoles()[0];
         }
         else{
-            $role='Visitor';
+            $role='VISITOR';
         }
 
-        if($role=='ADMIN' || $role=='SUPER_ADMIN'){
-            return $this->render('OTBackendBundle:Security:entrance.html.twig');
-        }
+        return $this->render('OTBackendBundle:Security:entrance.html.twig',['role'=>$role]);
 
-        throw $this->createNotFoundException('ERROR: Wrong permission or role.'. ' | Current role: ' . $role);
+        //throw $this->createNotFoundException('ERROR: Wrong permission or role.'. ' | Current role: ' . $role);
 
     }
 }

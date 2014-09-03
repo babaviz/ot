@@ -18,10 +18,10 @@ security:
             pattern: ^/
             anonymous: ~
             form_login:
-                login_path: /backend/login
-                check_path: /backend/login_check
+                login_path: /login
+                check_path: /login_check
                 #always_use_default_target_path: true
                 #default_target_path: /backend/entry
             logout:
-                path: /backend/logout
+                path: /logout
                 target: /

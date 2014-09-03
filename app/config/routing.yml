@@ -3,14 +3,18 @@ default:
     defaults: { _controller: OTBackendBundle:Security:login }
 
 login:
-    path:     /backend/login
+    path:     /login
     defaults: { _controller: OTBackendBundle:Security:login }
 
 login_check:
-    path: /backend/login_check
+    path: /login_check
 
 logout:
-    path: /backend/logout
+    path: /logout
+
+entrance:
+    path: /entrance
+    defaults: {_controller: OTBackendBundle:Security:entrance }
 
 ot_backend:
     resource: "@OTBackendBundle/Resources/config/routing.yml"
