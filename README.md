@@ -22,9 +22,9 @@ Timezone is supported for intercontinental tutoring.
 Contact
 ----
 
-We welcome all possible oppotunities to offer this software for free, while get your feedback to improve it.
+We welcome all oppotunities to offer this software for free to you in exchange of your feedback.
 
-Copyright (C) 2014, Han Rui (@betaver).
+Copyright (C) 2014, Han Rui.
 
 Contact [han@learningtechasia.com](mailto:han@learningtechasia.com) for details.
 
