@@ -14,9 +14,9 @@ The Alpha version of the software is expected to be released on *18th, September
 Internationalization
 -----
 
-Three languages are natively supported: 'en', 'zh_CN', 'zh_TW'.
+Three languages are natively supported currently: 'en', 'zh_CN', 'zh_TW'.
 
-Timezone is supported for intercontinental tutoring
+Timezone is supported for intercontinental tutoring.
 
 
 Contact
