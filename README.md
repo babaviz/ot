@@ -24,7 +24,7 @@ Contact
 
 We welcome all possible oppotunities to offer this software for free, while get your feedback to improve it.
 
-Copyright (C) 2014, Han Rui.
+Copyright (C) 2014, Han Rui (@betaver).
 
 Contact [han@learningtechasia.com](mailto:han@learningtechasia.com) for details.
 
