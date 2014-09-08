@@ -1,10 +1,10 @@
 OTBackendBundle_admin_user:
-        resource: "@OTBackendBundle/Resources/config/routing/admin_user.yml"
-        prefix:   /admin/user
+    resource: "@OTBackendBundle/Resources/config/routing/admin_user.yml"
+    prefix:   /admin/user
 
 OTBackendBundle_admin_course:
-        resource: "@OTBackendBundle/Resources/config/routing/admin_course.yml"
-        prefix:   /admin/course
+    resource: "@OTBackendBundle/Resources/config/routing/admin_course.yml"
+    prefix:   /admin/course
 
 OTBackendBundle_teacher:
         resource: "@OTBackendBundle/Resources/config/routing/teacher.yml"

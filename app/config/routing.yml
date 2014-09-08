@@ -1,6 +1,10 @@
 default:
     path:     /
-    defaults: { _controller: OTBackendBundle:Security:login }
+    defaults: { _controller: OTBackendBundle:Homepage:index }
+
+homepage:
+    path:     /homepage
+    defaults: {_controller: OTBackendBundle:Homepage:index}
 
 login:
     path:     /login
