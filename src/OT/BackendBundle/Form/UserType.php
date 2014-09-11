@@ -19,7 +19,13 @@ class UserType extends AbstractType
             ->add('name')
             ->add('email')
             ->add('phone')
-            ->add('role')
+            ->add('role','choice',[
+                'choices'=>[
+                'Administrator'=>'ADMIN',
+                'Teacher'=>'TEACHER',
+                'Learner'=>'LEARNER'
+                ]
+                ])
             ->add('account_balance')
             ->add('create_time','date',['widget'=>'single_text'])
             ->add('timezone','text')
