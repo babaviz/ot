@@ -44,7 +44,7 @@ class Weekplan
      * @ORM\ManyToOne(targetEntity="User", inversedBy="Weekplans")
      * @ORM\JoinColumn(name="teacher_id", referencedColumnName="id", nullable=false)
      */
-    private $User;
+    private $teacher;
     /**
      * Constructor
      */
@@ -200,5 +200,28 @@ class Weekplan
     public function getUser()
     {
         return $this->User;
+    }
+
+    /**
+     * Set teacher
+     *
+     * @param \OT\BackendBundle\Entity\User $teacher
+     * @return Weekplan
+     */
+    public function setTeacher(\OT\BackendBundle\Entity\User $teacher)
+    {
+        $this->teacher = $teacher;
+
+        return $this;
+    }
+
+    /**
+     * Get teacher
+     *
+     * @return \OT\BackendBundle\Entity\User 
+     */
+    public function getTeacher()
+    {
+        return $this->teacher;
     }
 }

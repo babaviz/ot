@@ -31,11 +31,6 @@ class BookedTime
     private $status;
 
     /**
-     * @ORM\OneToOne(targetEntity="TransactionRecord", mappedBy="BookedTime")
-     */
-    private $TransactionRecord;
-
-    /**
      * @ORM\ManyToOne(targetEntity="Course", inversedBy="BookedTimes")
      * @ORM\JoinColumn(name="course_id", referencedColumnName="id")
      */
@@ -134,28 +129,6 @@ class BookedTime
         return $this->status;
     }
 
-    /**
-     * Set TransactionRecord
-     *
-     * @param \OT\BackendBundle\Entity\TransactionRecord $transactionRecord
-     * @return BookedTime
-     */
-    public function setTransactionRecord(\OT\BackendBundle\Entity\TransactionRecord $transactionRecord = null)
-    {
-        $this->TransactionRecord = $transactionRecord;
-
-        return $this;
-    }
-
-    /**
-     * Get TransactionRecord
-     *
-     * @return \OT\BackendBundle\Entity\TransactionRecord 
-     */
-    public function getTransactionRecord()
-    {
-        return $this->TransactionRecord;
-    }
 
     /**
      * Set Course

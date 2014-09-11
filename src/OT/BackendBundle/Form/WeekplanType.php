@@ -20,7 +20,7 @@ class WeekplanType extends AbstractType
             ->add('start_minute')
             ->add('end_hour')
             ->add('end_minute')
-            //->add('User')
+            ->add('teacher','entity',['class'=>'OTBackendBundle:User','property'=>'username'])
         ;
     }
     

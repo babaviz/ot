@@ -15,7 +15,7 @@ OTBackendBundle_teacher_weekplan:
         prefix:   /teacher/weekplan
 
 OTBackendBundle_teacher_bookedtime:
-        resource: "@OTBackendBundle/Resources/config/routing/bookedtime.yml"
+        resource: "@OTBackendBundle/Resources/config/routing/teacher_bookedtime.yml"
         prefix:   /teacher/bookedtime
 
 admin_dashboard:

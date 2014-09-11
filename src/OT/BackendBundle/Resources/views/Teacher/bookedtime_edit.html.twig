@@ -1,4 +1,11 @@
-{% extends '::base.html.twig' %}
+{% extends '::two-col.html.twig' %}
+
+
+{% block title %}{% trans %}Edit Booked Time{% endtrans %}{% endblock %}
+
+{% block sidebar %}
+{% include "OTBackendBundle:Teacher:sidebar.html.twig" %}
+{% endblock %}
 
 {% block body -%}
     <h1>BookedTime edit</h1>

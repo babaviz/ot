@@ -18,10 +18,9 @@ class BookedTimeType extends AbstractType
             ->add('start_time')
             ->add('end_time')
             ->add('status')
-            ->add('TransactionRecord')
-            //->add('Course')
-            //->add('Teacher')
-            //->add('Learner')
+            ->add('Course','entity',['class'=>'OTBackendBundle:Course','property'=>'name'])
+            ->add('Teacher','entity',['class'=>'OTBackendBundle:User','property'=>'username'])
+            ->add('Learner','entity',['class'=>'OTBackendBundle:User','property'=>'username'])
         ;
     }
     

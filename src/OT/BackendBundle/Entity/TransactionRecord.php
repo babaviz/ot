@@ -41,12 +41,6 @@ class TransactionRecord
     private $created_time;
 
     /**
-     * @ORM\OneToOne(targetEntity="BookedTime", inversedBy="TransactionRecord")
-     * @ORM\JoinColumn(name="booked_time_id", referencedColumnName="id", unique=true)
-     */
-    private $BookedTime;
-
-    /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="TransactionRecords")
      * @ORM\JoinColumn(name="from_id", referencedColumnName="id")
      */
@@ -181,29 +175,6 @@ class TransactionRecord
     public function getCreatedTime()
     {
         return $this->created_time;
-    }
-
-    /**
-     * Set BookedTime
-     *
-     * @param \OT\BackendBundle\Entity\BookedTime $bookedTime
-     * @return TransactionRecord
-     */
-    public function setBookedTime(\OT\BackendBundle\Entity\BookedTime $bookedTime = null)
-    {
-        $this->BookedTime = $bookedTime;
-
-        return $this;
-    }
-
-    /**
-     * Get BookedTime
-     *
-     * @return \OT\BackendBundle\Entity\BookedTime 
-     */
-    public function getBookedTime()
-    {
-        return $this->BookedTime;
     }
 
     /**

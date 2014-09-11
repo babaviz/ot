@@ -25,7 +25,7 @@ class BookedTimeController extends Controller
 
         $entities = $em->getRepository('OTBackendBundle:BookedTime')->findAll();
 
-        return $this->render('OTBackendBundle:BookedTime:index.html.twig', array(
+        return $this->render('OTBackendBundle:Teacher:bookedtime_index.html.twig', array(
             'entities' => $entities,
         ));
     }
@@ -47,7 +47,7 @@ class BookedTimeController extends Controller
             return $this->redirect($this->generateUrl('teacher_bookedtime_show', array('id' => $entity->getId())));
         }
 
-        return $this->render('OTBackendBundle:BookedTime:new.html.twig', array(
+        return $this->render('OTBackendBundle:Teacher:bookedtime_new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -81,7 +81,7 @@ class BookedTimeController extends Controller
         $entity = new BookedTime();
         $form   = $this->createCreateForm($entity);
 
-        return $this->render('OTBackendBundle:BookedTime:new.html.twig', array(
+        return $this->render('OTBackendBundle:Teacher:bookedtime_new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -103,7 +103,7 @@ class BookedTimeController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('OTBackendBundle:BookedTime:show.html.twig', array(
+        return $this->render('OTBackendBundle:Teacher:bookedtime_show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -126,7 +126,7 @@ class BookedTimeController extends Controller
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('OTBackendBundle:BookedTime:edit.html.twig', array(
+        return $this->render('OTBackendBundle:Teacher:bookedtime_edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -175,7 +175,7 @@ class BookedTimeController extends Controller
             return $this->redirect($this->generateUrl('teacher_bookedtime_edit', array('id' => $id)));
         }
 
-        return $this->render('OTBackendBundle:BookedTime:edit.html.twig', array(
+        return $this->render('OTBackendBundle:Teacher:bookedtime_edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

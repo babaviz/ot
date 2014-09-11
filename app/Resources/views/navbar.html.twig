@@ -17,9 +17,9 @@
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="#">{% trans %}Learner{% endtrans %}</a></li>
-            <li><a href="#">{% trans %}Teacher{% endtrans %}</a></li>
-            <li><a href="#">{% trans %}Administrator{% endtrans %}</a></li>
+            <li><a href="">{% trans %}Learner{% endtrans %}</a></li>
+            <li><a href="{{ path('teacher_dashboard') }}">{% trans %}Teacher{% endtrans %}</a></li>
+            <li><a href="{{ path('admin_dashboard') }}">{% trans %}Administrator{% endtrans %}</a></li>
             </li>
           </ul>
 
