@@ -11,10 +11,21 @@
 	<div class="panel-heading">{% trans %}Dashboard{% endtrans %}</div>
 	<div class="panel-body">
 
+	<p class="lead">Welcome!</p>
+
+	<p>[Upcoming courses will be shown here.]</p>
+
+	<p>{% trans %}Choose a feature on the left:{% endtrans %}</p>
+
+	<p>{% trans %}If you are also a system administrator, you can{% endtrans %}
+
+		<a href="{{ path('teacher_dashboard') }}"><i class="fa fa-random fa-fw"></i> {% trans %}Switch to administrator role.{% endtrans %}</a>
+
+	</p>
 
 	</div>
 	</div>
 
-<p class="help-block">{% trans %}Contact{% endtrans %}</p>
+<p class="help-block">{% trans %}Contact School365 by xxxxx.{% endtrans %}</p>
 
 {% endblock %}
