@@ -151,6 +151,29 @@ class Course
     }
 
     /**
+     * Set duration
+     *
+     * @param integer $duration
+     * @return Course
+     */
+    public function setDuration($duration)
+    {
+        $this->duration = $duration;
+
+        return $this;
+    }
+
+    /**
+     * Get duration
+     *
+     * @return integer 
+     */
+    public function getDuration()
+    {
+        return $this->duration;
+    }
+
+    /**
      * Set price
      *
      * @param float $price
@@ -250,62 +273,6 @@ class Course
     public function getCategory()
     {
         return $this->Category;
-    }
-
-    /**
-     * Add Users
-     *
-     * @param \OT\BackendBundle\Entity\User $Users
-     * @return Course
-     */
-    public function addUser(\OT\BackendBundle\Entity\User $Users)
-    {
-        $this->Users[] = $Users;
-
-        return $this;
-    }
-
-    /**
-     * Remove Users
-     *
-     * @param \OT\BackendBundle\Entity\User $Users
-     */
-    public function removeUser(\OT\BackendBundle\Entity\User $Users)
-    {
-        $this->Users->removeElement($Users);
-    }
-
-    /**
-     * Get Users
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getUsers()
-    {
-        return $this->Users;
-    }
-
-    /**
-     * Set duration
-     *
-     * @param integer $duration
-     * @return Course
-     */
-    public function setDuration($duration)
-    {
-        $this->duration = $duration;
-
-        return $this;
-    }
-
-    /**
-     * Get duration
-     *
-     * @return integer 
-     */
-    public function getDuration()
-    {
-        return $this->duration;
     }
 
     /**

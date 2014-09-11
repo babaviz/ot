@@ -5,37 +5,37 @@ namespace OT\BackendBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use OT\BackendBundle\Entity\Weekplan;
-use OT\BackendBundle\Form\WeekplanType;
+use OT\BackendBundle\Entity\BookedTime;
+use OT\BackendBundle\Form\BookedTimeType;
 
 /**
- * Weekplan controller.
+ * BookedTime controller.
  *
  */
-class WeekplanController extends Controller
+class BookedTimeController extends Controller
 {
 
     /**
-     * Lists all Weekplan entities.
+     * Lists all BookedTime entities.
      *
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('OTBackendBundle:Weekplan')->findAll();
+        $entities = $em->getRepository('OTBackendBundle:BookedTime')->findAll();
 
-        return $this->render('OTBackendBundle:Teacher:weekplan_index.html.twig', array(
+        return $this->render('OTBackendBundle:BookedTime:index.html.twig', array(
             'entities' => $entities,
         ));
     }
     /**
-     * Creates a new Weekplan entity.
+     * Creates a new BookedTime entity.
      *
      */
     public function createAction(Request $request)
     {
-        $entity = new Weekplan();
+        $entity = new BookedTime();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -44,26 +44,26 @@ class WeekplanController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('teacher_weekplan_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('teacher_bookedtime_show', array('id' => $entity->getId())));
         }
 
-        return $this->render('OTBackendBundle:Teacher:weekplan_new.html.twig', array(
+        return $this->render('OTBackendBundle:BookedTime:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
     }
 
     /**
-     * Creates a form to create a Weekplan entity.
+     * Creates a form to create a BookedTime entity.
      *
-     * @param Weekplan $entity The entity
+     * @param BookedTime $entity The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Weekplan $entity)
+    private function createCreateForm(BookedTime $entity)
     {
-        $form = $this->createForm(new WeekplanType(), $entity, array(
-            'action' => $this->generateUrl('teacher_weekplan_create'),
+        $form = $this->createForm(new BookedTimeType(), $entity, array(
+            'action' => $this->generateUrl('teacher_bookedtime_create'),
             'method' => 'POST',
         ));
 
@@ -73,60 +73,60 @@ class WeekplanController extends Controller
     }
 
     /**
-     * Displays a form to create a new Weekplan entity.
+     * Displays a form to create a new BookedTime entity.
      *
      */
     public function newAction()
     {
-        $entity = new Weekplan();
+        $entity = new BookedTime();
         $form   = $this->createCreateForm($entity);
 
-        return $this->render('OTBackendBundle:Teacher:weekplan_new.html.twig', array(
+        return $this->render('OTBackendBundle:BookedTime:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
     }
 
     /**
-     * Finds and displays a Weekplan entity.
+     * Finds and displays a BookedTime entity.
      *
      */
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('OTBackendBundle:Weekplan')->find($id);
+        $entity = $em->getRepository('OTBackendBundle:BookedTime')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Weekplan entity.');
+            throw $this->createNotFoundException('Unable to find BookedTime entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('OTBackendBundle:Teacher:weekplan_show.html.twig', array(
+        return $this->render('OTBackendBundle:BookedTime:show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-     * Displays a form to edit an existing Weekplan entity.
+     * Displays a form to edit an existing BookedTime entity.
      *
      */
     public function editAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('OTBackendBundle:Weekplan')->find($id);
+        $entity = $em->getRepository('OTBackendBundle:BookedTime')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Weekplan entity.');
+            throw $this->createNotFoundException('Unable to find BookedTime entity.');
         }
 
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('OTBackendBundle:Teacher:weekplan_edit.html.twig', array(
+        return $this->render('OTBackendBundle:BookedTime:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -134,16 +134,16 @@ class WeekplanController extends Controller
     }
 
     /**
-    * Creates a form to edit a Weekplan entity.
+    * Creates a form to edit a BookedTime entity.
     *
-    * @param Weekplan $entity The entity
+    * @param BookedTime $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Weekplan $entity)
+    private function createEditForm(BookedTime $entity)
     {
-        $form = $this->createForm(new WeekplanType(), $entity, array(
-            'action' => $this->generateUrl('teacher_weekplan_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new BookedTimeType(), $entity, array(
+            'action' => $this->generateUrl('teacher_bookedtime_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -152,17 +152,17 @@ class WeekplanController extends Controller
         return $form;
     }
     /**
-     * Edits an existing Weekplan entity.
+     * Edits an existing BookedTime entity.
      *
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('OTBackendBundle:Weekplan')->find($id);
+        $entity = $em->getRepository('OTBackendBundle:BookedTime')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Weekplan entity.');
+            throw $this->createNotFoundException('Unable to find BookedTime entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -172,17 +172,17 @@ class WeekplanController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('teacher_weekplan_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('teacher_bookedtime_edit', array('id' => $id)));
         }
 
-        return $this->render('OTBackendBundle:Teacher:weekplan_edit.html.twig', array(
+        return $this->render('OTBackendBundle:BookedTime:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
     /**
-     * Deletes a Weekplan entity.
+     * Deletes a BookedTime entity.
      *
      */
     public function deleteAction(Request $request, $id)
@@ -192,21 +192,21 @@ class WeekplanController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('OTBackendBundle:Weekplan')->find($id);
+            $entity = $em->getRepository('OTBackendBundle:BookedTime')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Weekplan entity.');
+                throw $this->createNotFoundException('Unable to find BookedTime entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('teacher_weekplan'));
+        return $this->redirect($this->generateUrl('teacher_bookedtime'));
     }
 
     /**
-     * Creates a form to delete a Weekplan entity by id.
+     * Creates a form to delete a BookedTime entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -215,7 +215,7 @@ class WeekplanController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('teacher_weekplan_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('teacher_bookedtime_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

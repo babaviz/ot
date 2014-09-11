@@ -1,0 +1,30 @@
+teacher_bookedtime:
+    path:     /
+    defaults: { _controller: "OTBackendBundle:BookedTime:index" }
+
+teacher_bookedtime_show:
+    path:     /{id}/show
+    defaults: { _controller: "OTBackendBundle:BookedTime:show" }
+
+teacher_bookedtime_new:
+    path:     /new
+    defaults: { _controller: "OTBackendBundle:BookedTime:new" }
+
+teacher_bookedtime_create:
+    path:     /create
+    defaults: { _controller: "OTBackendBundle:BookedTime:create" }
+    requirements: { _method: post }
+
+teacher_bookedtime_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "OTBackendBundle:BookedTime:edit" }
+
+teacher_bookedtime_update:
+    path:     /{id}/update
+    defaults: { _controller: "OTBackendBundle:BookedTime:update" }
+    requirements: { _method: post|put }
+
+teacher_bookedtime_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "OTBackendBundle:BookedTime:delete" }
+    requirements: { _method: post|delete }

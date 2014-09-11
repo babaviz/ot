@@ -505,4 +505,37 @@ class User implements UserInterface, \Serializable
     {
         return $this->Courses;
     }
+
+    /**
+     * Add BookedTimes
+     *
+     * @param \OT\BackendBundle\Entity\BookedTime $bookedTimes
+     * @return User
+     */
+    public function addBookedTime(\OT\BackendBundle\Entity\BookedTime $bookedTimes)
+    {
+        $this->BookedTimes[] = $bookedTimes;
+
+        return $this;
+    }
+
+    /**
+     * Remove BookedTimes
+     *
+     * @param \OT\BackendBundle\Entity\BookedTime $bookedTimes
+     */
+    public function removeBookedTime(\OT\BackendBundle\Entity\BookedTime $bookedTimes)
+    {
+        $this->BookedTimes->removeElement($bookedTimes);
+    }
+
+    /**
+     * Get BookedTimes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getBookedTimes()
+    {
+        return $this->BookedTimes;
+    }
 }

@@ -26,7 +26,7 @@ class BookedTime
     private $end_time;
 
     /**
-     * @ORM\Column(type="string", length=16, nullable=false)
+     * @ORM\Column(type="string", length=16)
      */
     private $status;
 
@@ -45,7 +45,13 @@ class BookedTime
      * @ORM\ManyToOne(targetEntity="User", inversedBy="BookedTimes")
      * @ORM\JoinColumn(name="teacher_id", referencedColumnName="id", nullable=false)
      */
-    private $User;
+    private $Teacher;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="BookedTimes")
+     * @ORM\JoinColumn(name="learner_id", referencedColumnName="id", nullable=false)
+     */
+    private $Learner;
 
 
 
@@ -195,5 +201,51 @@ class BookedTime
     public function getUser()
     {
         return $this->User;
+    }
+
+    /**
+     * Set Teacher
+     *
+     * @param \OT\BackendBundle\Entity\User $teacher
+     * @return BookedTime
+     */
+    public function setTeacher(\OT\BackendBundle\Entity\User $teacher)
+    {
+        $this->Teacher = $teacher;
+
+        return $this;
+    }
+
+    /**
+     * Get Teacher
+     *
+     * @return \OT\BackendBundle\Entity\User 
+     */
+    public function getTeacher()
+    {
+        return $this->Teacher;
+    }
+
+    /**
+     * Set Learner
+     *
+     * @param \OT\BackendBundle\Entity\User $learner
+     * @return BookedTime
+     */
+    public function setLearner(\OT\BackendBundle\Entity\User $learner)
+    {
+        $this->Learner = $learner;
+
+        return $this;
+    }
+
+    /**
+     * Get Learner
+     *
+     * @return \OT\BackendBundle\Entity\User 
+     */
+    public function getLearner()
+    {
+        return $this->Learner;
     }
 }
