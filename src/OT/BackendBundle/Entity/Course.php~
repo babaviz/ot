@@ -61,7 +61,7 @@ class Course
     /**
      * @ORM\ManyToMany(targetEntity="User", mappedBy="Courses")
      */
-    private $Users;
+    private $Teachers;
     /**
      * Constructor
      */
@@ -306,5 +306,38 @@ class Course
     public function getDuration()
     {
         return $this->duration;
+    }
+
+    /**
+     * Add Teachers
+     *
+     * @param \OT\BackendBundle\Entity\User $teachers
+     * @return Course
+     */
+    public function addTeacher(\OT\BackendBundle\Entity\User $teachers)
+    {
+        $this->Teachers[] = $teachers;
+
+        return $this;
+    }
+
+    /**
+     * Remove Teachers
+     *
+     * @param \OT\BackendBundle\Entity\User $teachers
+     */
+    public function removeTeacher(\OT\BackendBundle\Entity\User $teachers)
+    {
+        $this->Teachers->removeElement($teachers);
+    }
+
+    /**
+     * Get Teachers
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTeachers()
+    {
+        return $this->Teachers;
     }
 }

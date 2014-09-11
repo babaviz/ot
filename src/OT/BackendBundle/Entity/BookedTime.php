@@ -31,25 +31,9 @@ class BookedTime
     private $status;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $Teacher_comment;
-
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $Learner_comment;
-
-    /**
      * @ORM\OneToOne(targetEntity="TransactionRecord", mappedBy="BookedTime")
      */
     private $TransactionRecord;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="FreeTime", inversedBy="BookedTimes")
-     * @ORM\JoinColumn(name="free_time_id", referencedColumnName="id", nullable=false)
-     */
-    private $FreeTime;
 
     /**
      * @ORM\ManyToOne(targetEntity="Course", inversedBy="BookedTimes")
@@ -59,9 +43,11 @@ class BookedTime
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="BookedTimes")
-     * @ORM\JoinColumn(name="User_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="teacher_id", referencedColumnName="id", nullable=false)
      */
     private $User;
+
+
 
     /**
      * Get id
@@ -143,52 +129,6 @@ class BookedTime
     }
 
     /**
-     * Set Teacher_comment
-     *
-     * @param string $TeacherComment
-     * @return BookedTime
-     */
-    public function setTeacherComment($TeacherComment)
-    {
-        $this->Teacher_comment = $TeacherComment;
-
-        return $this;
-    }
-
-    /**
-     * Get Teacher_comment
-     *
-     * @return string 
-     */
-    public function getTeacherComment()
-    {
-        return $this->Teacher_comment;
-    }
-
-    /**
-     * Set Learner_comment
-     *
-     * @param string $LearnerComment
-     * @return BookedTime
-     */
-    public function setLearnerComment($LearnerComment)
-    {
-        $this->Learner_comment = $LearnerComment;
-
-        return $this;
-    }
-
-    /**
-     * Get Learner_comment
-     *
-     * @return string 
-     */
-    public function getLearnerComment()
-    {
-        return $this->Learner_comment;
-    }
-
-    /**
      * Set TransactionRecord
      *
      * @param \OT\BackendBundle\Entity\TransactionRecord $transactionRecord
@@ -209,29 +149,6 @@ class BookedTime
     public function getTransactionRecord()
     {
         return $this->TransactionRecord;
-    }
-
-    /**
-     * Set FreeTime
-     *
-     * @param \OT\BackendBundle\Entity\FreeTime $freeTime
-     * @return BookedTime
-     */
-    public function setFreeTime(\OT\BackendBundle\Entity\FreeTime $freeTime)
-    {
-        $this->FreeTime = $freeTime;
-
-        return $this;
-    }
-
-    /**
-     * Get FreeTime
-     *
-     * @return \OT\BackendBundle\Entity\FreeTime 
-     */
-    public function getFreeTime()
-    {
-        return $this->FreeTime;
     }
 
     /**
@@ -260,12 +177,12 @@ class BookedTime
     /**
      * Set User
      *
-     * @param \OT\BackendBundle\Entity\User $User
+     * @param \OT\BackendBundle\Entity\User $user
      * @return BookedTime
      */
-    public function setUser(\OT\BackendBundle\Entity\User $User)
+    public function setUser(\OT\BackendBundle\Entity\User $user)
     {
-        $this->User = $User;
+        $this->User = $user;
 
         return $this;
     }

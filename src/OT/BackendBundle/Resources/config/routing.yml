@@ -10,6 +10,10 @@ OTBackendBundle_teacher:
         resource: "@OTBackendBundle/Resources/config/routing/teacher.yml"
         prefix:   /teacher
 
+OTBackendBundle_teacher_weekplan:
+        resource: "@OTBackendBundle/Resources/config/routing/teacher_weekplan.yml"
+        prefix:   /teacher/weekplan
+
 admin_dashboard:
     path:     /admin/dashboard
     defaults: { _controller: OTBackendBundle:Admin:dashboard }

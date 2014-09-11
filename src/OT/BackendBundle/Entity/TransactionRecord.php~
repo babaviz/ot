@@ -230,52 +230,6 @@ class TransactionRecord
     }
 
     /**
-     * Set from_id
-     *
-     * @param \OT\BackendBundle\Entity\User $fromId
-     * @return TransactionRecord
-     */
-    public function setFromId(\OT\BackendBundle\Entity\User $fromId = null)
-    {
-        $this->from_id = $fromId;
-
-        return $this;
-    }
-
-    /**
-     * Get from_id
-     *
-     * @return \OT\BackendBundle\Entity\User 
-     */
-    public function getFromId()
-    {
-        return $this->from_id;
-    }
-
-    /**
-     * Set to_id
-     *
-     * @param \OT\BackendBundle\Entity\User $toId
-     * @return TransactionRecord
-     */
-    public function setToId(\OT\BackendBundle\Entity\User $toId = null)
-    {
-        $this->to_id = $toId;
-
-        return $this;
-    }
-
-    /**
-     * Get to_id
-     *
-     * @return \OT\BackendBundle\Entity\User 
-     */
-    public function getToId()
-    {
-        return $this->to_id;
-    }
-
-    /**
      * Set From
      *
      * @param \OT\BackendBundle\Entity\User $from

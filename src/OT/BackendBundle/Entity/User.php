@@ -74,15 +74,20 @@ class User implements UserInterface, \Serializable
     private $TransactionRecords;
 
     /**
-     * @ORM\OneToMany(targetEntity="FreeTime", mappedBy="User")
+     * @ORM\OneToMany(targetEntity="Weekplan", mappedBy="User")
      */
-    private $FreeTimes;
+    private $Weekplans;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Course", inversedBy="Users")
+     * @ORM\OneToMany(targetEntity="BookedTime", mappedBy="User")
+     */
+    private $BookedTimes;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Course", inversedBy="Teachers")
      * @ORM\JoinTable(
-     *     name="CourseHasUser",
-     *     joinColumns={@ORM\JoinColumn(name="User_id", referencedColumnName="id", nullable=false)},
+     *     name="CourseHasTeacher",
+     *     joinColumns={@ORM\JoinColumn(name="teacher_id", referencedColumnName="id", nullable=false)},
      *     inverseJoinColumns={@ORM\JoinColumn(name="course_id", referencedColumnName="id", nullable=false)}
      * )
      */
@@ -94,9 +99,93 @@ class User implements UserInterface, \Serializable
     public function __construct()
     {
         $this->TransactionRecords = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->FreeTimes = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->Weekplans = new \Doctrine\Common\Collections\ArrayCollection();
         $this->Courses = new \Doctrine\Common\Collections\ArrayCollection();
     }
+
+
+    /**
+     * Set roles
+     *
+     * @param array $roles
+     * @return User
+     */
+    public function setRoles($roles)
+    {
+        $this->role = $roles[0];
+
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getSalt()
+    {
+        // you *may* need a real salt depending on your encoder
+        // see section on salt below
+        return null;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getRoles()
+    {
+        return [$this->role];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function eraseCredentials()
+    {
+    }
+
+    /**
+     * @see \Serializable::serialize()
+     */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->username,
+            $this->password,
+            // see section on salt below
+            // $this->salt,
+        ));
+    }
+
+    /**
+     * @see \Serializable::unserialize()
+     */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->username,
+            $this->password,
+            // see section on salt below
+            // $this->salt
+        ) = unserialize($serialized);
+    }
+
 
     /**
      * Get id
@@ -129,11 +218,10 @@ class User implements UserInterface, \Serializable
      */
     public function setPassword($password)
     {
-        $this->password = password_hash($password,PASSWORD_BCRYPT);
+        $this->password = $password;
 
         return $this;
     }
-
 
     /**
      * Set name
@@ -205,16 +293,26 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * Set roles
+     * Set role
      *
-     * @param array $roles
+     * @param string $role
      * @return User
      */
-    public function setRoles($roles)
+    public function setRole($role)
     {
-        $this->role = $roles[0];
+        $this->role = $role;
 
         return $this;
+    }
+
+    /**
+     * Get role
+     *
+     * @return string 
+     */
+    public function getRole()
+    {
+        return $this->role;
     }
 
     /**
@@ -343,36 +441,36 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * Add FreeTimes
+     * Add Weekplans
      *
-     * @param \OT\BackendBundle\Entity\FreeTime $freeTimes
+     * @param \OT\BackendBundle\Entity\Weekplan $weekplans
      * @return User
      */
-    public function addFreeTime(\OT\BackendBundle\Entity\FreeTime $freeTimes)
+    public function addWeekplan(\OT\BackendBundle\Entity\Weekplan $weekplans)
     {
-        $this->FreeTimes[] = $freeTimes;
+        $this->Weekplans[] = $weekplans;
 
         return $this;
     }
 
     /**
-     * Remove FreeTimes
+     * Remove Weekplans
      *
-     * @param \OT\BackendBundle\Entity\FreeTime $freeTimes
+     * @param \OT\BackendBundle\Entity\Weekplan $weekplans
      */
-    public function removeFreeTime(\OT\BackendBundle\Entity\FreeTime $freeTimes)
+    public function removeWeekplan(\OT\BackendBundle\Entity\Weekplan $weekplans)
     {
-        $this->FreeTimes->removeElement($freeTimes);
+        $this->Weekplans->removeElement($weekplans);
     }
 
     /**
-     * Get FreeTimes
+     * Get Weekplans
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getFreeTimes()
+    public function getWeekplans()
     {
-        return $this->FreeTimes;
+        return $this->Weekplans;
     }
 
     /**
@@ -409,95 +507,35 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * @inheritDoc
-     */
-    public function getUsername()
-    {
-        return $this->username;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getSalt()
-    {
-        // you *may* need a real salt depending on your encoder
-        // see section on salt below
-        return null;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getRoles()
-    {
-        return [$this->role];
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function eraseCredentials()
-    {
-    }
-
-
-    /**
-     * @see \Serializable::serialize()
-     */
-    public function serialize()
-    {
-        return serialize(array(
-            $this->id,
-            $this->username,
-            $this->password,
-            // see section on salt below
-            // $this->salt,
-        ));
-    }
-
-    /**
-     * @see \Serializable::unserialize()
-     */
-    public function unserialize($serialized)
-    {
-        list (
-            $this->id,
-            $this->username,
-            $this->password,
-            // see section on salt below
-            // $this->salt
-        ) = unserialize($serialized);
-    }
-
-    /**
-     * Set role
+     * Add BookedTimes
      *
-     * @param string $role
+     * @param \OT\BackendBundle\Entity\BookedTime $bookedTimes
      * @return User
      */
-    public function setRole($role)
+    public function addBookedTime(\OT\BackendBundle\Entity\BookedTime $bookedTimes)
     {
-        $this->role = $role;
+        $this->BookedTimes[] = $bookedTimes;
 
         return $this;
     }
 
     /**
-     * Get role
+     * Remove BookedTimes
      *
-     * @return string 
+     * @param \OT\BackendBundle\Entity\BookedTime $bookedTimes
      */
-    public function getRole()
+    public function removeBookedTime(\OT\BackendBundle\Entity\BookedTime $bookedTimes)
     {
-        return $this->role;
+        $this->BookedTimes->removeElement($bookedTimes);
+    }
+
+    /**
+     * Get BookedTimes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getBookedTimes()
+    {
+        return $this->BookedTimes;
     }
 }

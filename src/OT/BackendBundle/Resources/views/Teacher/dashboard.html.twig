@@ -1,0 +1,20 @@
+{% extends "::two-col.html.twig" %}
+
+{% block title %}{% trans %}Dashboard{% endtrans %}{% endblock %}
+
+{% block sidebar %}
+{% include "OTBackendBundle:Teacher:sidebar.html.twig" %}
+{% endblock %}
+
+{% block body %}
+	<div class="panel panel-default">
+	<div class="panel-heading">{% trans %}Dashboard{% endtrans %}</div>
+	<div class="panel-body">
+
+
+	</div>
+	</div>
+
+<p class="help-block">{% trans %}Contact{% endtrans %}</p>
+
+{% endblock %}

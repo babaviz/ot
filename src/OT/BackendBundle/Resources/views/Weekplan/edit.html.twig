@@ -1,0 +1,23 @@
+{% extends '::two-col.html.twig' %}
+
+
+{% block title %}{% trans %}Edit Weekly Plan{% endtrans %}{% endblock %}
+
+{% block sidebar %}
+{% include "OTBackendBundle:Teacher:sidebar.html.twig" %}
+{% endblock %}
+
+{% block body -%}
+    <h1>Weekplan edit</h1>
+
+    {{ form(edit_form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('teacher_weekplan') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

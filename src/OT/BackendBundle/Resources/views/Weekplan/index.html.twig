@@ -1,0 +1,56 @@
+{% extends '::two-col.html.twig' %}
+
+
+{% block title %}{% trans %}View Weekly Plan{% endtrans %}{% endblock %}
+
+{% block sidebar %}
+{% include "OTBackendBundle:Teacher:sidebar.html.twig" %}
+{% endblock %}
+
+{% block body -%}
+    <h1>Weekplan list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Weekday</th>
+                <th>Start_hour</th>
+                <th>Start_minute</th>
+                <th>End_hour</th>
+                <th>End_minute</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('teacher_weekplan_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.weekday }}</td>
+                <td>{{ entity.starthour }}</td>
+                <td>{{ entity.startminute }}</td>
+                <td>{{ entity.endhour }}</td>
+                <td>{{ entity.endminute }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('teacher_weekplan_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('teacher_weekplan_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('teacher_weekplan_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}
