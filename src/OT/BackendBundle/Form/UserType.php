@@ -21,10 +21,9 @@ class UserType extends AbstractType
             ->add('phone')
             ->add('role')
             ->add('account_balance')
-            ->add('create_time')
+            ->add('create_time','date',['widget'=>'single_text'])
             ->add('timezone','text')
             ->add('introduction')
-            //->add('Courses')
         ;
     }
     
