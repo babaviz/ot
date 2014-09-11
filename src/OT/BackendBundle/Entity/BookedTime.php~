@@ -16,17 +16,17 @@ class BookedTime
     private $id;
 
     /**
-     * @ORM\Column(type="smallint", nullable=false)
+     * @ORM\Column(type="smallint")
      */
     private $start_time;
 
     /**
-     * @ORM\Column(type="smallint", nullable=false)
+     * @ORM\Column(type="smallint")
      */
     private $end_time;
 
     /**
-     * @ORM\Column(type="string", length=16)
+     * @ORM\Column(type="string", length=16, nullable=false)
      */
     private $status;
 
