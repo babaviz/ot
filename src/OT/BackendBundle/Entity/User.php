@@ -228,7 +228,7 @@ class User implements UserInterface, \Serializable
      */
     public function setPassword($password)
     {
-        $this->password = $password;
+        $this->password = password_hash($password,PASSWORD_BCRYPT);
 
         return $this;
     }

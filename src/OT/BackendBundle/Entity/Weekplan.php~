@@ -16,7 +16,7 @@ class Weekplan
     private $id;
 
     /**
-     * @ORM\Column(type="string", nullable=false)
+     * @ORM\Column(type="smallint", nullable=false)
      */
     private $weekday;
 

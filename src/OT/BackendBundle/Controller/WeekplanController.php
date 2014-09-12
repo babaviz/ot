@@ -23,7 +23,8 @@ class WeekplanController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('OTBackendBundle:Weekplan')->findAll();
+        $userid= $this->get('security.context')->getToken()->getUser()->getId();
+        $entities = $em->getRepository('OTBackendBundle:Weekplan')->findByTeacher($userid);
 
         return $this->render('OTBackendBundle:Teacher:weekplan_index.html.twig', array(
             'entities' => $entities,
@@ -36,6 +37,7 @@ class WeekplanController extends Controller
     public function createAction(Request $request)
     {
         $entity = new Weekplan();
+
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -79,6 +81,10 @@ class WeekplanController extends Controller
     public function newAction()
     {
         $entity = new Weekplan();
+
+        $user= $this->get('security.context')->getToken()->getUser();
+        $entity->setTeacher($user);
+
         $form   = $this->createCreateForm($entity);
 
         return $this->render('OTBackendBundle:Teacher:weekplan_new.html.twig', array(

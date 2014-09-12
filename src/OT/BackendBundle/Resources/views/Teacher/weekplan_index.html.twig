@@ -10,15 +10,35 @@
 {% block body -%}
     <h1>Weekplan list</h1>
 
-    <table class="records_list">
+    {#
+    <table class="table">
+        <thead>
+            <th>Monday</th>
+            <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thursday</th>
+            <th>Friday</th>
+            <th>Saturday</th>
+            <th>Sunday</th>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <hr/>
+
+    #}
+
+    <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Weekday</th>
-                <th>Start_hour</th>
-                <th>Start_minute</th>
-                <th>End_hour</th>
-                <th>End_minute</th>
+                <th>Start</th>
+                <th>End</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -27,10 +47,8 @@
             <tr>
                 <td><a href="{{ path('teacher_weekplan_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.weekday }}</td>
-                <td>{{ entity.starthour }}</td>
-                <td>{{ entity.startminute }}</td>
-                <td>{{ entity.endhour }}</td>
-                <td>{{ entity.endminute }}</td>
+                <td>{{ "%02d" |format(entity.starthour) }}:{{ "%02d" |format(entity.startminute) }}</td>
+                <td>{{ "%02d" |format(entity.endhour) }}:{{ "%02d" |format(entity.endminute) }}</td>
                 <td>
                 <ul>
                     <li>

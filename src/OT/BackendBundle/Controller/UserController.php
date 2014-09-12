@@ -253,7 +253,9 @@ class UserController extends Controller
       if ($form->isSubmitted() && $form->isValid()) {
         $username = $this->getUser()->getName();
         $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository('OTBackendBundle:User')->findOneByName($username);
+        
+        //$user = $em->getRepository('OTBackendBundle:User')->findOneByName($username);
+        $user= $this->get('security.context')->getToken()->getUser();
         
         $user->setPassword($changePasswordModel->newPassword);
         $em->flush();

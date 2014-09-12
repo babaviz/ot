@@ -15,12 +15,22 @@ class WeekplanType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('weekday')
+            ->add('teacher','entity',['class'=>'OTBackendBundle:User','property'=>'username'])
+            ->add('weekday','choice',[
+                'choices'=>[
+                '1'=>'Monday',
+                '2'=>'Tuesday',
+                '3'=>'Wednesday',
+                '4'=>'Thursday',
+                '5'=>'Friday',
+                '6'=>'Saturday',
+                '7'=>'Sunday'
+                ]
+                ])
             ->add('start_hour')
             ->add('start_minute')
             ->add('end_hour')
             ->add('end_minute')
-            ->add('teacher','entity',['class'=>'OTBackendBundle:User','property'=>'username'])
         ;
     }
     
