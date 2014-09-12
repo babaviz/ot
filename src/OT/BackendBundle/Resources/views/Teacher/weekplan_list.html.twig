@@ -35,29 +35,24 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Weekday</th>
-                <th>Start</th>
-                <th>End</th>
+                <th>Start Hour</th>
+                <th>Start Minute</th>
+                <th>Start Hour</th>
+                <th>End Minute</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('teacher_weekplan_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.weekday }}</td>
-                <td>{{ "%02d" |format(entity.starthour) }}:{{ "%02d" |format(entity.startminute) }}</td>
-                <td>{{ "%02d" |format(entity.endhour) }}:{{ "%02d" |format(entity.endminute) }}</td>
+                <td>{{  weekdays[entity.weekday-1] }}</td>
+                <td>{{ "%02d" |format((entity.startminute-1440*(entity.weekday-1))/60) }}</td>
+                <td>{{ "%02d" |format((entity.startminute-1440*(entity.weekday-1))%60) }}</td>
+                <td>{{ "%02d" |format((entity.endminute-1440*(entity.weekday-1))/60) }}</td>
+                <td>{{ "%02d" |format((entity.endminute-1440*(entity.weekday-1))%60) }}</td>
                 <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('teacher_weekplan_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('teacher_weekplan_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
+                    action
                 </td>
             </tr>
         {% endfor %}
@@ -66,7 +61,7 @@
 
         <ul>
         <li>
-            <a href="{{ path('teacher_weekplan_new') }}">
+            <a href="#">
                 Create a new entry
             </a>
         </li>

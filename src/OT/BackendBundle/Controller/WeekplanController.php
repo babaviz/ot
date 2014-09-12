@@ -3,6 +3,7 @@
 namespace OT\BackendBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use OT\BackendBundle\Entity\Weekplan;
@@ -19,16 +20,27 @@ class WeekplanController extends Controller
      * Lists all Weekplan entities.
      *
      */
-    public function indexAction()
+    public function listAction()
     {
+        
         $em = $this->getDoctrine()->getManager();
 
         $userid= $this->get('security.context')->getToken()->getUser()->getId();
         $entities = $em->getRepository('OTBackendBundle:Weekplan')->findByTeacher($userid);
 
-        return $this->render('OTBackendBundle:Teacher:weekplan_index.html.twig', array(
+        return $this->render('OTBackendBundle:Teacher:weekplan_list.html.twig', array(
             'entities' => $entities,
+            'weekdays'=>['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
         ));
+        
+        /*
+        $ot_calendar=$this->get('ot_calendar');
+
+        $plan=new Weekplan();
+
+        return new Response(
+            var_dump($ot_calendar->push_calendar_timezone($plan))
+        );*/
     }
     /**
      * Creates a new Weekplan entity.

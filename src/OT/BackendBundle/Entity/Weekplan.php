@@ -21,22 +21,12 @@ class Weekplan
     private $weekday;
 
     /**
-     * @ORM\Column(type="smallint", nullable=false)
-     */
-    private $start_hour;
-
-    /**
-     * @ORM\Column(type="smallint", nullable=false)
+     * @ORM\Column(type="integer", nullable=false)
      */
     private $start_minute;
 
     /**
-     * @ORM\Column(type="smallint", nullable=false)
-     */
-    private $end_hour;
-
-    /**
-     * @ORM\Column(type="smallint", nullable=false)
+     * @ORM\Column(type="integer", nullable=false)
      */
     private $end_minute;
 
@@ -45,6 +35,7 @@ class Weekplan
      * @ORM\JoinColumn(name="teacher_id", referencedColumnName="id", nullable=false)
      */
     private $teacher;
+
     /**
      * Constructor
      */
@@ -67,7 +58,7 @@ class Weekplan
     /**
      * Set weekday
      *
-     * @param string $weekday
+     * @param integer $weekday
      * @return Weekplan
      */
     public function setWeekday($weekday)
@@ -80,34 +71,11 @@ class Weekplan
     /**
      * Get weekday
      *
-     * @return string 
+     * @return integer 
      */
     public function getWeekday()
     {
         return $this->weekday;
-    }
-
-    /**
-     * Set start_hour
-     *
-     * @param integer $startHour
-     * @return Weekplan
-     */
-    public function setStartHour($startHour)
-    {
-        $this->start_hour = $startHour;
-
-        return $this;
-    }
-
-    /**
-     * Get start_hour
-     *
-     * @return integer 
-     */
-    public function getStartHour()
-    {
-        return $this->start_hour;
     }
 
     /**
@@ -134,29 +102,6 @@ class Weekplan
     }
 
     /**
-     * Set end_hour
-     *
-     * @param integer $endHour
-     * @return Weekplan
-     */
-    public function setEndHour($endHour)
-    {
-        $this->end_hour = $endHour;
-
-        return $this;
-    }
-
-    /**
-     * Get end_hour
-     *
-     * @return integer 
-     */
-    public function getEndHour()
-    {
-        return $this->end_hour;
-    }
-
-    /**
      * Set end_minute
      *
      * @param integer $endMinute
@@ -177,29 +122,6 @@ class Weekplan
     public function getEndMinute()
     {
         return $this->end_minute;
-    }
-
-    /**
-     * Set User
-     *
-     * @param \OT\BackendBundle\Entity\User $user
-     * @return Weekplan
-     */
-    public function setUser(\OT\BackendBundle\Entity\User $user)
-    {
-        $this->User = $user;
-
-        return $this;
-    }
-
-    /**
-     * Get User
-     *
-     * @return \OT\BackendBundle\Entity\User 
-     */
-    public function getUser()
-    {
-        return $this->User;
     }
 
     /**
