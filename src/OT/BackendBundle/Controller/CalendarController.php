@@ -22,7 +22,7 @@ class CalendarController
       $strPlan.=str_repeat($workingString[0],$workingString[1]);
     }
 
-    $offset=-$offset_tz/60/10;
+    $offset=$offset_tz/60/10;
 
     if ($offset!=0)
       $strPlan=substr($strPlan,$offset).substr($strPlan,0,$offset);
@@ -59,7 +59,38 @@ class CalendarController
 
   private function day_to_agenda($strDay)
   {
-    return $strDay;
+    $strDay.='B';
+    $pos_start;
+    $pos_end;
+    $result='';
+    $i=0;
+
+    //$result.=$strDay;  debug
+
+    while ($i<144)
+    {
+      $pos_start=strpos($strDay,'F',$i);
+      if ($pos_start!==false){
+
+
+        $pos_end=strpos($strDay,'B',$pos_start);
+
+        $result.=floor($pos_start/6);
+        $result.=':';
+        $result.=$pos_start%6;
+        $result.='0 -- ';
+        $result.=floor($pos_end/6); 
+        $result.=':';
+        $result.=$pos_end%6;
+        $result.='0, ';
+
+        $i=$pos_end;
+      }
+      
+      $i++;
+    }
+
+    return $result.'(end)';
   }
 
 
@@ -69,7 +100,8 @@ class CalendarController
     for ($d=0;$d<1008;$d+=144){
       $result.='<br/>';
       $result.=array('mon:','tue:','wed:','thu:','fri:','sat:','sun:')[$d/144];
-      $result.=$this->day_to_agenda(substr($strPlan,$d,144),'F');
+      $result.='  ';
+      $result.=$this->day_to_agenda(substr($strPlan,$d,144));
     }
     return $result;
   }
