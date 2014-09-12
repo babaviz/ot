@@ -37,13 +37,13 @@ class BookedTime
     private $Course;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="BookedTimes")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="TeachingBookedTimes")
      * @ORM\JoinColumn(name="teacher_id", referencedColumnName="id", nullable=false)
      */
     private $Teacher;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="BookedTimes")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="LearningBookedTimes")
      * @ORM\JoinColumn(name="learner_id", referencedColumnName="id", nullable=false)
      */
     private $Learner;

@@ -69,19 +69,29 @@ class User implements UserInterface, \Serializable
     private $introduction;
 
     /**
-     * @ORM\OneToMany(targetEntity="TransactionRecord", mappedBy="User")
+     * @ORM\OneToMany(targetEntity="TransactionRecord", mappedBy="From")
      */
-    private $TransactionRecords;
+    private $SentTransactions;
 
     /**
-     * @ORM\OneToMany(targetEntity="Weekplan", mappedBy="User")
+     * @ORM\OneToMany(targetEntity="TransactionRecord", mappedBy="To")
+     */
+    private $ReceivedTransactions;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Weekplan", mappedBy="teacher")
      */
     private $Weekplans;
 
     /**
-     * @ORM\OneToMany(targetEntity="BookedTime", mappedBy="User")
+     * @ORM\OneToMany(targetEntity="BookedTime", mappedBy="Teacher")
      */
-    private $BookedTimes;
+    private $TeachingBookedTimes;
+
+        /**
+     * @ORM\OneToMany(targetEntity="BookedTime", mappedBy="Learner")
+     */
+    private $LearningBookedTimes;
 
     /**
      * @ORM\ManyToMany(targetEntity="Course", inversedBy="Teachers")
@@ -520,22 +530,134 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * Remove BookedTimes
+     * Add SentTransactions
      *
-     * @param \OT\BackendBundle\Entity\BookedTime $bookedTimes
+     * @param \OT\BackendBundle\Entity\TransactionRecord $sentTransactions
+     * @return User
      */
-    public function removeBookedTime(\OT\BackendBundle\Entity\BookedTime $bookedTimes)
+    public function addSentTransaction(\OT\BackendBundle\Entity\TransactionRecord $sentTransactions)
     {
-        $this->BookedTimes->removeElement($bookedTimes);
+        $this->SentTransactions[] = $sentTransactions;
+
+        return $this;
     }
 
     /**
-     * Get BookedTimes
+     * Remove SentTransactions
+     *
+     * @param \OT\BackendBundle\Entity\TransactionRecord $sentTransactions
+     */
+    public function removeSentTransaction(\OT\BackendBundle\Entity\TransactionRecord $sentTransactions)
+    {
+        $this->SentTransactions->removeElement($sentTransactions);
+    }
+
+    /**
+     * Get SentTransactions
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getBookedTimes()
+    public function getSentTransactions()
     {
-        return $this->BookedTimes;
+        return $this->SentTransactions;
+    }
+
+    /**
+     * Add ReceivedTransactions
+     *
+     * @param \OT\BackendBundle\Entity\TransactionRecord $receivedTransactions
+     * @return User
+     */
+    public function addReceivedTransaction(\OT\BackendBundle\Entity\TransactionRecord $receivedTransactions)
+    {
+        $this->ReceivedTransactions[] = $receivedTransactions;
+
+        return $this;
+    }
+
+    /**
+     * Remove ReceivedTransactions
+     *
+     * @param \OT\BackendBundle\Entity\TransactionRecord $receivedTransactions
+     */
+    public function removeReceivedTransaction(\OT\BackendBundle\Entity\TransactionRecord $receivedTransactions)
+    {
+        $this->ReceivedTransactions->removeElement($receivedTransactions);
+    }
+
+    /**
+     * Get ReceivedTransactions
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getReceivedTransactions()
+    {
+        return $this->ReceivedTransactions;
+    }
+
+    /**
+     * Add TeachingBookedTimes
+     *
+     * @param \OT\BackendBundle\Entity\BookedTime $teachingBookedTimes
+     * @return User
+     */
+    public function addTeachingBookedTime(\OT\BackendBundle\Entity\BookedTime $teachingBookedTimes)
+    {
+        $this->TeachingBookedTimes[] = $teachingBookedTimes;
+
+        return $this;
+    }
+
+    /**
+     * Remove TeachingBookedTimes
+     *
+     * @param \OT\BackendBundle\Entity\BookedTime $teachingBookedTimes
+     */
+    public function removeTeachingBookedTime(\OT\BackendBundle\Entity\BookedTime $teachingBookedTimes)
+    {
+        $this->TeachingBookedTimes->removeElement($teachingBookedTimes);
+    }
+
+    /**
+     * Get TeachingBookedTimes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTeachingBookedTimes()
+    {
+        return $this->TeachingBookedTimes;
+    }
+
+    /**
+     * Add LearningBookedTimes
+     *
+     * @param \OT\BackendBundle\Entity\BookedTime $learningBookedTimes
+     * @return User
+     */
+    public function addLearningBookedTime(\OT\BackendBundle\Entity\BookedTime $learningBookedTimes)
+    {
+        $this->LearningBookedTimes[] = $learningBookedTimes;
+
+        return $this;
+    }
+
+    /**
+     * Remove LearningBookedTimes
+     *
+     * @param \OT\BackendBundle\Entity\BookedTime $learningBookedTimes
+     */
+    public function removeLearningBookedTime(\OT\BackendBundle\Entity\BookedTime $learningBookedTimes)
+    {
+        $this->LearningBookedTimes->removeElement($learningBookedTimes);
+    }
+
+    /**
+     * Get LearningBookedTimes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getLearningBookedTimes()
+    {
+        return $this->LearningBookedTimes;
     }
 }

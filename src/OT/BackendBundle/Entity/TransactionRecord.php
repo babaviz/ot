@@ -41,13 +41,13 @@ class TransactionRecord
     private $created_time;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="TransactionRecords")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="SentTransactions")
      * @ORM\JoinColumn(name="from_id", referencedColumnName="id")
      */
     private $From;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="TransactionRecords")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="ReceivedTransactions")
      * @ORM\JoinColumn(name="to_id", referencedColumnName="id")
      */
     private $To;
