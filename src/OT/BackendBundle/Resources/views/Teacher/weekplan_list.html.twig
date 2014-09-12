@@ -10,6 +10,8 @@
 {% block body -%}
     <h1>Weekplan list</h1>
 
+    {{ entity|raw }}
+
     {#
     <table class="table">
         <thead>
@@ -32,32 +34,7 @@
 
     #}
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Weekday</th>
-                <th>Start Hour</th>
-                <th>Start Minute</th>
-                <th>Start Hour</th>
-                <th>End Minute</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for entity in entities %}
-            <tr>
-                <td>{{  weekdays[entity.weekday-1] }}</td>
-                <td>{{ "%02d" |format((entity.startminute-1440*(entity.weekday-1))/60) }}</td>
-                <td>{{ "%02d" |format((entity.startminute-1440*(entity.weekday-1))%60) }}</td>
-                <td>{{ "%02d" |format((entity.endminute-1440*(entity.weekday-1))/60) }}</td>
-                <td>{{ "%02d" |format((entity.endminute-1440*(entity.weekday-1))%60) }}</td>
-                <td>
-                    action
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    {#
 
         <ul>
         <li>
@@ -66,4 +43,6 @@
             </a>
         </li>
     </ul>
-    {% endblock %}
+
+    #}
+{% endblock %}

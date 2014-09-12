@@ -16,34 +16,16 @@ class Weekplan
     private $id;
 
     /**
-     * @ORM\Column(type="smallint", nullable=false)
-     */
-    private $weekday;
-
-    /**
-     * @ORM\Column(type="integer", nullable=false)
-     */
-    private $start_minute;
-
-    /**
-     * @ORM\Column(type="integer", nullable=false)
-     */
-    private $end_minute;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="Weekplans")
+     * @ORM\OneToOne(targetEntity="User", inversedBy="Weekplan")
      * @ORM\JoinColumn(name="teacher_id", referencedColumnName="id", nullable=false)
      */
     private $teacher;
 
     /**
-     * Constructor
+     * @ORM\Column(type="text", nullable=false)
      */
-    public function __construct()
-    {
+    private $plan;
 
-    }
-    
 
     /**
      * Get id
@@ -56,72 +38,26 @@ class Weekplan
     }
 
     /**
-     * Set weekday
+     * Set plan
      *
-     * @param integer $weekday
+     * @param string $plan
      * @return Weekplan
      */
-    public function setWeekday($weekday)
+    public function setPlan($plan)
     {
-        $this->weekday = $weekday;
+        $this->plan = $plan;
 
         return $this;
     }
 
     /**
-     * Get weekday
+     * Get plan
      *
-     * @return integer 
+     * @return string 
      */
-    public function getWeekday()
+    public function getPlan()
     {
-        return $this->weekday;
-    }
-
-    /**
-     * Set start_minute
-     *
-     * @param integer $startMinute
-     * @return Weekplan
-     */
-    public function setStartMinute($startMinute)
-    {
-        $this->start_minute = $startMinute;
-
-        return $this;
-    }
-
-    /**
-     * Get start_minute
-     *
-     * @return integer 
-     */
-    public function getStartMinute()
-    {
-        return $this->start_minute;
-    }
-
-    /**
-     * Set end_minute
-     *
-     * @param integer $endMinute
-     * @return Weekplan
-     */
-    public function setEndMinute($endMinute)
-    {
-        $this->end_minute = $endMinute;
-
-        return $this;
-    }
-
-    /**
-     * Get end_minute
-     *
-     * @return integer 
-     */
-    public function getEndMinute()
-    {
-        return $this->end_minute;
+        return $this->plan;
     }
 
     /**

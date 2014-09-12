@@ -16,32 +16,70 @@ class Weekplan
     private $id;
 
     /**
-     * @ORM\Column(type="smallint", nullable=false)
-     */
-    private $weekday;
-
-    /**
-     * @ORM\Column(type="integer", nullable=false)
-     */
-    private $start_minute;
-
-    /**
-     * @ORM\Column(type="integer", nullable=false)
-     */
-    private $end_minute;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="Weekplans")
+     * @ORM\OneToOne(targetEntity="User", inversedBy="Weekplan")
      * @ORM\JoinColumn(name="teacher_id", referencedColumnName="id", nullable=false)
      */
     private $teacher;
 
     /**
-     * Constructor
+     * @ORM\Column(type="text", nullable=false)
      */
-    public function __construct()
-    {
+    private $plan;
 
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
     }
-    
+
+    /**
+     * Set plan
+     *
+     * @param string $plan
+     * @return Weekplan
+     */
+    public function setPlan($plan)
+    {
+        $this->plan = $plan;
+
+        return $this;
+    }
+
+    /**
+     * Get plan
+     *
+     * @return string 
+     */
+    public function getPlan()
+    {
+        return $this->plan;
+    }
+
+    /**
+     * Set teacher
+     *
+     * @param \OT\BackendBundle\Entity\User $teacher
+     * @return Weekplan
+     */
+    public function setTeacher(\OT\BackendBundle\Entity\User $teacher)
+    {
+        $this->teacher = $teacher;
+
+        return $this;
+    }
+
+    /**
+     * Get teacher
+     *
+     * @return \OT\BackendBundle\Entity\User 
+     */
+    public function getTeacher()
+    {
+        return $this->teacher;
+    }
 }

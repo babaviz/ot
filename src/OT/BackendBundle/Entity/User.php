@@ -79,9 +79,9 @@ class User implements UserInterface, \Serializable
     private $ReceivedTransactions;
 
     /**
-     * @ORM\OneToMany(targetEntity="Weekplan", mappedBy="teacher")
+     * @ORM\OneToOne(targetEntity="Weekplan")
      */
-    private $Weekplans;
+    private $Weekplan;
 
     /**
      * @ORM\OneToMany(targetEntity="BookedTime", mappedBy="Teacher")
@@ -659,5 +659,28 @@ class User implements UserInterface, \Serializable
     public function getLearningBookedTimes()
     {
         return $this->LearningBookedTimes;
+    }
+
+    /**
+     * Set Weekplan
+     *
+     * @param \OT\BackendBundle\Entity\Weekplan $weekplan
+     * @return User
+     */
+    public function setWeekplan(\OT\BackendBundle\Entity\Weekplan $weekplan = null)
+    {
+        $this->Weekplan = $weekplan;
+
+        return $this;
+    }
+
+    /**
+     * Get Weekplan
+     *
+     * @return \OT\BackendBundle\Entity\Weekplan 
+     */
+    public function getWeekplan()
+    {
+        return $this->Weekplan;
     }
 }

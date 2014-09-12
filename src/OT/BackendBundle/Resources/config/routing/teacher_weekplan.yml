@@ -1,6 +1,12 @@
 teacher_weekplan_list:
     path:     /list
     defaults: { _controller: "OTBackendBundle:Weekplan:list" }
+
+teacher_weekplan_create:
+    path:     /create
+    defaults: { _controller: "OTBackendBundle:Weekplan:create" }
+    requirements: { _method: post }
+
 #
 #teacher_weekplan_show:
 #    path:     /{id}/show

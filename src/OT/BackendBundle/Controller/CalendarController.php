@@ -8,31 +8,86 @@ use OT\BackendBundle\Entity\Weekplan;
 class CalendarController
 {
 
-    public function get_timezone_offset($remote_tz, $origin_tz = null) {
-      //get the difference of timezones by minutes
-        if($origin_tz === null) {
-            if(!is_string($origin_tz = date_default_timezone_get())) {
-                return false; // A UTC timestamp was returned -- bail out!
-            }
+  public function parse_weekplan(Weekplan $plan, $tz = 'GMT')
+  {
+    $workingPlan=$plan->getPlan();
+    $offset_tz=$this->get_timezone_offset($tz);
+    $strPlan='';
+
+    $workingArray=explode(',',$workingPlan);
+
+    foreach ($workingArray as $workingElement)
+    {
+      $workingString=explode('*',$workingElement);
+      $strPlan.=str_repeat($workingString[0],$workingString[1]);
+    }
+
+    $offset=-$offset_tz/60/10;
+
+    if ($offset!=0)
+      $strPlan=substr($strPlan,$offset).substr($strPlan,0,$offset);
+
+    return $strPlan;
+
+  }
+
+  public function render_parsed_weekplan($strPlan)
+  {
+
+    $result='<table class="table"><tbody>';
+
+    for ($d=0;$d<1008;$d+=144){
+      $result.='<tr><td colspan=12>';
+      $result.=array('mon','tue','wed','thu','fri','sat','sun')[$d/144];
+      $result.='</td></tr><tr>';
+      for ($h=0;$h<24;$h++){
+        $result.=('<td>'.$h.'</td><td>');
+        $result.=substr($strPlan,$d+$h*6,6);
+        $result.=('</td>');
+        if ($h==11)
+          $result.='</tr><tr>';
         }
-        $origin_dtz = new \DateTimeZone($origin_tz);
-        $remote_dtz = new \DateTimeZone($remote_tz);
-        $origin_dt = new \DateTime("now", $origin_dtz);
-        $remote_dt = new \DateTime("now", $remote_dtz);
-        $offset = $origin_dtz->getOffset($origin_dt) - $remote_dtz->getOffset($remote_dt);
-        return $offset;
+      $result.='</tr>';
     }
 
-    public function set_weekday(Weekplan $weekplan)
-    {
-      //set the right weekday property of the Weekplan
-    }
+    $result=str_replace('F','<strong>F</strong>',$result);
+    $result=str_replace('B','_',$result);
 
-    public function timezoned_weekplan(Weekplan $weekplan, $tz)
-    {
-        //convert a gmt weekplan to a timezoned one.
+    return $result.'</tbody></table>';
 
+  }
+
+  private function day_to_agenda($strDay)
+  {
+    return $strDay;
+  }
+
+
+  public function render_parsed_weekplan_agenda($strPlan)
+  {
+    $result='';
+    for ($d=0;$d<1008;$d+=144){
+      $result.='<br/>';
+      $result.=array('mon:','tue:','wed:','thu:','fri:','sat:','sun:')[$d/144];
+      $result.=$this->day_to_agenda(substr($strPlan,$d,144),'F');
     }
+    return $result;
+  }
+
+  public function get_timezone_offset($remote_tz, $origin_tz = 'GMT') {
+    //get the difference of timezones by seconds
+      //if($origin_tz === null) {
+      //    if(!is_string($origin_tz = date_default_timezone_get())) {
+      //        return false; // A UTC timestamp was returned -- bail out!
+      //    }
+      //}
+      $origin_dtz = new \DateTimeZone($origin_tz);
+      $remote_dtz = new \DateTimeZone($remote_tz);
+      $origin_dt = new \DateTime("now", $origin_dtz);
+      $remote_dt = new \DateTime("now", $remote_dtz);
+      $offset = $origin_dtz->getOffset($origin_dt) - $remote_dtz->getOffset($remote_dt);
+      return $offset;
+  }
 
 /*
     public function timezone_convert($original_time_string, $orginal_tz, $target_tz)
