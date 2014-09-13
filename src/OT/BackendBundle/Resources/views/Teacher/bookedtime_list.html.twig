@@ -16,6 +16,7 @@
     <table class="table">
 
     <thead>
+    	<td><strong>{% trans %}Date{% endtrans %}</strong></td>
     	<td><strong>{% trans %}Start{% endtrans %}</strong></td>
     	<td><strong>{% trans %}End{% endtrans %}</strong></td>
     	<td><strong>{% trans %}Course{% endtrans %}</strong></td>
@@ -26,8 +27,9 @@
 
 	    {% for entity in entities %}
 	    <tr>
-		    <td>{{ entity.starttime|date("m-d H:i") }}</td>
-		    <td>{{ entity.endtime|date("m-d H:i") }}</td>
+		    <td>{{ entity.starttime|date("m-d") }}</td>
+		    <td>{{ entity.starttime|date("H:i") }}</td>
+		    <td>{{ entity.endtime|date("H:i") }}</td>
 		    <td>{{ entity.course.name }}</td>
 		    <td></td>
 	    </tr>
