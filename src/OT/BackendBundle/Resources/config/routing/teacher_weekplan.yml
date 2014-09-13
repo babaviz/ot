@@ -7,6 +7,10 @@ teacher_weekplan_create:
     defaults: { _controller: "OTBackendBundle:Weekplan:create" }
     requirements: { _method: post }
 
+teacher_weekplan_edit:
+    path:     /edit
+    defaults: { _controller: "OTBackendBundle:Weekplan:edit" }
+
 #
 #teacher_weekplan_show:
 #    path:     /{id}/show
@@ -21,9 +25,7 @@ teacher_weekplan_create:
 #    defaults: { _controller: "OTBackendBundle:Weekplan:create" }
 #    requirements: { _method: post }
 
-#teacher_weekplan_edit:
-#    path:     /{id}/edit
-#    defaults: { _controller: "OTBackendBundle:Weekplan:edit" }
+
 
 #teacher_weekplan_update:
 #    path:     /{id}/update

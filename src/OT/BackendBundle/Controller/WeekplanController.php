@@ -30,16 +30,21 @@ class WeekplanController extends Controller
         $entity = $em->getRepository('OTBackendBundle:Weekplan')->findOneByTeacher($userid);
 
         return $this->render('OTBackendBundle:Teacher:weekplan_list.html.twig', array(
-            'entity' => $ot_calendar->render_parsed_weekplan_agenda($ot_calendar->parse_weekplan($entity,'Asia/Hong_Kong'))
+            'entity' => $ot_calendar->render_parsed_weekplan_agenda($ot_calendar->parse_weekplan($entity,'America/Denver'))
         ));
         
-        /*
-        $ot_calendar=$this->get('ot_calendar');
+    }
 
-        $plan=new Weekplan();
+    public function editAction(Request $request)
+    {
+        $choices=[];
+        for ($m10=0;$m10<144;$m10++)
+            $choices[$m10]=$m10;
 
-        return new Response(
-            var_dump($ot_calendar->push_calendar_timezone($plan))
-        );*/
+        $form=$this->createFormBuilder()
+            ->add($m10, 'choice', ['choices'=>$choices,'multiple'=>true,'expanded'=>true])
+            ->getForm();
+
+        return $this->render('OTBackendBundle:Teacher:weekplan_edit.html.twig',['form'=>$form->createView()]);
     }
 }

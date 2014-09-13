@@ -57,51 +57,52 @@ class CalendarController
 
   }
 
+
   private function day_to_agenda($strDay)
   {
     $strDay.='B';
     $pos_start;
     $pos_end;
-    $result='';
+    $result_array=[];
     $i=0;
 
     //$result.=$strDay;  debug
 
     while ($i<144)
     {
+      $result='';
       $pos_start=strpos($strDay,'F',$i);
       if ($pos_start!==false){
 
-
         $pos_end=strpos($strDay,'B',$pos_start);
 
-        $result.=floor($pos_start/6);
+        $result.=str_pad(floor($pos_start/6),2,'0',STR_PAD_LEFT);
         $result.=':';
         $result.=$pos_start%6;
-        $result.='0 -- ';
-        $result.=floor($pos_end/6); 
+        $result.='0 - ';
+        $result.=str_pad(floor($pos_end/6),2,'0',STR_PAD_LEFT);
         $result.=':';
         $result.=$pos_end%6;
-        $result.='0, ';
+        $result.='0';
 
         $i=$pos_end;
+
+        array_push($result_array,$result);
+
       }
       
       $i++;
     }
 
-    return $result.'(end)';
+    return $result_array;
   }
 
 
   public function render_parsed_weekplan_agenda($strPlan)
   {
-    $result='';
+    $result=[];
     for ($d=0;$d<1008;$d+=144){
-      $result.='<br/>';
-      $result.=array('mon:','tue:','wed:','thu:','fri:','sat:','sun:')[$d/144];
-      $result.='  ';
-      $result.=$this->day_to_agenda(substr($strPlan,$d,144));
+      array_push($result,$this->day_to_agenda(substr($strPlan,$d,144)));
     }
     return $result;
   }
