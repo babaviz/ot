@@ -10,6 +10,7 @@ class CalendarController
 
   public function parse_weekplan(Weekplan $plan, $tz = 'GMT')
   {
+    //uncompress weekplan to timezoned string
     $workingPlan=$plan->getPlan();
     $offset_tz=$this->get_timezone_offset($tz);
     $strPlan='';
@@ -33,6 +34,7 @@ class CalendarController
 
   public function render_parsed_weekplan($strPlan)
   {
+    //render parsed weekplan to HTML table
     $result='<table class="table"><tbody>';
 
     for ($d=0;$d<1008;$d+=144){
@@ -59,6 +61,7 @@ class CalendarController
 
   private function day_to_agenda($strDay)
   {
+    //convert 144 bytes daily string to array
     $strDay.='B';
     $pos_start;
     $pos_end;
@@ -99,6 +102,7 @@ class CalendarController
 
   public function render_parsed_weekplan_agenda($strPlan)
   {
+    //render parsed weekplan string to weekplan array
     $result=[];
     for ($d=0;$d<1008;$d+=144){
       array_push($result,$this->day_to_agenda(substr($strPlan,$d,144)));
@@ -107,7 +111,7 @@ class CalendarController
   }
 
   public function get_timezone_offset($remote_tz, $origin_tz = 'GMT') {
-    //get the difference of timezones by seconds
+      //get the difference of timezones by seconds
       //if($origin_tz === null) {
       //    if(!is_string($origin_tz = date_default_timezone_get())) {
       //        return false; // A UTC timestamp was returned -- bail out!
@@ -123,9 +127,19 @@ class CalendarController
 
   public function utc_timezoned_string($str, $tz='GMT', $fmt='Y-m-d H:i:s')
   {
+    //convert a UTC time string to timezoned time string
       $UTC = new \DateTimeZone('UTC');
       $date = new \DateTime($str, $UTC);
       $date->setTimezone(new \DateTimeZone($tz));
+      return $date->format($fmt);
+  }
+
+  public function timezoned_utc_string($str, $tz='GMT', $fmt='Y-m-d H:i:s')
+  {
+    //convert a timezoned time string to UTC time string
+      $UTC = new \DateTimeZone('UTC');
+      $date = new \DateTime($str, new \DateTimeZone($tz));
+      $date->setTimezone($UTC);
       return $date->format($fmt);
   }
 
