@@ -84,12 +84,12 @@ class User implements UserInterface, \Serializable
     private $Weekplan;
 
     /**
-     * @ORM\OneToMany(targetEntity="BookedTime", mappedBy="Teacher")
+     * @ORM\OneToMany(targetEntity="BookedTime", mappedBy="teacher")
      */
     private $TeachingBookedTimes;
 
         /**
-     * @ORM\OneToMany(targetEntity="BookedTime", mappedBy="Learner")
+     * @ORM\OneToMany(targetEntity="BookedTime", mappedBy="learner")
      */
     private $LearningBookedTimes;
 
