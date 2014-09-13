@@ -121,6 +121,14 @@ class CalendarController
       return $offset;
   }
 
+  public function utc_timezoned_string($str, $tz='GMT', $fmt='Y-m-d H:i:s')
+  {
+      $UTC = new \DateTimeZone('UTC');
+      $date = new \DateTime($str, $UTC);
+      $date->setTimezone(new \DateTimeZone($tz));
+      return $date->format($fmt);
+  }
+
 /*
     public function timezone_convert($original_time_string, $orginal_tz, $target_tz)
     {
