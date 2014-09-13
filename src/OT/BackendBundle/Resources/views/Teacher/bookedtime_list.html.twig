@@ -1,0 +1,23 @@
+{% extends '::two-col.html.twig' %}
+
+
+{% block title %}{% trans %}View Time Booked{% endtrans %}{% endblock %}
+
+{% block sidebar %}
+{% include "OTBackendBundle:Teacher:sidebar.html.twig" %}
+{% endblock %}
+
+{% block body %}
+    
+    <div class="panel-body">
+
+    <p class="lead">My Time Booked</p>
+
+    {% for entity in entities %}
+    {{ entity.id }}<br/>
+    {{ entity.starttime|date("m-d H:i") }}<br/>
+    {{ entity.endtime|date("m-d H:i") }}<br/>
+    {{ entity.status }}<br/>
+    {% endfor %}
+    
+{% endblock %}

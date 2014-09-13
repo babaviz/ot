@@ -16,12 +16,12 @@ class BookedTime
     private $id;
 
     /**
-     * @ORM\Column(type="smallint")
+     * @ORM\Column(type="string")
      */
     private $start_time;
 
     /**
-     * @ORM\Column(type="smallint")
+     * @ORM\Column(type="string")
      */
     private $end_time;
 
@@ -49,7 +49,6 @@ class BookedTime
     private $Learner;
 
 
-
     /**
      * Get id
      *
@@ -63,7 +62,7 @@ class BookedTime
     /**
      * Set start_time
      *
-     * @param integer $startTime
+     * @param \DateTime $startTime
      * @return BookedTime
      */
     public function setStartTime($startTime)
@@ -76,7 +75,7 @@ class BookedTime
     /**
      * Get start_time
      *
-     * @return integer 
+     * @return \DateTime 
      */
     public function getStartTime()
     {
@@ -86,7 +85,7 @@ class BookedTime
     /**
      * Set end_time
      *
-     * @param integer $endTime
+     * @param \DateTime $endTime
      * @return BookedTime
      */
     public function setEndTime($endTime)
@@ -99,7 +98,7 @@ class BookedTime
     /**
      * Get end_time
      *
-     * @return integer 
+     * @return \DateTime 
      */
     public function getEndTime()
     {
@@ -129,7 +128,6 @@ class BookedTime
         return $this->status;
     }
 
-
     /**
      * Set Course
      *
@@ -151,29 +149,6 @@ class BookedTime
     public function getCourse()
     {
         return $this->Course;
-    }
-
-    /**
-     * Set User
-     *
-     * @param \OT\BackendBundle\Entity\User $user
-     * @return BookedTime
-     */
-    public function setUser(\OT\BackendBundle\Entity\User $user)
-    {
-        $this->User = $user;
-
-        return $this;
-    }
-
-    /**
-     * Get User
-     *
-     * @return \OT\BackendBundle\Entity\User 
-     */
-    public function getUser()
-    {
-        return $this->User;
     }
 
     /**

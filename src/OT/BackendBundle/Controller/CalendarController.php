@@ -33,7 +33,6 @@ class CalendarController
 
   public function render_parsed_weekplan($strPlan)
   {
-
     $result='<table class="table"><tbody>';
 
     for ($d=0;$d<1008;$d+=144){
