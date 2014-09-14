@@ -7,6 +7,39 @@ use OT\BackendBundle\Entity\Weekplan;
 
 class CalendarController
 {
+  public function encode_weekplan($str, $tz = 'GMT')
+  {
+    $result='';
+    $last_char='';
+    $count=0;
+
+    $offset_tz=$this->get_timezone_offset($tz);
+    $offset=-$offset_tz/60/10;
+
+    if ($offset!=0)
+      $str=substr($str,$offset).substr($str,0,$offset);
+
+    for ($i=0;$i<1008;$i++){
+      if ($str[$i]!=$last_char){
+        if ($i!=0){
+          $result.=strval($count);
+          $result.=',';  
+        }
+        $result.=$str[$i];
+        $result.='*';
+        $count=1;
+      }
+      else
+      $count++;
+      $last_char=$str[$i];
+      if ($i==1007){
+        $result.=$count;
+      }
+    }
+
+    return $result;
+  }
+
   public function parse_weekplan(Weekplan $plan, $tz = 'GMT')
   {
     //uncompress weekplan to timezoned string

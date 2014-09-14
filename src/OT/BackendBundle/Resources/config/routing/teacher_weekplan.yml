@@ -11,6 +11,10 @@ teacher_weekplan_edit:
     path:     /edit
     defaults: { _controller: "OTBackendBundle:Weekplan:edit" }
 
+teacher_weekplan_clear_day:
+    path:     /{weekday}/clearday
+    defaults: { _controller: "OTBackendBundle:Weekplan:clearday"}
+
 #
 #teacher_weekplan_show:
 #    path:     /{id}/show
