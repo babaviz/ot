@@ -175,6 +175,26 @@ class CalendarController
       return $date->format($fmt);
   }
 
+  public function generateFromDayTimeList()
+  {
+    $result=[];
+    for ($i=0;$i<144;$i++){
+      $result[strval($i)]=sprintf(floor($i/6),'%02d').':'.sprintf(floor($i%6)*10,'%02d');
+    }
+    return $result;
+  }
+
+  public function generateToDayTimeList()
+  {
+    $result=[];
+    for ($i=0;$i<144;$i++){
+      $result[strval($i)]=sprintf(floor(($i+1)/6),'%02d').':'.sprintf(floor(($i+1)%6)*10,'%02d');
+    }
+    return $result;
+  }
+
+
+
 /*
     public function timezone_convert($original_time_string, $orginal_tz, $target_tz)
     {

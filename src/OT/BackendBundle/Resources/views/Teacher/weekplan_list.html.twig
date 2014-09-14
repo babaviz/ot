@@ -13,64 +13,92 @@
 
     <p class="lead">My Weekly Plan</p>
 
-    <table class="table">
-        <thead>
-            <tr><td colspan=2></td><td><strong>{% trans %}Weekday{% endtrans %}</strong></td>
-            <td colspan=10><strong>{% trans %}Available Time{% endtrans %}</strong></td></tr>
-        </thead>
-        <tbody>
-        <tr><td>{% trans %}Add{% endtrans %}</td><td><a href='{{ path('teacher_weekplan_clear_day', {'weekday':1}) }}'>Clear</a></td><td>{% trans %}Monday{% endtrans %}</td>
-            {% for agenda in entity[0] %}
-                <td>
-                        {{ agenda }}
-                </td>
-            {% endfor %}<td colspan=10></td>
-        </tr>
-        <tr><td>{% trans %}Add{% endtrans %}</td><td><a href='{{ path('teacher_weekplan_clear_day', {'weekday':2}) }}'>{% trans %}Clear{% endtrans %}</a></td><td>{% trans %}Tuesday{% endtrans %}</td>
-            {% for agenda in entity[1] %}
-                <td>
-                        {{ agenda }}
-                </td>
-            {% endfor %}<td colspan=10></td>
-        </tr>
-        <tr><td>{% trans %}Add{% endtrans %}</td><td><a href='{{ path('teacher_weekplan_clear_day', {'weekday':3}) }}'>{% trans %}Clear{% endtrans %}</a></td><td>{% trans %}Wednesday{% endtrans %}</td>
-            {% for agenda in entity[2] %}
-                <td>
-                        {{ agenda }}
-                </td>
-            {% endfor %}<td colspan=10></td>
-        </tr>
-        <tr><td>{% trans %}Add{% endtrans %}</td><td><a href='{{ path('teacher_weekplan_clear_day', {'weekday':4}) }}'>{% trans %}Clear{% endtrans %}</a></td><td>{% trans %}Thursday{% endtrans %}</td>
-            {% for agenda in entity[3] %}
-                <td>
-                        {{ agenda }}
-                </td>
-            {% endfor %}<td colspan=10></td>
-        </tr>
-        <tr><td>{% trans %}Add{% endtrans %}</td><td><a href='{{ path('teacher_weekplan_clear_day', {'weekday':5}) }}'>{% trans %}Clear{% endtrans %}</a></td><td>{% trans %}Friday{% endtrans %}</td>
-            {% for agenda in entity[4] %}
-                <td>
-                        {{ agenda }}
-                </td>
-            {% endfor %}<td colspan=10></td>
-        </tr>
-        <tr><td>{% trans %}Add{% endtrans %}</td><td><a href='{{ path('teacher_weekplan_clear_day', {'weekday':6}) }}'>{% trans %}Clear{% endtrans %}</a></td><td>{% trans %}Saturday{% endtrans %}</td>
-            {% for agenda in entity[5] %}
-                <td>
-                        {{ agenda }}
-                </td>
-            {% endfor %}<td colspan=10></td>
-        </tr>
-        <tr><td>{% trans %}Add{% endtrans %}</td><td><a href='{{ path('teacher_weekplan_clear_day', {'weekday':7}) }}'>{% trans %}Clear{% endtrans %}</a></td><td>{% trans %}Sunday{% endtrans %}</td>
-            {% for agenda in entity[6] %}
-                <td>
-                        {{ agenda }}
-                </td>
-            {% endfor %}<td colspan=10></td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="row">
+
+    <div class="col-md-7">
+        <div class="panel panel-default">
+        <div class="panel-heading">{% trans %}My Timetable{% endtrans %}</div>
+        <div class="panel-body">
+
+        <table class="table">
+            <thead>
+                <tr><td></td><td><strong>{% trans %}Weekday{% endtrans %}</strong></td>
+                <td colspan=10><strong>{% trans %}Available Time{% endtrans %}</strong></td></tr>
+            </thead>
+            <tbody>
+            <tr><td><a href='{{ path('teacher_weekplan_clear_day', {'weekday':1}) }}'>Clear</a></td><td>{% trans %}Monday{% endtrans %}</td>
+                {% for agenda in entity[0] %}
+                    <td>
+                            {{ agenda }}
+                    </td>
+                {% endfor %}<td colspan=10></td>
+            </tr>
+            <tr><td><a href='{{ path('teacher_weekplan_clear_day', {'weekday':2}) }}'>{% trans %}Clear{% endtrans %}</a></td><td>{% trans %}Tuesday{% endtrans %}</td>
+                {% for agenda in entity[1] %}
+                    <td>
+                            {{ agenda }}
+                    </td>
+                {% endfor %}<td colspan=10></td>
+            </tr>
+            <tr><td><a href='{{ path('teacher_weekplan_clear_day', {'weekday':3}) }}'>{% trans %}Clear{% endtrans %}</a></td><td>{% trans %}Wednesday{% endtrans %}</td>
+                {% for agenda in entity[2] %}
+                    <td>
+                            {{ agenda }}
+                    </td>
+                {% endfor %}<td colspan=10></td>
+            </tr>
+            <tr><td><a href='{{ path('teacher_weekplan_clear_day', {'weekday':4}) }}'>{% trans %}Clear{% endtrans %}</a></td><td>{% trans %}Thursday{% endtrans %}</td>
+                {% for agenda in entity[3] %}
+                    <td>
+                            {{ agenda }}
+                    </td>
+                {% endfor %}<td colspan=10></td>
+            </tr>
+            <tr><td><a href='{{ path('teacher_weekplan_clear_day', {'weekday':5}) }}'>{% trans %}Clear{% endtrans %}</a></td><td>{% trans %}Friday{% endtrans %}</td>
+                {% for agenda in entity[4] %}
+                    <td>
+                            {{ agenda }}
+                    </td>
+                {% endfor %}<td colspan=10></td>
+            </tr>
+            <tr><td><a href='{{ path('teacher_weekplan_clear_day', {'weekday':6}) }}'>{% trans %}Clear{% endtrans %}</a></td><td>{% trans %}Saturday{% endtrans %}</td>
+                {% for agenda in entity[5] %}
+                    <td>
+                            {{ agenda }}
+                    </td>
+                {% endfor %}<td colspan=10></td>
+            </tr>
+            <tr><td><a href='{{ path('teacher_weekplan_clear_day', {'weekday':7}) }}'>{% trans %}Clear{% endtrans %}</a></td><td>{% trans %}Sunday{% endtrans %}</td>
+                {% for agenda in entity[6] %}
+                    <td>
+                            {{ agenda }}
+                    </td>
+                {% endfor %}<td colspan=10></td>
+            </tr>
+            </tbody>
+        </table>
+
+        </div>
+        </div>
 
     </div>
+
+    <div class='col-md-5'>
+
+        <div class="panel panel-default">
+        <div class="panel-heading">{% trans %}Add a Time{% endtrans %}</div>
+        <div class="panel-body">
+
+        {{ form(add_form) }}
+
+        </div>
+
+        </div>
+
+    </div>
+
+    </div>
+
+    </div>{# row #}
     
 {% endblock %}
