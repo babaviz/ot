@@ -20,9 +20,14 @@ class CourseType extends AbstractType
             ->add('description')
             ->add('duration')
             ->add('price')
-            ->add('status')
+            ->add('status','choice',[
+                'choices'=>[
+                'ACTIVE'=>'Active',
+                'Pending'=>'Pending',
+                ]
+                ])
             ->add('Category')
-            ->add('Users')
+            ->add('Teachers','entity',['class'=>'OTBackendBundle:User','property'=>'id'])
         ;
     }
     

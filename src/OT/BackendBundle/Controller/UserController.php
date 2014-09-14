@@ -164,7 +164,11 @@ class UserController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('admin_user_edit', array('id' => $id)));
+            $this->get('session')->getFlashBag()->add(
+            'success',
+            $this->get('translator')->trans('User information successfully edited.'));
+
+            return $this->redirect($this->generateUrl('admin_user_list', array('id' => $id)));
         }
 
         return $this->render('OTBackendBundle:User:admin_user_edit.html.twig', array(

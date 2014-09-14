@@ -27,7 +27,7 @@
 
 	    {% for entity in entities %}
 	    <tr>
-		    <td>{{ entity.starttime|date("m-d") }}</td>
+		    <td>{{ entity.starttime|date("Y-m-d") }}</td>
 		    <td>{{ entity.starttime|date("H:i") }}</td>
 		    <td>{{ entity.endtime|date("H:i") }}</td>
 		    <td>{{ entity.course.name }}</td>

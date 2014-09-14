@@ -7,7 +7,6 @@ use OT\BackendBundle\Entity\Weekplan;
 
 class CalendarController
 {
-
   public function parse_weekplan(Weekplan $plan, $tz = 'GMT')
   {
     //uncompress weekplan to timezoned string
