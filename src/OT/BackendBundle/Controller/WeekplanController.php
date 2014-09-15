@@ -28,7 +28,8 @@ class WeekplanController extends Controller
         $em = $this->getDoctrine()->getManager();
         $ot_calendar=$this->get('ot_calendar');
 
-        $userid= $this->get('security.context')->getToken()->getUser()->getId();
+        $userid=$this->get('security.context')->getToken()->getUser()->getId();
+        $usertz=$this->get('security.context')->getToken()->getUser()->getTimeZone();
         $entity = $em->getRepository('OTBackendBundle:Weekplan')->findOneByTeacher($userid);
 
 
@@ -59,7 +60,7 @@ class WeekplanController extends Controller
             //throw $this->createAccessDeniedException($i);
 
 
-            $plan=$ot_calendar->parse_weekplan($entity,'Asia/Hong_Kong');
+            $plan=$ot_calendar->parse_weekplan($entity,$usertz);
 
             for ($k=$i;$k<=$j;$k++)
                 $plan[$k]='F';
@@ -71,7 +72,7 @@ class WeekplanController extends Controller
 
 
         return $this->render('OTBackendBundle:Teacher:weekplan_list.html.twig', array(
-            'entity' => $ot_calendar->render_parsed_weekplan_agenda($ot_calendar->parse_weekplan($entity,'Asia/Hong_Kong')),
+            'entity' => $ot_calendar->render_parsed_weekplan_agenda($ot_calendar->parse_weekplan($entity,$usertz)),
             'add_form' => $add_form->createView()
         ));
     }
@@ -100,9 +101,10 @@ class WeekplanController extends Controller
         $end_m10=$start_m10+143;
 
         $userid= $this->get('security.context')->getToken()->getUser()->getId();
+        $usertz=$this->get('security.context')->getToken()->getUser()->getTimeZone();
         $entity = $em->getRepository('OTBackendBundle:Weekplan')->findOneByTeacher($userid);
 
-        $plan=$ot_calendar->parse_weekplan($entity,'Asia/Hong_Kong');
+        $plan=$ot_calendar->parse_weekplan($entity,$usertz);
 
         for ($i=$start_m10;$i<=$end_m10;$i++)
             $plan[$i]='B';
@@ -119,10 +121,11 @@ class WeekplanController extends Controller
         $ot_calendar=$this->get('ot_calendar');
 
         $userid= $this->get('security.context')->getToken()->getUser()->getId();
+        $usertz=$this->get('security.context')->getToken()->getUser()->getTimeZone();
         $entity = $em->getRepository('OTBackendBundle:Weekplan')->findOneByTeacher($userid);
 
         //$weekplan[($m10-$ot_calendar->get_timezone_offset('Asia/Hong_Kong')/60/10+1008)%1008]='F';
-        $plan=$ot_calendar->encode_weekplan($plan,'Asia/Hong_Kong');
+        $plan=$ot_calendar->encode_weekplan($plan,$usertz);
 
         $entity->setPlan($plan);
         $em->flush();

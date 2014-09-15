@@ -16,7 +16,7 @@ class UserType extends AbstractType
     {
         $builder
             ->add('username')
-            ->add('name')
+            ->add('name','text',['label'=>'Nickname'])
             ->add('password','password')
             ->add('email')
             ->add('phone')
@@ -29,7 +29,20 @@ class UserType extends AbstractType
                 ])
             ->add('account_balance')
             ->add('create_time','date',['widget'=>'single_text'])
-            ->add('timezone','text')
+            ->add('timezone','choice',[
+                    'choices'=>[
+                    'Asia/Hong_Kong'=>'Asia Taiwan/Hong Kong/China',
+                    'America/New_York'=>'US Eastern Time',
+                    'America/Chicago'=>'US Central Time',
+                    'America/Denver'=>'US Mountain Time',
+                    'America/Phoenix'=>'US Mountain Time (no DST)',
+                    'America/Los_Angeles'=>'US Pacific Time',
+                    'America/Anchorage'=>'US Alaska Time',
+                    'America/Adak'=>'US Hawaii-Aleutian Time',
+                    'Pacific/Honolulu'=>'Hawaii-Aleutian Time (no DST)'
+                    ]
+                ]
+                )
             ->add('introduction')
         ;
     }
