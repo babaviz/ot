@@ -131,8 +131,4 @@ class WeekplanController extends Controller
 
     }
 
-    public function addAction(Request $request)
-    {
-        
-    }
 }
