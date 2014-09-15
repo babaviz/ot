@@ -1,0 +1,49 @@
+{% extends '::two-col.html.twig' %}
+
+
+{% block title %}{% trans %}Past Course{% endtrans %}{% endblock %}
+
+{% block sidebar %}
+{% include "OTBackendBundle:Teacher:sidebar.html.twig" %}
+{% endblock %}
+
+{% block body %}
+
+    {# <pre>{{ dump(entities[0].course.name) }}</pre> #}
+
+    <ul class="nav nav-tabs" role="tablist">
+        <li><a href="{{ path('teacher_bookedtime_upcoming_list') }}">{% trans %}Upcoming Course{% endtrans %}</a></li>
+        <li class="active"><a href="#">{% trans %}Past Course{% endtrans %}</a></li>
+    </ul>
+    
+    <div class="panel-body">
+
+    <p class="lead">{% trans %}Past Course{% endtrans %}</p>
+
+    <table class="table">
+
+    <thead>
+    	<td><strong>{% trans %}Date{% endtrans %}</strong></td>
+    	<td><strong>{% trans %}Start{% endtrans %}</strong></td>
+    	<td><strong>{% trans %}End{% endtrans %}</strong></td>
+    	<td><strong>{% trans %}Course{% endtrans %}</strong></td>
+    	<td><strong>{% trans %}Learner{% endtrans %}</strong></td>
+    </thead>
+
+    <tbody>
+
+	    {% for entity in entities %}
+	    <tr>
+		    <td>{{ entity.starttime|date("Y-m-d") }}</td>
+		    <td>{{ entity.starttime|date("H:i") }}</td>
+		    <td>{{ entity.endtime|date("H:i") }}</td>
+		    <td>{{ entity.course.name }}</td>
+		    
+	    </tr>
+	    {% endfor %}
+
+    </tbody>
+
+    </table>
+    
+{% endblock %}

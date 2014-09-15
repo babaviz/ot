@@ -41,7 +41,7 @@ class WeekplanController extends Controller
                                             '5'=>'Friday',
                                             '6'=>'Saturday',
                                             '7'=>'Sunday']
-                                        ])
+                                        ,'label'=>'Day'])
                                     ->add('From','choice',['choices'=>$ot_calendar->generateFromDayTimeList()])
                                     ->add('To','choice',['choices'=>$ot_calendar->generateToDayTimeList()])
                                     ->add('Add', 'submit', ['label' => 'Add'])

@@ -179,7 +179,7 @@ class CalendarController
   {
     $result=[];
     for ($i=0;$i<144;$i++){
-      $result[strval($i)]=sprintf(floor($i/6),'%02d').':'.sprintf(floor($i%6)*10,'%02d');
+      $result[strval($i)]=sprintf('%02d',floor($i/6)).':'.sprintf('%02d',floor($i%6)*10);
     }
     return $result;
   }
@@ -188,7 +188,7 @@ class CalendarController
   {
     $result=[];
     for ($i=0;$i<144;$i++){
-      $result[strval($i)]=sprintf(floor(($i+1)/6),'%02d').':'.sprintf(floor(($i+1)%6)*10,'%02d');
+      $result[strval($i)]=sprintf('%02d',floor(($i+1)/6)).':'.sprintf('%02d',floor(($i+1)%6)*10);
     }
     return $result;
   }

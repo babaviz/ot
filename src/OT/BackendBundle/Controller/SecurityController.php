@@ -70,9 +70,11 @@ class SecurityController extends Controller
     {
         $role=$this->getRole();
 
-        //throw $this->createNotFoundException($this->getUserId());
+        if ($role=='ADMIN')
+            return $this->render('OTBackendBundle:Admin:entrance.html.twig',['role'=>$role]);
 
-        return $this->render('OTBackendBundle:Security:entrance.html.twig',['role'=>$role]);
+        if ($role=='TEACHER')
+            return $this->redirect($this->generateUrl('teacher_dashboard'));
         
 
     }

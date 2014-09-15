@@ -1,17 +1,24 @@
 {% extends '::two-col.html.twig' %}
 
 
-{% block title %}{% trans %}View Time Booked{% endtrans %}{% endblock %}
+{% block title %}{% trans %}Upcoming Course{% endtrans %}{% endblock %}
 
 {% block sidebar %}
 {% include "OTBackendBundle:Teacher:sidebar.html.twig" %}
 {% endblock %}
 
 {% block body %}
+
+    {# <pre>{{ dump(entities[0].course.name) }}</pre> #}
+
+    <ul class="nav nav-tabs" role="tablist">
+          <li class="active"><a href="#">{% trans %}Upcoming Course{% endtrans %}</a></li>
+          <li><a href="{{ path('teacher_bookedtime_past_list') }}">{% trans %}Past Course{% endtrans %}</a></li>
+    </ul>
     
     <div class="panel-body">
 
-    <p class="lead">My Time Booked</p>
+    <p class="lead">{% trans %}Upcoming Course{% endtrans %}</p>
 
     <table class="table">
 
@@ -31,14 +38,12 @@
 		    <td>{{ entity.starttime|date("H:i") }}</td>
 		    <td>{{ entity.endtime|date("H:i") }}</td>
 		    <td>{{ entity.course.name }}</td>
-		    <td></td>
+		    
 	    </tr>
 	    {% endfor %}
 
     </tbody>
 
     </table>
-
-    {{ message }}
     
 {% endblock %}

@@ -18,6 +18,17 @@
 			<a type="button" class="btn btn-default btn-lg btn-block" href="{{ path('teacher_dashboard') }}"><i class="fa fa-user fa-fw"></i> {% trans %}Teacher Panel{% endtrans %}</a>
 		{% endif %}
 
+		{% if role == 'TEACHER' %}
+			
+		{% endif %}
+
+		{% if role == 'LEARNER' %}
+			<p>LEARNER</p>
+		{% endif %}
+
+		{% if role == 'VISITOR' %}
+			<p>VISITOR</p>
+		{% endif %}
 	</div>
 	</div>
 

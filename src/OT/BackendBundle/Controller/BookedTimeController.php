@@ -14,7 +14,7 @@ use OT\BackendBundle\Form\BookedTimeType;
  */
 class BookedTimeController extends Controller
 {
-    public function listAction()
+    public function upcominglistAction()
     {
         $em = $this->getDoctrine()->getManager();
         $ot_calendar=$this->get('ot_calendar');
@@ -22,7 +22,18 @@ class BookedTimeController extends Controller
 
         $entities = $em->getRepository('OTBackendBundle:BookedTime')->findBy(['teacher'=>$userid,'status'=>'BOOKED']);
 
-        return $this->render('OTBackendBundle:Teacher:bookedtime_list.html.twig',['entities'=>$entities,'message'=>$ot_calendar->timezoned_utc_string('2014-09-14 04:14','Asia/Hong_Kong','m-d H:i')]);
+        return $this->render('OTBackendBundle:Teacher:bookedtime_upcoming_list.html.twig',['entities'=>$entities]);
+    }
+
+    public function pastlistAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $ot_calendar=$this->get('ot_calendar');
+        $userid=$this->get('security.context')->getToken()->getUser()->getId();
+
+        $entities = $em->getRepository('OTBackendBundle:BookedTime')->findBy(['teacher'=>$userid,'status'=>'PAST']);
+
+        return $this->render('OTBackendBundle:Teacher:bookedtime_past_list.html.twig',['entities'=>$entities]);
     }
 
 }

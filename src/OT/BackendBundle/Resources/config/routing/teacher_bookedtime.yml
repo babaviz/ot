@@ -1,3 +1,7 @@
-teacher_bookedtime_list:
-    path:     /list
-    defaults: { _controller: "OTBackendBundle:BookedTime:list" }
+teacher_bookedtime_upcoming_list:
+    path:     /upcoming/list
+    defaults: { _controller: "OTBackendBundle:BookedTime:upcomingList" }
+
+teacher_bookedtime_past_list:
+    path:     /past/list
+    defaults: { _controller: "OTBackendBundle:BookedTime:pastlist" }
