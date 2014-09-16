@@ -24,8 +24,13 @@ class TransactionRecordController extends Controller
     public function learnerTransactionRecordListAction()
     {
     	$user_id=$this->get('security.context')->getToken()->getUser()->getId();
-    	$transactions = $this->getDoctrine()->getManager()->getRepository('OTBackendBundle:TransactionRecord')->findBy(['From'=>$user_id]);////
 
+    	$em = $this->getDoctrine()->getManager();
+      	$transactions = $em->createQuery("SELECT t FROM OTBackendBundle:TransactionRecord t
+      								WHERE t.From=:t_from OR t.To=:t_to")
+      				->setParameter('t_from',$user_id)
+      				->setParameter('t_to',$user_id)
+      				->getResult();
     
         return $this->render('OTBackendBundle:TransactionRecord:user_transactionrecord_list.html.twig', array('transactions'=>$transactions,'role'=>'LEARNER'));
     }
@@ -33,7 +38,13 @@ class TransactionRecordController extends Controller
     public function teacherTransactionRecordListAction()
     {
     	$user_id=$this->get('security.context')->getToken()->getUser()->getId();
-    	$transactions = $this->getDoctrine()->getManager()->getRepository('OTBackendBundle:TransactionRecord')->findBy(['To'=>$user_id]);/////
+
+    	$em = $this->getDoctrine()->getManager();
+    	$transactions = $em->createQuery("SELECT t FROM OTBackendBundle:TransactionRecord t
+      								WHERE t.From=:t_from OR t.To=:t_to")
+      				->setParameter('t_from',$user_id)
+      				->setParameter('t_to',$user_id)
+      				->getResult();
 
         return $this->render('OTBackendBundle:TransactionRecord:user_transactionrecord_list.html.twig', array('transactions'=>$transactions,'role'=>'TEACHER'));
     }
