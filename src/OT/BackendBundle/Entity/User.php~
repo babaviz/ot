@@ -79,7 +79,7 @@ class User implements UserInterface, \Serializable
     private $ReceivedTransactions;
 
     /**
-     * @ORM\OneToOne(targetEntity="Weekplan")
+     * @ORM\OneToOne(targetEntity="Weekplan", mappedBy="teacher")
      */
     private $Weekplan;
 
@@ -97,7 +97,7 @@ class User implements UserInterface, \Serializable
      * @ORM\ManyToMany(targetEntity="Course", inversedBy="Teachers")
      * @ORM\JoinTable(
      *     name="CourseHasTeacher",
-     *     joinColumns={@ORM\JoinColumn(name="teacher_id", referencedColumnName="id", nullable=false)},
+     *     joinColumns={@ORM\JoinColumn(name="teacher_id", referencedColumnName="id")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="course_id", referencedColumnName="id", nullable=false)}
      * )
      */

@@ -73,11 +73,17 @@ class LearnerController extends Controller
         $teacher_selected=$this->createChooseTeacherForm($teacher_form->get('Course')->getData());
         $teacher_selected->handleRequest($request);
 
+        $ot_calendar=$this->get('ot_calendar');
+        $usertz=$this->get('security.context')->getToken()->getUser()->getTimeZone();
+
+        $em = $this->getDoctrine()->getManager();
+        $entity=$em->getRepository('OTBackendBundle:Weekplan')->findOneByTeacher(2);
+
         return $this->render('OTBackendBundle:Learner:booking_choose_time.html.twig', 
             [
             'form_course'=>$course_selected->createView(),
             'form_teacher'=>$teacher_selected->createView(),
-            //'entities'=>
+            'entity'=>$ot_calendar->render_parsed_weekplan_agenda($ot_calendar->parse_weekplan($entity,$usertz))
             ]
         );
     }
