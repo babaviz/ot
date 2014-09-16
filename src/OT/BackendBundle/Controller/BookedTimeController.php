@@ -36,4 +36,9 @@ class BookedTimeController extends Controller
         return $this->render('OTBackendBundle:Teacher:bookedtime_past_list.html.twig',['entities'=>$entities]);
     }
 
+    public function learnerChooseTimeAction()
+    {
+        
+    }
+
 }
