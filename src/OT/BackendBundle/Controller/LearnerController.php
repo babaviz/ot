@@ -18,7 +18,16 @@ class LearnerController extends Controller
     {
 
     	$em = $this->getDoctrine()->getManager();
-        $entities = $em->getRepository('OTBackendBundle:User')->findBy(['role'=>'TEACHER','Courses'=>$course_id]);
+      	$query = $em->createQuery("SELECT u FROM OTBackendBundle:User u
+      								LEFT JOIN OTBackendBundle:Course c
+      								WHERE c.id=:course_id
+      								")
+      				->setParameter('course_id',$course_id)
+      				->getResult();
+
+      	$entities=$query;
+
+        //getRepository('OTBackendBundle:User')->findBy(['role'=>'TEACHER','Courses'=>$course_id]);
 
         foreach ($entities as $entity){
         	$choices[$entity->getId()]=$entity->getName();
