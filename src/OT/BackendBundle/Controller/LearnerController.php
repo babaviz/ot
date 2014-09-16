@@ -19,10 +19,10 @@ class LearnerController extends Controller
 
     	$em = $this->getDoctrine()->getManager();
       	$query = $em->createQuery("SELECT u FROM OTBackendBundle:User u
-      								LEFT JOIN OTBackendBundle:Course c
+                                    INNER JOIN u.Courses c
       								WHERE c.id=:course_id
       								")
-      				->setParameter('course_id',$course_id)
+      				->setParameter('course_id',implode('',$course_id))
       				->getResult();
 
       	$entities=$query;
@@ -36,8 +36,9 @@ class LearnerController extends Controller
     	return $this->createFormBuilder()
     				->setAction($this->generateUrl('learner_booking_choose_course'))
     				->setMethod('PUT')
+                    ->add('Course','hidden',['data'=>implode('',$course_id)])
 		            ->add('Teacher','choice',['choices'=>$choices])
-		            ->add('Choose', 'submit', ['label' => 'Choose'])
+		            ->add('Submit', 'submit', ['label' => 'Check this teacher\'s time'])
     				->getForm();
     }
 
@@ -69,7 +70,7 @@ class LearnerController extends Controller
     	{
     		return $this->render('OTBackendBundle:Learner:booking_choose_teacher.html.twig', 
         	[
-        	'form_teacher'=>$this->createChooseTeacherForm($course_form->get('Course'))->createView()
+        	'form_teacher'=>$this->createChooseTeacherForm($course_form->getData('Courses'))->createView()
         	]
         	);
     	}
