@@ -82,6 +82,44 @@ Learner: 学生
 'Sales/Payment: directly deduct from a user''s account.': '__Sales/Payment: directly deduct from a user''s account.'
 'Choose Type T to transfer money from a user to another user.': '__Choose Type T to transfer money from a user to another user.'
 'Choose Type D/W to add / deduct money from a user''s account.': '__Choose Type D/W to add / deduct money from a user''s account.'
-'User List': '用户列表'
-'New User': '新用户'
-'User ID': '用户ID'
+'User List': 用户列表
+'New User': 新用户
+'User ID': 用户ID
+'Switch to teacher role.': '__Switch to teacher role.'
+'Choose Your Course': '__Choose Your Course'
+'If you have any questions, please contact school365.': '__If you have any questions, please contact school365.'
+'Choose Your Teacher': '__Choose Your Teacher'
+'Choose a Time': '__Choose a Time'
+Weekday: __Weekday
+'Available Time': '__Available Time'
+Today: __Today
+Tomorrow: __Tomorrow
+'Start Learning': '__Start Learning'
+'Learning History(X)': '__Learning History(X)'
+'My Account': '__My Account'
+'Past Course': '__Past Course'
+'Upcoming Course': '__Upcoming Course'
+Start: __Start
+End: __End
+Course: __Course
+'Choose a feature on the left:': '__Choose a feature on the left:'
+'If you are also a system administrator, you can': '__If you are also a system administrator, you can'
+'Switch to administrator role.': '__Switch to administrator role.'
+'My Course': '__My Course'
+'My Weekly Plan': '__My Weekly Plan'
+'Edit Daily Plan': '__Edit Daily Plan'
+'View Weekly Plan': '__View Weekly Plan'
+'My Timetable': '__My Timetable'
+Monday: __Monday
+clear: __clear
+Tuesday: __Tuesday
+Wednesday: __Wednesday
+Thursday: __Thursday
+Friday: __Friday
+Saturday: __Saturday
+Sunday: __Sunday
+'Add a Time': '__Add a Time'
+'Account History': '__Account History'
+'Edit User': '__Edit User'
+Back: __Back
+'Create User': '__Create User'

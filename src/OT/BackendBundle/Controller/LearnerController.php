@@ -75,6 +75,13 @@ class LearnerController extends Controller
 
         $ot_calendar=$this->get('ot_calendar');
         $usertz=$this->get('security.context')->getToken()->getUser()->getTimeZone();
+        date_default_timezone_set($usertz);
+
+        $cd=new \DateTime('now');
+        for ($i=0;$i<7;$i++){
+            $day[$i]=$cd->format("m-d");
+            date_add($cd, date_interval_create_from_date_string('1 day'));
+        }
 
         $em = $this->getDoctrine()->getManager();
         $entity=$em->getRepository('OTBackendBundle:Weekplan')->findOneByTeacher(2);
@@ -83,7 +90,9 @@ class LearnerController extends Controller
             [
             'form_course'=>$course_selected->createView(),
             'form_teacher'=>$teacher_selected->createView(),
-            'entity'=>$ot_calendar->render_parsed_weekplan_agenda($ot_calendar->parse_weekplan($entity,$usertz))
+            'entity'=>$ot_calendar->render_parsed_weekplan_learner($ot_calendar->parse_weekplan($entity,$usertz),date("Y-m-d H:i:s ").$usertz),
+            //'entity'=>$ot_calendar->render_parsed_weekplan_agenda($ot_calendar->parse_weekplan($entity,$usertz),'2014-09-17'),
+            'day'=>$day
             ]
         );
     }

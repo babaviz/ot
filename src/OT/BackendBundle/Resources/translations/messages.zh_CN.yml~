@@ -74,15 +74,14 @@ Learner: 学生
 'You are force changing the password of another user. This operation is NOT recoverable.': '你正在强制修改其它用户的密码。本操作无法撤销。'
 'You don''t need to type anything in ''From (full name'' row.': '不需填写"从(全名)"一栏，仅填写"到(全名)"一栏即可。'
 'Type a negative amount if you want to deduct from the user''s account.': '如需账户减值，请输入负数金额。'
-'User Mgt.': '用户管理'
+'User Mgt.': 用户管理
 'Backend Entrance': '后台入口'
-'Transfer from a user to another user.': '从一位用户转账至另一位用户'
-'Deposit to a user''s account.': '向用户存款'
+'Transfer from a user to another user.': 从一位用户转账至另一位用户
+'Deposit to a user''s account.': 向用户存款
 'Withdraw from a user''s account.': '__Withdraw from a user''s account.'
 'Sales/Payment: directly deduct from a user''s account.': '__Sales/Payment: directly deduct from a user''s account.'
 'Choose Type T to transfer money from a user to another user.': '__Choose Type T to transfer money from a user to another user.'
 'Choose Type D/W to add / deduct money from a user''s account.': '__Choose Type D/W to add / deduct money from a user''s account.'
-'Uesr List': '__Uesr List'
-'User List': '__User List'
-'New User': '__New User'
-'User ID': '__User ID'
+'User List': '用户列表'
+'New User': '新用户'
+'User ID': '用户ID'

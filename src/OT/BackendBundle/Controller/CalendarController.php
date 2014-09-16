@@ -142,6 +142,24 @@ class CalendarController
     return $result;
   }
 
+  public function render_parsed_weekplan_learner($strPlan, $start_date)
+  {
+    $result=[];
+
+    $dw = date( "w", strtotime($start_date));  //0 is Sunday through 6 is Sat
+    $dw = ($dw==0)?7:$dw;
+
+    for ($d=0;$d<1008;$d+=144){
+      array_push($result,$this->day_to_agenda(substr($strPlan,($d+($dw-1)*144)%1008,144)));
+    }
+
+    /*
+    for ($d=0;$d<1008;$d+=144){
+      array_push($result,$this->day_to_agenda(substr($strPlan,$d,144)));
+    }*/
+    return $result;
+  }
+
   public function get_timezone_offset($remote_tz, $origin_tz = 'GMT') {
       //get the difference of timezones by seconds
       //if($origin_tz === null) {
