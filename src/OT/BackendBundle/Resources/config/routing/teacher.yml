@@ -2,10 +2,6 @@ teacher_dashboard:
     path:     /dashboard
     defaults: { _controller: "OTBackendBundle:Teacher:dashboard" }
 
-teacher_account_transactionrecord_list:
-    path:     /account/transactionrecord/list
-    defaults: { _controller: "OTBackendBundle:TransactionRecord:accountTranscationRecordList" }
-
 teacher_course_history_list:
     path:     /teacher_course_history/list
     defaults: { _controller: "OTBackendBundle:BookedTime:courseHistoryList" }

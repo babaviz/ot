@@ -44,7 +44,15 @@ admin_account_overview:
 
 admin_account_transactionrecord_list:
     path:     /admin/account/transactionrecord/list
-    defaults: { _controller: OTBackendBundle:TransactionRecord:AccountTranscationRecordList }
+    defaults: { _controller: OTBackendBundle:TransactionRecord:accountTransactionRecordList }
+
+teacher_account_transactionrecord_list:
+    path:     /teacher/account/transactionrecord/list
+    defaults: { _controller: OTBackendBundle:TransactionRecord:teacherTransactionRecordList }
+
+learner_account_transactionrecord_list:
+    path:     /learner/account/transactionrecord/list
+    defaults: { _controller: OTBackendBundle:TransactionRecord:learnerTransactionRecordList }
 
 admin_account_transfer:
     path:     /admin/account/transfer

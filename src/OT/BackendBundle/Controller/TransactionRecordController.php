@@ -14,11 +14,28 @@ use OT\BackendBundle\Form\Model\TransferTo;
 
 class TransactionRecordController extends Controller
 {
-    public function accountTranscationRecordListAction()
+    public function accountTransactionRecordListAction()
     {
     	$transactions = $this->getDoctrine()->getManager()->getRepository('OTBackendBundle:TransactionRecord')->findAll();
     
         return $this->render('OTBackendBundle:TransactionRecord:account_transactionrecord_list.html.twig', array('transactions'=>$transactions));
+    }
+
+    public function learnerTransactionRecordListAction()
+    {
+    	$user_id=$this->get('security.context')->getToken()->getUser()->getId();
+    	$transactions = $this->getDoctrine()->getManager()->getRepository('OTBackendBundle:TransactionRecord')->findBy(['From'=>$user_id]);////
+
+    
+        return $this->render('OTBackendBundle:TransactionRecord:user_transactionrecord_list.html.twig', array('transactions'=>$transactions,'role'=>'LEARNER'));
+    }
+
+    public function teacherTransactionRecordListAction()
+    {
+    	$user_id=$this->get('security.context')->getToken()->getUser()->getId();
+    	$transactions = $this->getDoctrine()->getManager()->getRepository('OTBackendBundle:TransactionRecord')->findBy(['To'=>$user_id]);/////
+
+        return $this->render('OTBackendBundle:TransactionRecord:user_transactionrecord_list.html.twig', array('transactions'=>$transactions,'role'=>'TEACHER'));
     }
 
     public function adminAccountTransferAction(Request $request)
