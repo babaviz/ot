@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+
 
 
 class SecurityController extends Controller
@@ -37,9 +39,6 @@ class SecurityController extends Controller
     {
 
         $role=$this->getRole();
-
-        if ($role!='VISITOR')
-            return $this->render('OTBackendBundle:Security:entrance.html.twig',['role'=>$role]);
 
     	$session = $request->getSession();
         
@@ -75,8 +74,13 @@ class SecurityController extends Controller
 
         if ($role=='TEACHER')
             return $this->redirect($this->generateUrl('teacher_dashboard'));
-        
 
+        if ($role=='LEARNER')
+            return $this->redirect($this->generateUrl('learner_dashboard'));
+
+        if ($role='VISITOR') {
+            throw $this->createAccessDeniedException();
+        }
     }
 
 }

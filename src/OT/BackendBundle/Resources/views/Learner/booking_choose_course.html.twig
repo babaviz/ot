@@ -1,0 +1,23 @@
+{% extends "::two-col.html.twig" %}
+
+{% block title %}{% trans %}Choose Your Course{% endtrans %}{% endblock %}
+
+{% block sidebar %}
+{% include "OTBackendBundle:Learner:sidebar.html.twig" %}
+{% endblock %}
+
+{% block body %}
+	<div class="panel panel-default">
+	{#<div class="panel-heading">{% trans %}Dashboard{% endtrans %}</div>#}
+	<div class="panel-body">
+
+	<p class="lead">Step 1 - Choose your Course:</p>
+
+	{{ form(form_course) }}
+
+	</div>
+	</div>
+
+<p class="help-block">{% trans %}If you have any questions, please contact school365.{% endtrans %}</p>
+
+{% endblock %}

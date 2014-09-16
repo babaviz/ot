@@ -1,0 +1,3 @@
+learner_dashboard:
+    path:     /dashboard
+    defaults: { _controller: "OTBackendBundle:Learner:dashboard" }

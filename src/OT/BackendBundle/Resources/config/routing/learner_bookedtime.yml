@@ -1,0 +1,3 @@
+learner_bookedtime_past_list:
+    path:     /past/list
+    defaults: { _controller: "OTBackendBundle:BookedTime:pastlist" }

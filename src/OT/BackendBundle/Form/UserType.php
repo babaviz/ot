@@ -32,14 +32,14 @@ class UserType extends AbstractType
             ->add('timezone','choice',[
                     'choices'=>[
                     'Asia/Hong_Kong'=>'Asia Taiwan/Hong Kong/China',
-                    'America/New_York'=>'US Eastern Time',
-                    'America/Chicago'=>'US Central Time',
-                    'America/Denver'=>'US Mountain Time',
-                    'America/Phoenix'=>'US Mountain Time (no DST)',
-                    'America/Los_Angeles'=>'US Pacific Time',
-                    'America/Anchorage'=>'US Alaska Time',
-                    'America/Adak'=>'US Hawaii-Aleutian Time',
-                    'Pacific/Honolulu'=>'Hawaii-Aleutian Time (no DST)'
+                    'America/New_York'=>'US Eastern Time: New York',
+                    'America/Chicago'=>'US Central Time: Chicago',
+                    'America/Denver'=>'US Mountain Time: Denver',
+                    'America/Phoenix'=>'US Mountain Time (no DST): Phonenix',
+                    'America/Los_Angeles'=>'US Pacific Time: Los_Angeles',
+                    'America/Anchorage'=>'US Alaska Time: Anchorage',
+                    'America/Adak'=>'US Hawaii-Aleutian Time: Adak',
+                    'Pacific/Honolulu'=>'US Hawaii-Aleutian Time (no DST): Honolulu'
                     ]
                 ]
                 )
