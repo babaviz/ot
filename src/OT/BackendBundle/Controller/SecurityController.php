@@ -21,7 +21,7 @@ class SecurityController extends Controller
             $role=$user->getRoles()[0];
         }
         else{
-            $role='VISITOR';
+            $role='ROLE_VISITOR';
         }
 
         return $role;
@@ -69,18 +69,16 @@ class SecurityController extends Controller
     {
         $role=$this->getRole();
 
-        if ($role=='ADMIN')
+        if ($role=='ROLE_ADMIN')
             return $this->render('OTBackendBundle:Admin:entrance.html.twig',['role'=>$role]);
 
-        if ($role=='TEACHER')
+        if ($role=='ROLE_TEACHER')
             return $this->redirect($this->generateUrl('teacher_dashboard'));
 
-        if ($role=='LEARNER')
+        if ($role=='ROLE_LEARNER')
             return $this->redirect($this->generateUrl('learner_dashboard'));
 
-        if ($role='VISITOR') {
-            throw $this->createAccessDeniedException();
-        }
+        throw $this->createAccessDeniedException();
     }
 
 }

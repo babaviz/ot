@@ -4,10 +4,7 @@ security:
             algorithm: bcrypt
 
     role_hierarchy:
-        ROLE_ADMIN:       [ ADMIN ]
-        ROLE_SUPER_ADMIN: [ ROLE_ADMIN ]
-        ROLE_TEACHER:     [ TEACHER ]
-        ROLE_LEARNER:     [ LEARNER ]
+        ROLE_ADMIN:       [ ADMIN, ROLE_TEACHER, ROLE_ALLOWED_TO_SWITCH ]
 
     providers:
         users:
@@ -20,8 +17,15 @@ security:
             form_login:
                 login_path: /login
                 check_path: /login_check
-                always_use_default_target_path: true
                 default_target_path: /entrance
             logout:
                 path: /logout
                 target: /
+    access_control:
+        - { path: ~/entrance, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/backend/admin/, roles: ROLE_ADMIN }
+        - { path: ^/backend/teacher/, roles: ROLE_TEACHER }
+        - { path: ^/backend/learner/, roles: ROLE_LEARNER }
+
+            # Include the following line to also secure the /admin path itself
+            # - { path: ^/backend/admin$, roles: ROLE_ADMIN }
