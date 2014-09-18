@@ -22,9 +22,9 @@ class UserType extends AbstractType
             ->add('phone')
             ->add('role','choice',[
                 'choices'=>[
-                'ADMIN'=>'Administrator',
-                'TEACHER'=>'Teacher',
-                'LEARNER'=>'Learner'
+                'ROLE_ADMIN'=>'Administrator',
+                'ROLE_TEACHER'=>'Teacher',
+                'ROLE_LEARNER'=>'Learner'
                 ]
                 ])
             ->add('account_balance')
