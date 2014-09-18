@@ -44,6 +44,11 @@ class User implements UserInterface, \Serializable
     private $phone;
 
     /**
+     * @ORM\Column(type="string", length=32, nullable=true)
+     */
+    private $skype;
+
+    /**
      * @ORM\Column(type="string", length=16, nullable=false)
      */
     private $role;
@@ -67,6 +72,11 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(type="text", nullable=true)
      */
     private $introduction;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $bbb_address;
 
     /**
      * @ORM\OneToMany(targetEntity="TransactionRecord", mappedBy="From")

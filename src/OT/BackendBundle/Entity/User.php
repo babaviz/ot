@@ -44,6 +44,11 @@ class User implements UserInterface, \Serializable
     private $phone;
 
     /**
+     * @ORM\Column(type="string", length=32, nullable=true)
+     */
+    private $skype;
+
+    /**
      * @ORM\Column(type="string", length=16, nullable=false)
      */
     private $role;
@@ -67,6 +72,11 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(type="text", nullable=true)
      */
     private $introduction;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $bbb_address;
 
     /**
      * @ORM\OneToMany(targetEntity="TransactionRecord", mappedBy="From")
@@ -682,5 +692,51 @@ class User implements UserInterface, \Serializable
     public function getWeekplan()
     {
         return $this->Weekplan;
+    }
+
+    /**
+     * Set skype
+     *
+     * @param string $skype
+     * @return User
+     */
+    public function setSkype($skype)
+    {
+        $this->skype = $skype;
+
+        return $this;
+    }
+
+    /**
+     * Get skype
+     *
+     * @return string 
+     */
+    public function getSkype()
+    {
+        return $this->skype;
+    }
+
+    /**
+     * Set bbb_address
+     *
+     * @param string $bbbAddress
+     * @return User
+     */
+    public function setBbbAddress($bbbAddress)
+    {
+        $this->bbb_address = $bbbAddress;
+
+        return $this;
+    }
+
+    /**
+     * Get bbb_address
+     *
+     * @return string 
+     */
+    public function getBbbAddress()
+    {
+        return $this->bbb_address;
     }
 }

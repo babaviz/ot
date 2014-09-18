@@ -11,15 +11,11 @@
 	{#<div class="panel-heading">{% trans %}Dashboard{% endtrans %}</div>#}
 	<div class="panel-body">
 
-	<p class="lead">Step 1 - Choose your Course:</p>
-
-	{{ form(form_course) }}
-
-	<p class="lead">Step 2 - Choose your Teacher:</p>
+	<p class="lead">Choose your Teacher:</p>
 
 	{{ form(form_teacher) }}
 
-	<p class="lead">Step 3 - Choose a Time:</p>
+	<p class="lead">Choose a Time:</p>
 
 	{% if message is defined %}
 		{{ dump(message) }}

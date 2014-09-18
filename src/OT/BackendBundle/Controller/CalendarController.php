@@ -40,11 +40,12 @@ class CalendarController
     return $result;
   }
 
-  public function parse_weekplan(Weekplan $plan, $tz = 'GMT')
+  public function parse_weekplan(Weekplan $plan, $tz = 'GMT', $start_date=null, $teacher_id=null)
   {
     //uncompress weekplan to timezoned string
     $workingPlan=$plan->getPlan();
     $offset_tz=$this->get_timezone_offset($tz);
+    $offset=$offset_tz/60/10;
     $strPlan='';
 
     $workingArray=explode(',',$workingPlan);
@@ -55,7 +56,21 @@ class CalendarController
       $strPlan.=str_repeat($workingString[0],$workingString[1]);
     }
 
-    $offset=$offset_tz/60/10;
+    if ($start_date!==null){
+        //start override schedule
+        $em = $this->getDoctrine()->getManager();
+
+        $start_date_gmt = new \DateTime ($start_date.' 00:00:00 '.$tz);
+
+          ///
+
+        $query = $em->createQuery("SELECT b FROM OTBackendBundle:BookedTime b
+                      WHERE b.date
+                      ")
+              ->setParameter('course_id',$course_id)
+              ->getResult();
+    }
+
 
     if ($offset!=0)
       $strPlan=substr($strPlan,$offset).substr($strPlan,0,$offset);

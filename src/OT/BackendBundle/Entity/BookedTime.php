@@ -18,6 +18,11 @@ class BookedTime
     /**
      * @ORM\Column(type="string")
      */
+    private $date;
+
+    /**
+     * @ORM\Column(type="string")
+     */
     private $start_time;
 
     /**
@@ -195,5 +200,28 @@ class BookedTime
     public function getLearner()
     {
         return $this->Learner;
+    }
+
+    /**
+     * Set date
+     *
+     * @param string $date
+     * @return BookedTime
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return string 
+     */
+    public function getDate()
+    {
+        return $this->date;
     }
 }

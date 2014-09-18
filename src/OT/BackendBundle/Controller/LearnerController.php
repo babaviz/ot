@@ -64,15 +64,12 @@ class LearnerController extends Controller
 
     public function bookingChooseTeacherAction(Request $request)
     {
-        $teacher_form=$this->createChooseTeacherForm($request->request->get('Course'));
+        $teacher_form=$this->createChooseTeacherForm(1);
         $teacher_form->handleRequest($request);
 
-        $course_selected=$this->createChooseCourseForm();
-        $course_selected->get('Course')->setData($teacher_form->get('Course')->getData());
-
-        $teacher_selected=$this->createChooseTeacherForm($teacher_form->get('Course')->getData());
-        $teacher_selected->handleRequest($request);
-
+        //$teacher_selected=$this->createChooseTeacherForm($request->get('Course'));
+        //$teacher_selected->get('Teacher')->setData($request->get('Teacher'));
+    
         $ot_calendar=$this->get('ot_calendar');
         $usertz=$this->get('security.context')->getToken()->getUser()->getTimeZone();
         date_default_timezone_set($usertz);
@@ -88,11 +85,12 @@ class LearnerController extends Controller
 
         return $this->render('OTBackendBundle:Learner:booking_choose_time.html.twig', 
             [
-            'form_course'=>$course_selected->createView(),
-            'form_teacher'=>$teacher_selected->createView(),
-            'entity'=>$ot_calendar->render_parsed_weekplan_learner($ot_calendar->parse_weekplan($entity,$usertz),date("Y-m-d H:i:s ").$usertz),
-            //'entity'=>$ot_calendar->render_parsed_weekplan_agenda($ot_calendar->parse_weekplan($entity,$usertz),'2014-09-17'),
-            'day'=>$day
+            'form_teacher'=>$teacher_form->createView(),
+            'entity'=>$ot_calendar->render_parsed_weekplan_learner(
+                        $ot_calendar->parse_weekplan($entity,$usertz),
+                        date("Y-m-d H:i:s ").$usertz),
+            'day'=>$day,
+            //'message'=>$teacher_selected->get('Course')
             ]
         );
     }

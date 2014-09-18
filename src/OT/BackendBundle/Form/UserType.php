@@ -20,6 +20,7 @@ class UserType extends AbstractType
             ->add('password','password')
             ->add('email')
             ->add('phone')
+            ->add('skype')
             ->add('role','choice',[
                 'choices'=>[
                 'ROLE_ADMIN'=>'Administrator',
@@ -44,6 +45,7 @@ class UserType extends AbstractType
                 ]
                 )
             ->add('introduction')
+            ->add('bbbAddress','text',['label'=>'BigBlueButton Conference Room Address'])
         ;
     }
     

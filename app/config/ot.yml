@@ -14,6 +14,9 @@ parameters:
     app_vendor_name: Learning Tech Asia
     app_vendor_contact: '<address><strong>Learning Tech Asia Limited (Hong Kong)</strong><br>9B Ametel Building, 148 Des Voeux Rd C,<br>Central, Hong Kong<br><abbr title="Phone">Tel </abbr>(852) 9689 5930<br><abbr title="Email">Email </abbr><a href="mailto:support@learningtechasia.com">support@learningtechasia.com</a></address>'
 
+    #BigBlueButton
+    bbb_salt: d458ef4aff069d59b9fe18f74683fcb9
+
 twig:
   globals:
     app_title: %app_title%
@@ -28,3 +31,4 @@ twig:
     app_version: %app_version%
     app_vendor_name: %app_vendor_name%
     app_vendor_contact: %app_vendor_contact%
+

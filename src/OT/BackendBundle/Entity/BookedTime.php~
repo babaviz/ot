@@ -18,6 +18,11 @@ class BookedTime
     /**
      * @ORM\Column(type="string")
      */
+    private $date;
+
+    /**
+     * @ORM\Column(type="string")
+     */
     private $start_time;
 
     /**
