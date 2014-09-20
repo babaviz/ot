@@ -14,6 +14,8 @@ use OT\BackendBundle\Form\ChangePasswordType;
 use OT\BackendBundle\Form\Model\ForceChangePassword;
 use OT\BackendBundle\Form\ForceChangePasswordType;
 
+use OT\BackendBundle\Entity\Weekplan;
+
 /**
  * User controller.
  *
@@ -35,6 +37,15 @@ class UserController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
+
+            // create a Weekplan entry for the teacher
+            if ($entity->getRole()=='ROLE_TEACHER'){
+              $wp=new Weekplan();
+              $wp->setTeacher($entity);
+              $wp->setPlan('B*1008');
+              $em->persist($wp);
+              $em->flush();
+            }
 
             return $this->redirect($this->generateUrl('admin_user_list'));
         }
