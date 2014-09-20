@@ -19,17 +19,9 @@ class LearnerController extends Controller
     {
 
     	$em = $this->getDoctrine()->getManager();
-      	$query = $em->createQuery("SELECT u FROM OTBackendBundle:User u
-                                    INNER JOIN u.Courses c
-      								WHERE c.id=:course_id
-      								")
-      				->setParameter('course_id',$course_id)
-      				->getResult();
+      	$query = $em->getRepository('OTBackendBundle:User')->findBy(['role'=>'ROLE_TEACHER']);
 
       	$entities=$query;
-
-        //getRepository('OTBackendBundle:User')->findBy(['role'=>'TEACHER','Courses'=>$course_id]);
-
         $choices[-1]='';
 
         foreach ($entities as $entity){
@@ -65,7 +57,7 @@ class LearnerController extends Controller
 
     public function bookingChooseTeacherAction(Request $request)
     {
-        $teacher_form=$this->createChooseTeacherForm(1);
+        $teacher_form=$this->createChooseTeacherForm(1);//1 is unused course_id
         $teacher_form->handleRequest($request);
 
         //$teacher_selected=$this->createChooseTeacherForm($request->get('Course'));

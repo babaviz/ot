@@ -14,31 +14,22 @@
 		  <li><a href="{{ path('admin_course_list_record') }}">{% trans %}Course Record{% endtrans %}</a></li>
 	</ul>
 
-	<div class="panel-body">
+	<div class="panel panel-body">
 		<a href="{{ path('admin_course_list_all') }}"><button type="button" class="btn btn-sm btn-default pull-right">Go Back</button></a>
-		<p class="lead">
-			{% trans %}Assign Teacher to Course{% endtrans %}
-		</p>
-		{% trans %}Courses allowed to be taught:{% endtrans %} <strong></strong> <br />
-	</div>
 
-	<div class="panel-body">
-	{{ form_start(form) }}
-	    {# render the task's only field: description #}
-	    {{ form_row(form.name) }}
+	<p class="lead">{{ course.courseid }} - <strong>{{ course.name }}</strong></p>
+		<em>{% trans %}Teachers approved to teach this course:{% endtrans %}</em>
+		<!--<table class="table table-striped table-condensed">
+		<tbody>
+		</tbody>
+		</table>
+		-->
 
-	    <table class="table">
-	        {# iterate over each existing tag and render its only field: name #}
-	        {% for course in form.Courses %}
-	        	<tr>{{ form_row(course.course_id) }}</tr>
-	            <tr>{{ form_row(course.name) }}</tr>
-	        {% endfor %}
+		<br/>
 
-	        <ul class="tags" data-prototype="{{ form_widget(form.Courses.vars.prototype.name)|e }}">Add New
-    		</ul>
+		<em>{% trans %}Allow teacher to teach the course:{% endtrans %}</em>
 
-	    </table>
-	{{ form_end(form) }}
+		{{ form(form) }}
 	</div>
 
 

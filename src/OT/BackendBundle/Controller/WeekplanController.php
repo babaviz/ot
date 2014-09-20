@@ -32,6 +32,13 @@ class WeekplanController extends Controller
         $usertz=$this->get('security.context')->getToken()->getUser()->getTimeZone();
         $entity = $em->getRepository('OTBackendBundle:Weekplan')->findOneByTeacher($userid);
 
+        if ($entity == null){
+            $this->get('session')->getFlashBag()->add('warning',
+                $this->get('translator')->trans('This user does not have a timetable.')
+                );
+            return $this->render('OTBackendBundle:Teacher:dashboard.html.twig');
+        }
+
 
         $add_form=$this->createFormBuilder(null,['action' => $this->generateUrl('teacher_weekplan_list')])
                                     ->add('Weekday', 'choice',['choices'=>

@@ -7,7 +7,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @ORM\Entity
  * @ORM\Entity(repositoryClass="OT\BackendBundle\Entity\UserRepository")
- * 
+ *
  */
 class User implements UserInterface, \Serializable
 {
@@ -104,13 +104,8 @@ class User implements UserInterface, \Serializable
     private $LearningBookedTimes;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Course", inversedBy="Teachers")
-     * @ORM\JoinTable(
-     *     name="CourseHasTeacher",
-     *     joinColumns={@ORM\JoinColumn(name="teacher_id", referencedColumnName="id")},
-     *     inverseJoinColumns={@ORM\JoinColumn(name="course_id", referencedColumnName="id", nullable=false)}
-     * )
-     */
+     * @ORM\ManyToMany(targetEntity="Course", mappedBy="teachers")
+    */
     private $Courses;
 
     /**
@@ -210,7 +205,7 @@ class User implements UserInterface, \Serializable
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -259,7 +254,7 @@ class User implements UserInterface, \Serializable
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -282,7 +277,7 @@ class User implements UserInterface, \Serializable
     /**
      * Get email
      *
-     * @return string 
+     * @return string
      */
     public function getEmail()
     {
@@ -305,7 +300,7 @@ class User implements UserInterface, \Serializable
     /**
      * Get phone
      *
-     * @return string 
+     * @return string
      */
     public function getPhone()
     {
@@ -328,7 +323,7 @@ class User implements UserInterface, \Serializable
     /**
      * Get role
      *
-     * @return string 
+     * @return string
      */
     public function getRole()
     {
@@ -351,7 +346,7 @@ class User implements UserInterface, \Serializable
     /**
      * Get account_balance
      *
-     * @return float 
+     * @return float
      */
     public function getAccountBalance()
     {
@@ -374,7 +369,7 @@ class User implements UserInterface, \Serializable
     /**
      * Get create_time
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreateTime()
     {
@@ -397,7 +392,7 @@ class User implements UserInterface, \Serializable
     /**
      * Get timezone
      *
-     * @return string 
+     * @return string
      */
     public function getTimezone()
     {
@@ -420,7 +415,7 @@ class User implements UserInterface, \Serializable
     /**
      * Get introduction
      *
-     * @return string 
+     * @return string
      */
     public function getIntroduction()
     {
@@ -453,7 +448,7 @@ class User implements UserInterface, \Serializable
     /**
      * Get TransactionRecords
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getTransactionRecords()
     {
@@ -486,44 +481,11 @@ class User implements UserInterface, \Serializable
     /**
      * Get Weekplans
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getWeekplans()
     {
         return $this->Weekplans;
-    }
-
-    /**
-     * Add Courses
-     *
-     * @param \OT\BackendBundle\Entity\Course $courses
-     * @return User
-     */
-    public function addCourse(\OT\BackendBundle\Entity\Course $courses)
-    {
-        $this->Courses[] = $courses;
-
-        return $this;
-    }
-
-    /**
-     * Remove Courses
-     *
-     * @param \OT\BackendBundle\Entity\Course $courses
-     */
-    public function removeCourse(\OT\BackendBundle\Entity\Course $courses)
-    {
-        $this->Courses->removeElement($courses);
-    }
-
-    /**
-     * Get Courses
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getCourses()
-    {
-        return $this->Courses;
     }
 
     /**
@@ -565,7 +527,7 @@ class User implements UserInterface, \Serializable
     /**
      * Get SentTransactions
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getSentTransactions()
     {
@@ -598,7 +560,7 @@ class User implements UserInterface, \Serializable
     /**
      * Get ReceivedTransactions
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getReceivedTransactions()
     {
@@ -631,7 +593,7 @@ class User implements UserInterface, \Serializable
     /**
      * Get TeachingBookedTimes
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getTeachingBookedTimes()
     {
@@ -664,7 +626,7 @@ class User implements UserInterface, \Serializable
     /**
      * Get LearningBookedTimes
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getLearningBookedTimes()
     {
@@ -687,7 +649,7 @@ class User implements UserInterface, \Serializable
     /**
      * Get Weekplan
      *
-     * @return \OT\BackendBundle\Entity\Weekplan 
+     * @return \OT\BackendBundle\Entity\Weekplan
      */
     public function getWeekplan()
     {
@@ -710,7 +672,7 @@ class User implements UserInterface, \Serializable
     /**
      * Get skype
      *
-     * @return string 
+     * @return string
      */
     public function getSkype()
     {
@@ -733,10 +695,43 @@ class User implements UserInterface, \Serializable
     /**
      * Get bbb_address
      *
-     * @return string 
+     * @return string
      */
     public function getBbbAddress()
     {
         return $this->bbb_address;
+    }
+
+    /**
+     * Add courses
+     *
+     * @param \OT\BackendBundle\Entity\Course $courses
+     * @return User
+     */
+    public function addCourse(\OT\BackendBundle\Entity\Course $courses)
+    {
+        $this->courses[] = $courses;
+
+        return $this;
+    }
+
+    /**
+     * Remove courses
+     *
+     * @param \OT\BackendBundle\Entity\Course $courses
+     */
+    public function removeCourse(\OT\BackendBundle\Entity\Course $courses)
+    {
+        $this->courses->removeElement($courses);
+    }
+
+    /**
+     * Get courses
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCourses()
+    {
+        return $this->courses;
     }
 }

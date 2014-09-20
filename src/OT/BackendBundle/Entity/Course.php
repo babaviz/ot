@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping AS ORM;
 /**
  * @ORM\Entity
  * @ORM\Entity(repositoryClass="OT\BackendBundle\Entity\CourseRepository")
- * 
+ *
  */
 class Course
 {
@@ -58,10 +58,16 @@ class Course
      */
     private $Category;
 
+
     /**
-     * @ORM\ManyToMany(targetEntity="User", mappedBy="Courses")
-     */
-    private $Teachers;
+     * @ORM\ManyToMany(targetEntity="User")
+     * @ORM\JoinTable(name="course_teacher",
+     *      joinColumns={@ORM\JoinColumn(name="teacher_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="course_id", referencedColumnName="id")}
+     *      )
+     **/
+    private $teachers;
+
     /**
      * Constructor
      */
@@ -74,7 +80,7 @@ class Course
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -97,7 +103,7 @@ class Course
     /**
      * Get course_id
      *
-     * @return string 
+     * @return string
      */
     public function getCourseId()
     {
@@ -120,7 +126,7 @@ class Course
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -143,7 +149,7 @@ class Course
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -166,7 +172,7 @@ class Course
     /**
      * Get duration
      *
-     * @return integer 
+     * @return integer
      */
     public function getDuration()
     {
@@ -189,7 +195,7 @@ class Course
     /**
      * Get price
      *
-     * @return float 
+     * @return float
      */
     public function getPrice()
     {
@@ -212,7 +218,7 @@ class Course
     /**
      * Get status
      *
-     * @return string 
+     * @return string
      */
     public function getStatus()
     {
@@ -245,7 +251,7 @@ class Course
     /**
      * Get BookedTimes
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getBookedTimes()
     {
@@ -268,43 +274,44 @@ class Course
     /**
      * Get Category
      *
-     * @return \OT\BackendBundle\Entity\Category 
+     * @return \OT\BackendBundle\Entity\Category
      */
     public function getCategory()
     {
         return $this->Category;
     }
 
+
     /**
-     * Add Teachers
+     * Add teachers
      *
      * @param \OT\BackendBundle\Entity\User $teachers
      * @return Course
      */
     public function addTeacher(\OT\BackendBundle\Entity\User $teachers)
     {
-        $this->Teachers[] = $teachers;
+        $this->teachers[] = $teachers;
 
         return $this;
     }
 
     /**
-     * Remove Teachers
+     * Remove teachers
      *
      * @param \OT\BackendBundle\Entity\User $teachers
      */
     public function removeTeacher(\OT\BackendBundle\Entity\User $teachers)
     {
-        $this->Teachers->removeElement($teachers);
+        $this->teachers->removeElement($teachers);
     }
 
     /**
-     * Get Teachers
+     * Get teachers
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
     public function getTeachers()
     {
-        return $this->Teachers;
+        return $this->teachers;
     }
 }

@@ -9,7 +9,6 @@ use OT\BackendBundle\Entity\Course;
 use OT\BackendBundle\Entity\User;
 
 use OT\BackendBundle\Form\CourseType;
-use OT\BackendBundle\Form\TeacherCourseType;
 
 /**
  * Course controller.
@@ -271,14 +270,24 @@ class CourseController extends Controller
         return $this->redirect($this->generateUrl($redirect));
     }
 
+    private function createAdminAssignTeacherForm($courseid)
+    {
+        return $this->createFormBuilder()
+                    ->setAction($this->generateUrl('admin_course_assign_teacher',['courseid'=>$courseid]))
+                    ->add('courseid','hidden',['data'=>$courseid])
+                    ->add('submit', 'submit', array('label' => 'Add'))
+                    ->getForm();
+    }
+
     public function adminAssignTeacherAction(Request $request, $courseid)
     {
         $em = $this->getDoctrine()->getManager();
         $pending_number = $em->getRepository('OTBackendBundle:Course')->getPendingNumber();
 
-        $teacher=$em->getRepository('OTBackendBundle:User')->findOneById($courseid);
+        $course=$em->getRepository('OTBackendBundle:Course')->findOneById($courseid);
+        //$teachers=$em->getRepository('OTBackendBundle:Course')->findByTeachers(new User());
 
-        $form = $this->createForm(new TeacherCourseType(), $teacher);
+        $form=$this->createAdminAssignTeacherForm($courseid);
 
         $form->handleRequest($request);
 
@@ -289,6 +298,8 @@ class CourseController extends Controller
 
         return $this->render('OTBackendBundle:Course:admin_course_assign_teacher.html.twig',
             [
+                'course'=>$course,
+                //'teachers'=>$teachers,
                 'form'=>$form->createView(),
                 'pending_number'=>$pending_number,
             ]);
