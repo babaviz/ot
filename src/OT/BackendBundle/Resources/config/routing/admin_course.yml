@@ -45,3 +45,6 @@ admin_course_change_status:
     path:     /changestatus/{courseid}/{status}/{redirect}
     defaults: { _controller: OTBackendBundle:Course:adminCourseChangeStatus }
 
+admin_course_assign_teacher:
+    path:     /assignteacher/{courseid}
+    defaults: { _controller: OTBackendBundle:Course:adminAssignTeacher }

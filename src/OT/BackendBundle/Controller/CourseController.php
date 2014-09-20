@@ -6,7 +6,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use OT\BackendBundle\Entity\Course;
+use OT\BackendBundle\Entity\User;
+
 use OT\BackendBundle\Form\CourseType;
+use OT\BackendBundle\Form\TeacherCourseType;
 
 /**
  * Course controller.
@@ -230,7 +233,7 @@ class CourseController extends Controller
         return $this->render('OTBackendBundle:Course:admin_course_list_all.html.twig', array(
                 'courses'=>$courses,
                 'pending_number'=>$pending_number
-            ));    
+            ));
     }
 
     public function adminCourseListPendingAction()
@@ -248,7 +251,7 @@ class CourseController extends Controller
     public function adminCourseListRecordAction()
     {
         $em = $this->getDoctrine()->getManager();
-            
+
         $pending_number = $em->getRepository('OTBackendBundle:Course')->getPendingNumber();
         return $this->render('OTBackendBundle:Course:admin_course_list_record.html.twig', array('courseRecords'=>array(),'pending_number'=>$pending_number));
     }
@@ -266,5 +269,28 @@ class CourseController extends Controller
         );
 
         return $this->redirect($this->generateUrl($redirect));
+    }
+
+    public function adminAssignTeacherAction(Request $request, $courseid)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $pending_number = $em->getRepository('OTBackendBundle:Course')->getPendingNumber();
+
+        $teacher=$em->getRepository('OTBackendBundle:User')->findOneById($courseid);
+
+        $form = $this->createForm(new TeacherCourseType(), $teacher);
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+
+        }
+
+
+        return $this->render('OTBackendBundle:Course:admin_course_assign_teacher.html.twig',
+            [
+                'form'=>$form->createView(),
+                'pending_number'=>$pending_number,
+            ]);
     }
 }

@@ -38,7 +38,7 @@
 			<td>{{ course.description[:25] }}</td>
 			<td>{{ course.duration }}</td>
 			<td>{{ course.price }}</td>
-			<td><div class="btn-toolbar"><a class="btn-sm btn-default" title="{% trans %}Edit the course.{% endtrans %}" href='{{ path('admin_course_edit', { 'id': course.id }) }}'><i class="fa fa-edit"></i></a> <a class="btn-sm btn-default"><i class="fa fa-user" title="{% trans %}Assign the course to teachers. {% endtrans %}"></i></a> <a class="btn-sm btn-danger" href="{{ path('admin_course_change_status', {'status' : 'PENDING', 'courseid': course.id, 'redirect' : 'admin_course_list_all'}) }}" title="{% trans %}Inactivate the course. {% endtrans %}"><i class="fa fa-stop"></i></a></div></td>
+			<td><div class="btn-toolbar"><a class="btn-sm btn-default" title="{% trans %}Edit the course.{% endtrans %}" href='{{ path('admin_course_edit', { 'id': course.id }) }}'><i class="fa fa-edit"></i></a> <a class="btn-sm btn-default"  href='{{ path('admin_course_assign_teacher', { 'courseid': course.id }) }}'><i class="fa fa-user" title="{% trans %}Assign the course to teachers. {% endtrans %}"></i></a> <a class="btn-sm btn-danger" href="{{ path('admin_course_change_status', {'status' : 'PENDING', 'courseid': course.id, 'redirect' : 'admin_course_list_all'}) }}" title="{% trans %}Inactivate the course. {% endtrans %}"><i class="fa fa-stop"></i></a></div></td>
 
 		</tr>
 		{% endfor %}
