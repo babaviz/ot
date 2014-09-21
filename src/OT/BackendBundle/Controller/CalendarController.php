@@ -140,7 +140,7 @@ class CalendarController
     for ($d=0;$d<1008;$d+=144){
       array_push($result,$this->day_to_agenda(substr($strPlan,$d,144)));
     }
-    
+
     return $result;
   }
 
@@ -155,11 +155,18 @@ class CalendarController
       array_push($result,$this->day_to_agenda(substr($strPlan,($d+($dw-1)*144)%1008,144)));
     }
 
-    /*
-    for ($d=0;$d<1008;$d+=144){
-      array_push($result,$this->day_to_agenda(substr($strPlan,$d,144)));
-    }*/
     return $result;
+  }
+
+  public function override_rotate($strPlan, $start_date)
+  {
+    $dw = date( "w", strtotime($start_date));  //0 is Sunday through 6 is Sat
+    $dw = ($dw==0)?7:$dw; //1 is mon and 7 is sun
+    $dw--;//0 is mon (no move) and 6 is sun
+    //$dw = 7 - $dw; //7(0) is mon and 1 is sun
+
+    return substr($strPlan, 1008-$dw*144) . substr($strPlan, 0, (7-$dw)*144);
+
   }
 
   public function get_timezone_offset($remote_tz, $origin_tz = 'GMT') {
