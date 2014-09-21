@@ -162,7 +162,7 @@ class CalendarController
   {
     $dw = date( "w", strtotime($start_date));  //0 is Sunday through 6 is Sat
     $dw = ($dw==0)?7:$dw; //1 is mon and 7 is sun
-    $dw--;//0 is mon (no move) and 6 is sun
+    $dw-=2;//0 is mon (no move) and 6 is sun
     //$dw = 7 - $dw; //7(0) is mon and 1 is sun
 
     return substr($strPlan, 1008-$dw*144) . substr($strPlan, 0, (7-$dw)*144);

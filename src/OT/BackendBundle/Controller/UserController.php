@@ -82,6 +82,8 @@ class UserController extends Controller
     public function newAction()
     {
         $entity = new User();
+        $entity->setAccountBalance(0);
+        $entity->setCreateTime(new \Datetime (date('Y-m-d',time())));
         $form   = $this->createCreateForm($entity);
 
         return $this->render('OTBackendBundle:User:admin_user_new.html.twig', array(

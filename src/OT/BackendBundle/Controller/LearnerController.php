@@ -106,13 +106,13 @@ class LearnerController extends Controller
 
                 foreach ($query as $r){
                     $m10=$ot_calendar->time_diff_m10($r->getStartTime(),$r->getEndTime());
-                    $pos_start=$ot_calendar->time_diff_m10(new \Datetime($start_date),$r->getStartTime());
-                    $or_all=$ot_calendar->override_1008($or_all,$ot_calendar->create_override($pos_start,$m10));
-                    $dp.=$pos_start.'(pos_start)<br/>';
-                    $dp.=$or_all;
-                }
+                    $start_time=$r->getStartTime()->format('Y-m-d H:i:s');
+                    $start_time_c=date_create($start_time,new \Datetimezone('GMT'))->format('Y-m-d H:i:s');
+                    $start_time_c=date_create($start_time_c,new \Datetimezone($usertz));
 
-                //return new Response($dp.'<hr/>start '.$start_date_gmt.'<hr/>end '.$end_date_gmt);
+                    $pos_start=$ot_calendar->time_diff_m10(new \Datetime($start_date),$start_time_c);
+                    $or_all=$ot_calendar->override_1008($or_all,$ot_calendar->create_override($pos_start,$m10));
+                }
             }
 
         $entity=$ot_calendar->parse_weekplan($entity,$usertz);
