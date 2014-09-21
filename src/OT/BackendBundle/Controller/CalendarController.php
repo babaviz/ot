@@ -41,7 +41,7 @@ class CalendarController
     return $result;
   }
 
-  public function parse_weekplan(Weekplan $plan, $tz = 'GMT', $override=null)
+  public function parse_weekplan(Weekplan $plan, $tz = 'GMT')
   {
     //uncompress weekplan to timezoned string
     $workingPlan=$plan->getPlan();
@@ -56,13 +56,6 @@ class CalendarController
       $workingString=explode('*',$workingElement);
       $strPlan.=str_repeat($workingString[0],$workingString[1]);
     }
-
-    if ($override!==null){
-        //start override schedule by learner's schedule
-
-        return new Response('empty');//
-    }
-
 
     if ($offset!=0)
       $strPlan=substr($strPlan,$offset).substr($strPlan,0,$offset);
@@ -218,11 +211,15 @@ class CalendarController
     return $result;
   }
 
-  public function override_1008($string)
+  public function override_1008($str_old, $str_override)
   {
-    
+    for ($i=0;$i<1008;$i++){
+      if ($str_override[$i]=='B')
+        $str_old[$i]='B';
+    }
+    return $str_old;
   }
-  
+
   public function create_override($start_position,$length)
   {
     $r='';
@@ -234,9 +231,10 @@ class CalendarController
 
   public function time_diff_m10($time1, $time2)
   {
+      $d_diff=strval($time2->format('d')-$time1->format('d'));
       $h_diff=strval($time2->format('H')-$time1->format('H'));
       $m_diff=strval($time2->format('i')-$time1->format('i'));
-      return ($h_diff*60+$m_diff)/10;
+      return ($d_diff*1440+$h_diff*60+$m_diff)/10;
   }
 
 

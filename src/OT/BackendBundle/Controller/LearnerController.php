@@ -81,6 +81,8 @@ class LearnerController extends Controller
         $start_date_object=new \DateTime('now',new \DateTimezone('GMT'));
         $start_date=$start_date_object->format('Y-m-d 00:00:00');
 
+        $or_all=str_repeat('F', 1008);
+
         if ($start_date!==null){
                 //start override schedule by learner's schedule
                 //$em = $this->getDoctrine->getManager();
@@ -103,39 +105,39 @@ class LearnerController extends Controller
                       ->getQuery()->getResult();
 
                 $dp='<pre>';
-                foreach ($query as $r)
+                foreach ($query as $r){
                     $dp.=print_r($r->getStartTime());
                     $dp.=print_r($r->getEndTime());
                     $dp.=',';
+                }
                 
                 $dp.='</pre>';
+
+                
 
                 foreach ($query as $r){
                     $m10=$ot_calendar->time_diff_m10($r->getStartTime(),$r->getEndTime());
                     $dp.=$m10.'(m10)';
                     $pos_start=$ot_calendar->time_diff_m10(new \Datetime($start_date),$r->getStartTime());
-                    $or=$ot_calendar->create_override($pos_start,$m10);
+                    $or_all=$ot_calendar->override_1008($or_all,$ot_calendar->create_override($pos_start,$m10));
                     $dp.=$pos_start.'(pos_start)<br/>';
-                    $dp.=$or;
+                    $dp.=$or_all;
                 }
 
-                return new Response($dp.'<hr/>'.
-                                    $start_date_gmt.'<hr/>'.
-                                    $end_date_gmt
-                                    );
+                //return new Response($dp.'<hr/>start '.$start_date_gmt.'<hr/>end '.$end_date_gmt);
             }
+
+        $entity=$ot_calendar->parse_weekplan($entity,$usertz);
+        $entity=$ot_calendar->override_1008($entity,$or_all);
+
+        $entity=$ot_calendar->render_parsed_weekplan_learner($entity,date_create('now',new \DateTimezone('GMT'))->format('Y-m-d H:i:s'));
+
 
 
         return $this->render('OTBackendBundle:Learner:booking_choose_time.html.twig', 
             [
             'form_teacher'=>$teacher_form->createView(),
-            'entity'=>$ot_calendar->render_parsed_weekplan_learner(
-                            $ot_calendar->parse_weekplan(
-                                $entity,$usertz,
-                                date_create('now',new \DateTimezone('GMT'))->format('Y-m-d H:i:s'),
-                                2
-                            )
-                        ),
+            'entity'=>$entity,
             'day'=>$day
             ]
         );
