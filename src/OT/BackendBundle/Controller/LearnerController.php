@@ -113,8 +113,6 @@ class LearnerController extends Controller
                 
                 $dp.='</pre>';
 
-                
-
                 foreach ($query as $r){
                     $m10=$ot_calendar->time_diff_m10($r->getStartTime(),$r->getEndTime());
                     $dp.=$m10.'(m10)';
@@ -128,11 +126,8 @@ class LearnerController extends Controller
             }
 
         $entity=$ot_calendar->parse_weekplan($entity,$usertz);
-        $entity=$ot_calendar->override_1008($entity,$or_all);
-
         $entity=$ot_calendar->render_parsed_weekplan_learner($entity,date_create('now',new \DateTimezone('GMT'))->format('Y-m-d H:i:s'));
-
-
+        $entity=$ot_calendar->override_1008($entity,$or_all);
 
         return $this->render('OTBackendBundle:Learner:booking_choose_time.html.twig', 
             [

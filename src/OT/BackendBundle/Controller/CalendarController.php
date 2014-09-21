@@ -136,14 +136,16 @@ class CalendarController
   {
     //render parsed weekplan string to weekplan array
     $result=[];
+
     for ($d=0;$d<1008;$d+=144){
       array_push($result,$this->day_to_agenda(substr($strPlan,$d,144)));
     }
+    
     return $result;
   }
 
   public function render_parsed_weekplan_learner($strPlan, $start_date)
-  {
+  { 
     $result=[];
 
     $dw = date( "w", strtotime($start_date));  //0 is Sunday through 6 is Sat
