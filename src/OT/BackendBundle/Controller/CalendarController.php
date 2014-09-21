@@ -2,6 +2,7 @@
 
 namespace OT\BackendBundle\Controller;
 
+
 use OT\BackendBundle\Entity\Weekplan;
 
 
@@ -40,7 +41,7 @@ class CalendarController
     return $result;
   }
 
-  public function parse_weekplan(Weekplan $plan, $tz = 'GMT', $start_date=null, $teacher_id=null)
+  public function parse_weekplan(Weekplan $plan, $tz = 'GMT', $override=null)
   {
     //uncompress weekplan to timezoned string
     $workingPlan=$plan->getPlan();
@@ -56,19 +57,10 @@ class CalendarController
       $strPlan.=str_repeat($workingString[0],$workingString[1]);
     }
 
-    if ($start_date!==null){
-        //start override schedule
-        $em = $this->getDoctrine()->getManager();
+    if ($override!==null){
+        //start override schedule by learner's schedule
 
-        $start_date_gmt = new \DateTime ($start_date.' 00:00:00 '.$tz);
-
-          ///
-
-        $query = $em->createQuery("SELECT b FROM OTBackendBundle:BookedTime b
-                      WHERE b.date
-                      ")
-              ->setParameter('course_id',$course_id)
-              ->getResult();
+        return new Response('empty');//
     }
 
 
@@ -226,6 +218,26 @@ class CalendarController
     return $result;
   }
 
+  public function override_1008($string)
+  {
+    
+  }
+  
+  public function create_override($start_position,$length)
+  {
+    $r='';
+    $r.=str_repeat('F', $start_position);
+    $r.=str_repeat('B',$length);
+    $r.=str_repeat('F',1008-strlen($r));
+    return $r;
+  }
+
+  public function time_diff_m10($time1, $time2)
+  {
+      $h_diff=strval($time2->format('H')-$time1->format('H'));
+      $m_diff=strval($time2->format('i')-$time1->format('i'));
+      return ($h_diff*60+$m_diff)/10;
+  }
 
 
 /*

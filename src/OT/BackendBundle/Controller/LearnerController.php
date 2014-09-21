@@ -3,6 +3,8 @@
 namespace OT\BackendBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -76,14 +78,65 @@ class LearnerController extends Controller
         $em = $this->getDoctrine()->getManager();
         $entity=$em->getRepository('OTBackendBundle:Weekplan')->findOneByTeacher(2);
 
+        $start_date_object=new \DateTime('now',new \DateTimezone('GMT'));
+        $start_date=$start_date_object->format('Y-m-d 00:00:00');
+
+        if ($start_date!==null){
+                //start override schedule by learner's schedule
+                //$em = $this->getDoctrine->getManager();
+
+                $start_date_gmt = $start_date;
+                $end_date_gmt = date_add(new \DateTime($start_date_gmt,new \DateTimezone('GMT')), date_interval_create_from_date_string('7 days'))->format('Y-m-d H:i:s');
+
+                $query = $em->createQueryBuilder()
+                            ->select('b')
+                            ->from('OTBackendBundle:BookedTime','b')
+                            ->where('b.teacher=:teacher')
+                            ->andWhere('b.start_time >=:start_time')
+                            ->andWhere('b.end_time < :end_time')
+                            ->andWhere('b.status=:status')
+                            ->setParameters(['start_time'=>$start_date_gmt,
+                                            'end_time'=>$end_date_gmt,
+                                            'teacher'=>$em->getRepository('OTBackendBundle:User')->findOneById(2),
+                                            'status'=>'BOOKED'
+                                ])
+                      ->getQuery()->getResult();
+
+                $dp='<pre>';
+                foreach ($query as $r)
+                    $dp.=print_r($r->getStartTime());
+                    $dp.=print_r($r->getEndTime());
+                    $dp.=',';
+                
+                $dp.='</pre>';
+
+                foreach ($query as $r){
+                    $m10=$ot_calendar->time_diff_m10($r->getStartTime(),$r->getEndTime());
+                    $dp.=$m10.'(m10)';
+                    $pos_start=$ot_calendar->time_diff_m10(new \Datetime($start_date),$r->getStartTime());
+                    $or=$ot_calendar->create_override($pos_start,$m10);
+                    $dp.=$pos_start.'(pos_start)<br/>';
+                    $dp.=$or;
+                }
+
+                return new Response($dp.'<hr/>'.
+                                    $start_date_gmt.'<hr/>'.
+                                    $end_date_gmt
+                                    );
+            }
+
+
         return $this->render('OTBackendBundle:Learner:booking_choose_time.html.twig', 
             [
             'form_teacher'=>$teacher_form->createView(),
             'entity'=>$ot_calendar->render_parsed_weekplan_learner(
-                        $ot_calendar->parse_weekplan($entity,$usertz),
-                        date("Y-m-d H:i:s ").$usertz),
-            'day'=>$day,
-            //'message'=>$teacher_selected->get('Course')
+                            $ot_calendar->parse_weekplan(
+                                $entity,$usertz,
+                                date_create('now',new \DateTimezone('GMT'))->format('Y-m-d H:i:s'),
+                                2
+                            )
+                        ),
+            'day'=>$day
             ]
         );
     }
