@@ -78,26 +78,26 @@ Learner: 学生
 'Backend Entrance': '后台入口'
 'Transfer from a user to another user.': 从一位用户转账至另一位用户
 'Deposit to a user''s account.': 向用户存款
-'Withdraw from a user''s account.': '__Withdraw from a user''s account.'
-'Sales/Payment: directly deduct from a user''s account.': '__Sales/Payment: directly deduct from a user''s account.'
+'Withdraw from a user''s account.': 从用户账户取款
+'Sales/Payment: directly deduct from a user''s account.': 直接支付
 'Choose Type T to transfer money from a user to another user.': '__Choose Type T to transfer money from a user to another user.'
 'Choose Type D/W to add / deduct money from a user''s account.': '__Choose Type D/W to add / deduct money from a user''s account.'
 'User List': 用户列表
 'New User': 新用户
 'User ID': 用户ID
-'Switch to teacher role.': '__Switch to teacher role.'
-'Choose Your Course': '__Choose Your Course'
-'If you have any questions, please contact school365.': '__If you have any questions, please contact school365.'
-'Choose Your Teacher': '__Choose Your Teacher'
-'Choose a Time': '__Choose a Time'
-Weekday: __Weekday
-'Available Time': '__Available Time'
-Today: __Today
-Tomorrow: __Tomorrow
-'Start Learning': '__Start Learning'
-'Learning History(X)': '__Learning History(X)'
-'My Account': '__My Account'
-'Past Course': '__Past Course'
+'Switch to teacher role.': 切换到教师角色
+'Choose Your Course': 选择课程
+'If you have any questions, please contact school365.': 如您有任何问题，请联系school365。
+'Choose Your Teacher': 选择老师
+'Choose a Time': 选择一个上课时间
+Weekday: 日期
+'Available Time': 可用时间
+Today: 今天
+Tomorrow: 明天
+'Start Learning': 开始上课
+'Learning History(X)': 上课历史(未完成)
+'My Account': 我的账户
+'Past Course': 历史课程
 'Upcoming Course': '__Upcoming Course'
 Start: __Start
 End: __End
@@ -123,3 +123,5 @@ Sunday: __Sunday
 'Edit User': '__Edit User'
 Back: __Back
 'Create User': '__Create User'
+'Teachers approved to teach this course:': '__Teachers approved to teach this course:'
+'Allow teacher to teach the course:': '__Allow teacher to teach the course:'
