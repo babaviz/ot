@@ -75,6 +75,3 @@ swiftmailer:
     spool:     { type: memory }
 
 # Services
-services:
-    ot_calendar:
-        class:    OT\BackendBundle\Controller\CalendarController

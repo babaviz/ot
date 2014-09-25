@@ -89,24 +89,24 @@ class User implements UserInterface, \Serializable
     private $ReceivedTransactions;
 
     /**
-     * @ORM\OneToOne(targetEntity="Weekplan", mappedBy="teacher")
-     */
-    private $Weekplan;
-
-    /**
-     * @ORM\OneToMany(targetEntity="BookedTime", mappedBy="teacher")
-     */
-    private $TeachingBookedTimes;
-
-        /**
-     * @ORM\OneToMany(targetEntity="BookedTime", mappedBy="learner")
-     */
-    private $LearningBookedTimes;
-
-    /**
      * @ORM\ManyToMany(targetEntity="Course", mappedBy="teachers")
     */
     private $Courses;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Event", mappedBy="user_id")
+     */
+    private $events;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Event", mappedBy="teacher_id")
+     */
+    private $teaching_events;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Event", mappedBy="learner_id")
+     */
+    private $learning_events;
 
     /**
      * Constructor
@@ -114,7 +114,6 @@ class User implements UserInterface, \Serializable
     public function __construct()
     {
         $this->TransactionRecords = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->Weekplans = new \Doctrine\Common\Collections\ArrayCollection();
         $this->Courses = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -456,52 +455,6 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * Add Weekplans
-     *
-     * @param \OT\BackendBundle\Entity\Weekplan $weekplans
-     * @return User
-     */
-    public function addWeekplan(\OT\BackendBundle\Entity\Weekplan $weekplans)
-    {
-        $this->Weekplans[] = $weekplans;
-
-        return $this;
-    }
-
-    /**
-     * Remove Weekplans
-     *
-     * @param \OT\BackendBundle\Entity\Weekplan $weekplans
-     */
-    public function removeWeekplan(\OT\BackendBundle\Entity\Weekplan $weekplans)
-    {
-        $this->Weekplans->removeElement($weekplans);
-    }
-
-    /**
-     * Get Weekplans
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getWeekplans()
-    {
-        return $this->Weekplans;
-    }
-
-    /**
-     * Add BookedTimes
-     *
-     * @param \OT\BackendBundle\Entity\BookedTime $bookedTimes
-     * @return User
-     */
-    public function addBookedTime(\OT\BackendBundle\Entity\BookedTime $bookedTimes)
-    {
-        $this->BookedTimes[] = $bookedTimes;
-
-        return $this;
-    }
-
-    /**
      * Add SentTransactions
      *
      * @param \OT\BackendBundle\Entity\TransactionRecord $sentTransactions
@@ -566,96 +519,7 @@ class User implements UserInterface, \Serializable
     {
         return $this->ReceivedTransactions;
     }
-
-    /**
-     * Add TeachingBookedTimes
-     *
-     * @param \OT\BackendBundle\Entity\BookedTime $teachingBookedTimes
-     * @return User
-     */
-    public function addTeachingBookedTime(\OT\BackendBundle\Entity\BookedTime $teachingBookedTimes)
-    {
-        $this->TeachingBookedTimes[] = $teachingBookedTimes;
-
-        return $this;
-    }
-
-    /**
-     * Remove TeachingBookedTimes
-     *
-     * @param \OT\BackendBundle\Entity\BookedTime $teachingBookedTimes
-     */
-    public function removeTeachingBookedTime(\OT\BackendBundle\Entity\BookedTime $teachingBookedTimes)
-    {
-        $this->TeachingBookedTimes->removeElement($teachingBookedTimes);
-    }
-
-    /**
-     * Get TeachingBookedTimes
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getTeachingBookedTimes()
-    {
-        return $this->TeachingBookedTimes;
-    }
-
-    /**
-     * Add LearningBookedTimes
-     *
-     * @param \OT\BackendBundle\Entity\BookedTime $learningBookedTimes
-     * @return User
-     */
-    public function addLearningBookedTime(\OT\BackendBundle\Entity\BookedTime $learningBookedTimes)
-    {
-        $this->LearningBookedTimes[] = $learningBookedTimes;
-
-        return $this;
-    }
-
-    /**
-     * Remove LearningBookedTimes
-     *
-     * @param \OT\BackendBundle\Entity\BookedTime $learningBookedTimes
-     */
-    public function removeLearningBookedTime(\OT\BackendBundle\Entity\BookedTime $learningBookedTimes)
-    {
-        $this->LearningBookedTimes->removeElement($learningBookedTimes);
-    }
-
-    /**
-     * Get LearningBookedTimes
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getLearningBookedTimes()
-    {
-        return $this->LearningBookedTimes;
-    }
-
-    /**
-     * Set Weekplan
-     *
-     * @param \OT\BackendBundle\Entity\Weekplan $weekplan
-     * @return User
-     */
-    public function setWeekplan(\OT\BackendBundle\Entity\Weekplan $weekplan = null)
-    {
-        $this->Weekplan = $weekplan;
-
-        return $this;
-    }
-
-    /**
-     * Get Weekplan
-     *
-     * @return \OT\BackendBundle\Entity\Weekplan
-     */
-    public function getWeekplan()
-    {
-        return $this->Weekplan;
-    }
-
+    
     /**
      * Set skype
      *
@@ -733,5 +597,104 @@ class User implements UserInterface, \Serializable
     public function getCourses()
     {
         return $this->courses;
+    }
+
+    /**
+     * Add Events
+     *
+     * @param \OT\BackendBundle\Entity\Event $events
+     * @return User
+     */
+    public function addEvent(\OT\BackendBundle\Entity\Event $events)
+    {
+        $this->Events[] = $events;
+
+        return $this;
+    }
+
+    /**
+     * Remove Events
+     *
+     * @param \OT\BackendBundle\Entity\Event $events
+     */
+    public function removeEvent(\OT\BackendBundle\Entity\Event $events)
+    {
+        $this->Events->removeElement($events);
+    }
+
+    /**
+     * Get Events
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getEvents()
+    {
+        return $this->Events;
+    }
+
+    /**
+     * Add teaching_events
+     *
+     * @param \OT\BackendBundle\Entity\Event $teachingEvents
+     * @return User
+     */
+    public function addTeachingEvent(\OT\BackendBundle\Entity\Event $teachingEvents)
+    {
+        $this->teaching_events[] = $teachingEvents;
+
+        return $this;
+    }
+
+    /**
+     * Remove teaching_events
+     *
+     * @param \OT\BackendBundle\Entity\Event $teachingEvents
+     */
+    public function removeTeachingEvent(\OT\BackendBundle\Entity\Event $teachingEvents)
+    {
+        $this->teaching_events->removeElement($teachingEvents);
+    }
+
+    /**
+     * Get teaching_events
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTeachingEvents()
+    {
+        return $this->teaching_events;
+    }
+
+    /**
+     * Add learning_events
+     *
+     * @param \OT\BackendBundle\Entity\Event $learningEvents
+     * @return User
+     */
+    public function addLearningEvent(\OT\BackendBundle\Entity\Event $learningEvents)
+    {
+        $this->learning_events[] = $learningEvents;
+
+        return $this;
+    }
+
+    /**
+     * Remove learning_events
+     *
+     * @param \OT\BackendBundle\Entity\Event $learningEvents
+     */
+    public function removeLearningEvent(\OT\BackendBundle\Entity\Event $learningEvents)
+    {
+        $this->learning_events->removeElement($learningEvents);
+    }
+
+    /**
+     * Get learning_events
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getLearningEvents()
+    {
+        return $this->learning_events;
     }
 }

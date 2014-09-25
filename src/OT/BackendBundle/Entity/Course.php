@@ -48,11 +48,6 @@ class Course
     private $status;
 
     /**
-     * @ORM\OneToMany(targetEntity="BookedTime", mappedBy="Course")
-     */
-    private $BookedTimes;
-
-    /**
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="Courses")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      */
@@ -73,7 +68,6 @@ class Course
      */
     public function __construct()
     {
-        $this->BookedTimes = new \Doctrine\Common\Collections\ArrayCollection();
         $this->Users = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -223,39 +217,6 @@ class Course
     public function getStatus()
     {
         return $this->status;
-    }
-
-    /**
-     * Add BookedTimes
-     *
-     * @param \OT\BackendBundle\Entity\BookedTime $bookedTimes
-     * @return Course
-     */
-    public function addBookedTime(\OT\BackendBundle\Entity\BookedTime $bookedTimes)
-    {
-        $this->BookedTimes[] = $bookedTimes;
-
-        return $this;
-    }
-
-    /**
-     * Remove BookedTimes
-     *
-     * @param \OT\BackendBundle\Entity\BookedTime $bookedTimes
-     */
-    public function removeBookedTime(\OT\BackendBundle\Entity\BookedTime $bookedTimes)
-    {
-        $this->BookedTimes->removeElement($bookedTimes);
-    }
-
-    /**
-     * Get BookedTimes
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getBookedTimes()
-    {
-        return $this->BookedTimes;
     }
 
     /**

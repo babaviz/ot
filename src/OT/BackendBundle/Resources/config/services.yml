@@ -1,7 +1,11 @@
 parameters:
+    ot_backend.calendar.class: OT\BackendBundle\Controller\CalendarService
 #    ot_backend.example.class: OT\BackendBundle\Example
 
 services:
 #    ot_backend.example:
 #        class: %ot_backend.example.class%
 #        arguments: [@service_id, "plain_value", %parameter%]
+    ot_calendar_v2:
+        class: %ot_backend.calendar.class%
+        arguments: [ @doctrine.orm.entity_manager ]
