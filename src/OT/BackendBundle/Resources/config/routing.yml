@@ -18,18 +18,6 @@ OTBackendBundle_learner_bookedtime:
         resource: "@OTBackendBundle/Resources/config/routing/learner_bookedtime.yml"
         prefix:   /learner/bookedtime
 
-learner_booking_choose_teacher:
-    path:     /learner/booking/choose/teacher/
-    defaults: { _controller: OTBackendBundle:Learner:bookingChooseTeacher }
-
-learner_booking_choose_course:
-    path:     /learner/booking/choose/course/
-    defaults: { _controller: OTBackendBundle:Learner:bookingChooseCourse }
-
-learner_booking_choose_time:
-    path:     /learner/booking/choose/time/
-    defaults: { _controller: OTBackendBundle:BookedTime:learnerChooseTime }
-
 OTBackendBundle_teacher_weekplan:
         resource: "@OTBackendBundle/Resources/config/routing/teacher_weekplan.yml"
         prefix:   /teacher/weekplan
