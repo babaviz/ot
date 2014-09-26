@@ -21,12 +21,13 @@
                 <a href="{{ path('teacher_weekplan_list', {date_start: previous_week }) }}">{% trans %}Previous {% endtrans %}</a>
                  | 
                 {% if is_current_week == true %}<strong>{% endif %}
-                <a href="{{ path('teacher_weekplan_list', {date_start:'today'}) }}">{% trans %}The 7 days ahead{% endtrans %}</a>
+                <a href="{{ path('teacher_weekplan_list', {date_start:'today'}) }}">{% trans %}7 days coming{% endtrans %}</a>
                 {% if is_current_week == true %}</strong>{% endif %}
                  | 
                 <a href="{{ path('teacher_weekplan_list', {date_start: next_week }) }}">{% trans %}Next{% endtrans %}</a>
                 
             </div>
+
         </div>
 
         <table class="table table-condensed table-hover">
@@ -39,6 +40,18 @@
 
             </thead>
             <tbody>
+                <tr>
+                    <div class="pull-right">
+                        <form class="form" action="{{ url('teacher_weekplan_event_add') }}" method="post">
+                                <div>
+                                  <input size="20" type="text" value="" readonly class="date_start" id="date_start" name="date_start" placeholder="start time">
+                                  <input size="20" type="text" value="" readonly class="date_end" id="date_end" name="date_end" placeholder="end time">
+                                  <button class="btn btn-default btn-sm" type="submit">{% trans %}Add a plan{% endtrans %}</button>
+                                </div>
+                            </td>
+                        </form>
+                    </div>
+                </tr>
                 {% for event in response %}
                     <tr>
                         <td>{{ event.id }}</td>
@@ -52,24 +65,14 @@
                         </td>
                     </tr>
                 {% endfor %}
-                <tr class="info">
-                    <form class="form" action="{{ url('teacher_weekplan_event_add') }}" method="post">
-                        <td colspan=10>{% trans %}Add a span of free time{% endtrans %}
-                            <div>
-                              <input size="16" type="text" value="" readonly class="date_start" id="date_start" name=id="date_start">
-                              <input size="16" type="text" value="" readonly class="date_end" id="date_end" name="date_end">
-                              <input type="submit" value="{% trans %}Add{% endtrans %}"></div>
-                            </div>
-                        </td>
-                    </form>
-                </tr>
             </tbody>
         </table>
-    </div>
+
+    </div>    
 
     <script type="text/javascript">
-        $(".date_start").datetimepicker({format: 'mm-dd hh:ii', showMeridian: true, linkField:'date_end', linkFormat: 'mm-dd hh:ii', autoclose: true, todayBtn:true, startView:2});
-        $(".date_end").datetimepicker({format: 'mm-dd hh:ii', showMeridian: true, autoclose: true, startView:1});
+        $(".date_start").datetimepicker({format: 'yyyy-mm-dd hh:ii', showMeridian: true, linkField:'date_end', linkFormat: 'yyyy-mm-dd hh:ii', autoclose: true, todayBtn:true, startView:2 });
+        $(".date_end").datetimepicker({format: 'yyyy-mm-dd hh:ii', showMeridian: true, autoclose: true, startView:1});
     </script>
     
 {% endblock %}

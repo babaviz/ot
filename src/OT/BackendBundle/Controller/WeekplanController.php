@@ -51,6 +51,25 @@ class WeekplanController extends Controller
              ]);
     }
 
+    public function addAction(Request $request)
+    {
+        date_default_timezone_set("UTC");
+        $calendar = $this->get('ot_calendar_v2');
+        $userid=$this->get('security.context')->getToken()->getUser()->getId();
+
+        $start_string = $request->request->get('date_start');
+        $end_string = $request->request->get('date_end');
+
+        $start_string = $calendar->convert_time_string_to_another_timezone($start_string, 'Asia/Hong_Kong', 'UTC');
+        $end_string = $calendar->convert_time_string_to_another_timezone($end_string, 'Asia/Hong_Kong', 'UTC');
+
+        $calendar->create_or_update_event(null, "", $start_string, $end_string,
+                                 'FREE', $userid, $userid,null);
+
+        return $this->redirect($this->getRequest()->headers->get('referer'));
+
+    }
+
     public function deleteAction($event_id)
     {
         date_default_timezone_set("UTC");
@@ -80,8 +99,7 @@ class WeekplanController extends Controller
             $end->add(new \DateInterval('P1W'))->format('Y-m-d H:i:s'),
             $event->getStatus(),
             $event->getUserId()->getId(),
-            $event->getTeacherId()->getId(),
-            $event->getLearnerId()->getId()
+            $event->getTeacherId()->getId()
         );
 
         $this->get('session')->getFlashBag()->add(
