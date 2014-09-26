@@ -128,6 +128,20 @@ class Event
         return $this;
     }
 
+    public function getStringStart()
+    {
+        $start_string = new \DateTime('@'.$this->start);
+
+        return $start_string->format('Y-m-d H:i:s');
+    }
+
+    public function getStringEnd()
+    {
+        $end_string = new \DateTime('@'.$this->end);
+
+        return $end_string->format('Y-m-d H:i:s');
+    }
+
     /**
      * Get end
      *

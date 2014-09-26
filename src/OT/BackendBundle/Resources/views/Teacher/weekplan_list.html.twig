@@ -1,7 +1,7 @@
 {% extends '::two-col.html.twig' %}
 
 
-{% block title %}{% trans %}View Weekly Plan{% endtrans %}{% endblock %}
+{% block title %}{% trans %}View My Calendar{% endtrans %}{% endblock %}
 
 {% block sidebar %}
 {% include "OTBackendBundle:Teacher:sidebar.html.twig" %}
@@ -9,31 +9,67 @@
 
 {% block body %}
     
-    <p class="lead">{% trans %}My Calendar{% endtrans %}</p>
+    <p class="lead">{% trans %}My Weekly Calendar{% endtrans %}</p>
+    <p class="lead"><small>{% trans %}Claim when are you free to teach.{% endtrans %}</small></p>
 
-    <div class="row">
-
-        <div class="col-md-11">
-
-            <table class="table table-condensed table-hover">
-                <thead>
-                    <th>Start Time</th>
-                    <th>End Time</th>
-                </thead>
-                <tbody>
-                    {% for event in response %}
-                        <tr>
-                        <td>{{ event.start|date('Y-m-d H:i:s') }}</td>
-                        <td>{{ event.end|date('Y-m-d H:i:s') }}</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-
-
+    <div class="panel panel-info">
+        <div class="panel panel-heading">
+            {{ date_start|date('F jS','Asia/Hong_Kong') }}  --   
+            {{ date_end|date('F jS','Asia/Hong_Kong') }}
+            <div class="pull-right">
+                
+                <a href="{{ path('teacher_weekplan_list', {date_start: previous_week }) }}">{% trans %}Previous {% endtrans %}</a>
+                 | 
+                {% if is_current_week == true %}<strong>{% endif %}
+                <a href="{{ path('teacher_weekplan_list', {date_start:'today'}) }}">{% trans %}The 7 days ahead{% endtrans %}</a>
+                {% if is_current_week == true %}</strong>{% endif %}
+                 | 
+                <a href="{{ path('teacher_weekplan_list', {date_start: next_week }) }}">{% trans %}Next{% endtrans %}</a>
+                
+            </div>
         </div>
 
+        <table class="table table-condensed table-hover">
+            <thead>
+                <th>_ID_</th>
+                <th>{% trans %}Date{% endtrans %}</th>
+                <th>{% trans %}Start Time{% endtrans %}</th>
+                <th>{% trans %}End Time{% endtrans %}</th>
+                <th>{% trans %}Operation{% endtrans %}</th>
 
-    </div>{# row #}
+            </thead>
+            <tbody>
+                {% for event in response %}
+                    <tr>
+                        <td>{{ event.id }}</td>
+                        <td>{{ event.start|date('l, M jS', usertz) }}</td>
+                        <td>{{ event.start|date('H:i', usertz) }}</td>
+                        <td>{{ event.end|date('H:i', usertz) }}</td>
+                        <td>
+                            <a href="{{ path('teacher_weekplan_event_delete', {'event_id': event.id }) }}">Remove</a> |
+                            <a href="{{ path('teacher_weekplan_event_copy_to_next_week', {'event_id': event.id }) }}">Copy to next <tt>{{ event.start|date('l') }}</tt></a>
+                            
+                        </td>
+                    </tr>
+                {% endfor %}
+                <tr class="info">
+                    <form class="form" action="{{ url('teacher_weekplan_event_add') }}" method="post">
+                        <td colspan=10>{% trans %}Add a span of free time{% endtrans %}
+                            <div>
+                              <input size="16" type="text" value="" readonly class="date_start" id="date_start" name=id="date_start">
+                              <input size="16" type="text" value="" readonly class="date_end" id="date_end" name="date_end">
+                              <input type="submit" value="{% trans %}Add{% endtrans %}"></div>
+                            </div>
+                        </td>
+                    </form>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script type="text/javascript">
+        $(".date_start").datetimepicker({format: 'mm-dd hh:ii', showMeridian: true, linkField:'date_end', linkFormat: 'mm-dd hh:ii', autoclose: true, todayBtn:true, startView:2});
+        $(".date_end").datetimepicker({format: 'mm-dd hh:ii', showMeridian: true, autoclose: true, startView:1});
+    </script>
     
 {% endblock %}

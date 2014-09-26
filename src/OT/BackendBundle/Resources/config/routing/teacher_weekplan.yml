@@ -1,19 +1,28 @@
 teacher_weekplan_list:
-    path:     /list
+    path:     /list/{date_start}
     defaults: { _controller: "OTBackendBundle:Weekplan:list" }
 
-teacher_weekplan_create:
-    path:     /create
-    defaults: { _controller: "OTBackendBundle:Weekplan:create" }
-    requirements: { _method: post }
+teacher_weekplan_event_delete:
+    path:     /list/{event_id}/delete
+    defaults: { _controller: "OTBackendBundle:Weekplan:delete" }
 
-teacher_weekplan_edit:
-    path:     /edit
-    defaults: { _controller: "OTBackendBundle:Weekplan:edit" }
+teacher_weekplan_event_add:
+    path:     /add
+    defaults: { _controller: "OTBackendBundle:Weekplan:add" }
 
-teacher_weekplan_clear_day:
-    path:     /{weekday}/clearday
-    defaults: { _controller: "OTBackendBundle:Weekplan:clearday"}
+teacher_weekplan_event_copy_to_next_week:
+    path:     /{event_id}/duplicate
+    defaults: { _controller: "OTBackendBundle:Weekplan:copyToNextWeek" }
+
+#
+#teacher_weekplan_create:
+#    path:     /create
+#    defaults: { _controller: "OTBackendBundle:Weekplan:create" }
+#    requirements: { _method: post }
+
+#teacher_weekplan_edit:
+#    path:     /edit
+#    defaults: { _controller: "OTBackendBundle:Weekplan:edit" }
 
 #
 #teacher_weekplan_show:

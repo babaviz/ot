@@ -121,4 +121,15 @@ class CalendarService
   	return $query->getQuery()->getResult();
   }
 
+  function delete_events($event_id=null, $start_string=null, $end_string=null,
+                   $status=null, $user_id=null,
+                   $teacher_id=null, $learner_id=null)
+  {
+    $events = $this->fetch_events($event_id, $start_string, $end_string, $status, $user_id, $teacher_id, $learner_id);
+    foreach ($events as $event){
+      $this->em->remove($event);
+    }
+    $this->em->flush();
+  }
+
 }

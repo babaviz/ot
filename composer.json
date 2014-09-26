@@ -20,7 +20,8 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "twitter/bootstrap": "3.2.*",
         "components/jquery": "2.1.*",
-        "fontawesome/fontawesome": "4.2.0"
+        "fontawesome/fontawesome": "4.2.0",
+        "smalot/bootstrap-datetimepicker": "2.3.1"
     },
     "repositories": [
         {
@@ -46,6 +47,17 @@
             "version": "4.2.0",
             "dist": {
               "url": "http://fortawesome.github.io/Font-Awesome/assets/font-awesome-4.2.0.zip",
+              "type": "zip"
+            }
+          }
+        },
+        {
+          "type": "package",
+          "package": {
+            "name": "smalot/bootstrap-datetimepicker",
+            "version": "2.3.1",
+            "dist": {
+              "url": "https://github.com/smalot/bootstrap-datetimepicker/archive/2.3.1.zip",
               "type": "zip"
             }
           }

@@ -2,7 +2,7 @@
 	<a class="list-group-item" href="{{ path('teacher_dashboard') }}"><i class="fa fa-dashboard fa-fw"></i> {% trans %}Dashboard{% endtrans %}</a>
 	<a class="list-group-item" href="{{ path('teacher_bookedtime_upcoming_list') }}"><i class="fa fa-mortar-board fa-fw"></i> {% trans %}My Course{% endtrans %}</a>
 	<a class="list-group-item" href="{{ path('teacher_account_transactionrecord_list') }}"><i class="fa fa-credit-card fa-fw"></i> {% trans %}My Account{% endtrans %}</a>
-	<a class="list-group-item" href="{{ path('teacher_weekplan_list') }}"><i class="fa fa-calendar fa-fw"></i> {% trans %}My Weekly Plan{% endtrans %}</a>
+	<a class="list-group-item" href="{{ path('teacher_weekplan_list',{date_start:'today'}) }}"><i class="fa fa-calendar fa-fw"></i> {% trans %}My Calendar{% endtrans %}</a>
 
 	{#}
 	<a class="list-group-item" href="{{ path('admin_user_list') }}"><i class="fa fa-user fa-fw"></i> {% trans %}User Mgt.{% endtrans %}</a>
