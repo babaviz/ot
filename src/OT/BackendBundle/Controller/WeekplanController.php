@@ -38,7 +38,7 @@ class WeekplanController extends Controller
         $previous_week = clone $date_start;
         $previous_week->sub(new \DateInterval('P1W'));
 
-        $response = $calendar->fetch_events(null,$date_start->format('Y-m-d H:i:s'),$date_end->format('Y-m-d H:i:s'));
+        $response = $calendar->fetch_events(null,$date_start->format('Y-m-d H:i:s'),$date_end->format('Y-m-d H:i:s'),'FREE',$userid);
 
         return $this->render('OTBackendBundle:Teacher:weekplan_list.html.twig',
         	['response'=>$response,
