@@ -32,7 +32,7 @@
 
         <table class="table table-condensed table-hover">
             <thead>
-                <th>_ID_</th>
+                {#<th>_ID_</th>#}
                 <th>{% trans %}Date{% endtrans %}</th>
                 <th>{% trans %}Start Time{% endtrans %}</th>
                 <th>{% trans %}End Time{% endtrans %}</th>
@@ -54,7 +54,7 @@
                 </tr>
                 {% for event in response %}
                     <tr>
-                        <td>{{ event.id }}</td>
+                        {#<td>{{ event.id }}</td>#}
                         <td>{{ event.start|date('l, M jS', usertz) }}</td>
                         <td>{{ event.start|date('H:i', usertz) }}</td>
                         <td>{{ event.end|date('H:i', usertz) }}</td>

@@ -46,6 +46,10 @@ learner_account_transactionrecord_list:
     path:     /learner/account/transactionrecord/list
     defaults: { _controller: OTBackendBundle:TransactionRecord:learnerTransactionRecordList }
 
+learner_weekplan_course_select:
+    path:     /learner/weekplan/course_select
+    defaults: { _controller: OTBackendBundle:Weekplan:learnerCourseSelect }
+
 admin_account_transfer:
     path:     /admin/account/transfer
     defaults: { _controller: OTBackendBundle:TransactionRecord:adminAccountTransfer }

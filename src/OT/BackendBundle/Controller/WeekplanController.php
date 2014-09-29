@@ -110,4 +110,57 @@ class WeekplanController extends Controller
         return $this->redirect($this->getRequest()->headers->get('referer'));
 
     }
+
+    public function learnerCourseSelectAction(Request $request)
+    {
+
+        $course_selected = $request->request->get('form')['course'];
+        $teacher_selected = $request->request->get('form')['teacher'];
+
+        $form = $this->createFormBuilder()
+            //->setMethod('GET')
+            ->add('course', 'entity', ['class'=>'OTBackendBundle:Course',
+                                        'property'=>'name',
+                                        'empty_value'=>'',
+                                        'data'=>($course_selected=='')?'0':$this->getDoctrine()->getManager()->getReference("OTBackendBundle:Course", $course_selected),
+                                        'query_builder'=> function($er) {
+                                                                return $this->getDoctrine()
+                                                                ->getManager()
+                                                                ->createQueryBuilder()
+                                                                ->select('c')
+                                                                ->from('OTBackendBundle:Course','c')
+                                                                ->where('c.status=:status')
+                                                                ->setParameter('status','ACTIVE');
+                                                        },
+                                        'attr'=>['onclick'=>'this.form.submit();'],
+                                        ]
+                    )
+            ->add('teacher', 'entity', ['class'=>'OTBackendBundle:User',
+                                        'property'=>'name',
+                                        'empty_value'=>'',
+                                        'data'=>($teacher_selected=='')?'0':$this->getDoctrine()->getManager()->getReference("OTBackendBundle:User", $teacher_selected),
+                                        'query_builder'=> function($er) {
+                                                                return $this->getDoctrine()
+                                                                ->getManager()
+                                                                ->createQueryBuilder()
+                                                                ->select('u')
+                                                                ->from('OTBackendBundle:User','u')
+                                                                ->where('u.role=:role')
+                                                                ->setParameter('role','ROLE_TEACHER');
+                                                        },
+                                        'attr'=>['onclick'=>'this.form.submit();'],
+                                        ]
+                    )
+            //->add('view','submit')
+            ->getForm();
+
+        if ($course_selected!='' && $teacher_selected!=''){
+            
+        }
+
+        return $this->render('OTBackendBundle:Learner:course_selection.html.twig',
+            [
+             'form'=>$form->createView(),
+             ]);
+    }
 }
