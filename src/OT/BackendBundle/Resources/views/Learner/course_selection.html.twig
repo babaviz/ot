@@ -15,6 +15,10 @@
 
 	{{ form(form) }}
 
+	{% if weekplan is defined %}
+		<p class="lead">Choose a time to book:</p>
+		{{ (weekplan) }}
+	{% endif %}
 
 	</div>
 	</div>

@@ -154,13 +154,27 @@ class WeekplanController extends Controller
             //->add('view','submit')
             ->getForm();
 
+        $weekplan = null;
+
         if ($course_selected!='' && $teacher_selected!=''){
-            
+            date_default_timezone_set("UTC");
+            $calendar = $this->get('ot_calendar_v2');
+            $userid=$this->get('security.context')->getToken()->getUser()->getId();
+            $is_current_week = true;
+            $date_start = 'today';
+            $date_start = new \Datetime($date_start, new \Datetimezone('Asia/Hong_Kong'));
+            $date_end = clone $date_start;
+            $date_end->add(new \DateInterval('P1W'));
+            $previous_week = clone $date_start;
+            $previous_week->sub(new \DateInterval('P1W'));
+            $weekplan = $calendar->fetch_events(null,$date_start->format('Y-m-d H:i:s'),$date_end->format('Y-m-d H:i:s'),'FREE', null, $teacher_selected);
+
         }
 
         return $this->render('OTBackendBundle:Learner:course_selection.html.twig',
             [
              'form'=>$form->createView(),
+             'weekplan'=>var_dump($weekplan),
              ]);
     }
 }
