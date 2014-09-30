@@ -15,9 +15,70 @@
 
 	{{ form(form) }}
 
-	{% if weekplan is defined %}
+	{% if response is defined %}
 		<p class="lead">Choose a time to book:</p>
-		{{ (weekplan) }}
+		    <div class="panel panel-info">
+		        <div class="panel panel-heading">
+		            {{ date_start|date('F jS','Asia/Hong_Kong') }}  --   
+		            {{ date_end|date('F jS','Asia/Hong_Kong') }}
+		            <div class="pull-right">
+		                
+		                <a href="{{ path('teacher_weekplan_list', {date_start: previous_week }) }}">{% trans %}Previous {% endtrans %}</a>
+		                 | 
+		                {% if is_current_week == true %}<strong>{% endif %}
+		                <a href="{{ path('teacher_weekplan_list', {date_start:'today'}) }}">{% trans %}7 days coming{% endtrans %}</a>
+		                {% if is_current_week == true %}</strong>{% endif %}
+		                 | 
+		                <a href="{{ path('teacher_weekplan_list', {date_start: next_week }) }}">{% trans %}Next{% endtrans %}</a>
+		                
+		            </div>
+
+		        </div>
+
+		        <table class="table table-condensed table-hover">
+		            <thead>
+		                {#<th>_ID_</th>#}
+		                <th>{% trans %}Date{% endtrans %}</th>
+		                <th>{% trans %}Start Time{% endtrans %}</th>
+		                <th>{% trans %}End Time{% endtrans %}</th>
+		                <th>{% trans %}Operation{% endtrans %}</th>
+
+		            </thead>
+		            <tbody>
+		                <tr>
+		                    <div class="pull-right">
+		                        <form class="form" action="{{ url('teacher_weekplan_event_add') }}" method="post">
+		                                <div>
+		                                  <input size="20" type="text" value="" readonly class="date_start" id="date_start" name="date_start" placeholder="start time">
+		                                  <input size="20" type="text" value="" readonly class="date_end" id="date_end" name="date_end" placeholder="end time">
+		                                  <button class="btn btn-default btn-sm" type="submit">{% trans %}Add a plan{% endtrans %}</button>
+		                                </div>
+		                            </td>
+		                        </form>
+		                    </div>
+		                </tr>
+		                {% for event in response %}
+		                    <tr>
+		                        {#<td>{{ event.id }}</td>#}
+		                        <td>{{ event.start|date('l, M jS', usertz) }}</td>
+		                        <td>{{ event.start|date('H:i', usertz) }}</td>
+		                        <td>{{ event.end|date('H:i', usertz) }}</td>
+		                        <td>
+		                            <a href="{{ path('teacher_weekplan_event_delete', {'event_id': event.id }) }}">Remove</a> |
+		                            <a href="{{ path('teacher_weekplan_event_copy_to_next_week', {'event_id': event.id }) }}">Copy to next <tt>{{ event.start|date('l') }}</tt></a>
+		                            
+		                        </td>
+		                    </tr>
+		                {% endfor %}
+		            </tbody>
+		        </table>
+
+		    </div>    
+
+		    <script type="text/javascript">
+		        $(".date_start").datetimepicker({format: 'yyyy-mm-dd hh:ii', showMeridian: true, linkField:'date_end', linkFormat: 'yyyy-mm-dd hh:ii', autoclose: true, todayBtn:true, startView:2 });
+		        $(".date_end").datetimepicker({format: 'yyyy-mm-dd hh:ii', showMeridian: true, autoclose: true, startView:1});
+		    </script>
 	{% endif %}
 
 	</div>

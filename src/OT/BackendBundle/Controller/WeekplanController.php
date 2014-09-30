@@ -154,7 +154,9 @@ class WeekplanController extends Controller
             //->add('view','submit')
             ->getForm();
 
-        $weekplan = null;
+        $weekplan = null; $date_start=null; $date_end=null; 
+        $is_current_week=null; $previous_week=null;
+
 
         if ($course_selected!='' && $teacher_selected!=''){
             date_default_timezone_set("UTC");
@@ -169,12 +171,23 @@ class WeekplanController extends Controller
             $previous_week->sub(new \DateInterval('P1W'));
             $weekplan = $calendar->fetch_events(null,$date_start->format('Y-m-d H:i:s'),$date_end->format('Y-m-d H:i:s'),'FREE', null, $teacher_selected);
 
+            return $this->render('OTBackendBundle:Learner:course_selection.html.twig',
+            [
+             'form'=>$form->createView(),
+             'response'=>$weekplan,
+             'usertz'=>'Asia/Hong_Kong',
+             'date_start'=>$date_start,
+             'date_end'=>$date_end,
+             'previous_week'=>$previous_week->format('Y-m-d H:i:s'),
+             'next_week'=>$date_end->format('Y-m-d H:i:s'),
+             'is_current_week'=>$is_current_week,
+             ]);
+
         }
 
         return $this->render('OTBackendBundle:Learner:course_selection.html.twig',
             [
              'form'=>$form->createView(),
-             'weekplan'=>var_dump($weekplan),
              ]);
     }
 }
