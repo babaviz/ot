@@ -50,6 +50,10 @@ learner_weekplan_course_select:
     path:     /learner/weekplan/course_select
     defaults: { _controller: OTBackendBundle:Weekplan:learnerCourseSelect }
 
+learner_weekplan_time_select:
+    path:     /learner/weekplan/time_select/{course_id}/{event_id}
+    defaults: { _controller: OTBackendBundle:Weekplan:learnerTimeSelect }
+
 admin_account_transfer:
     path:     /admin/account/transfer
     defaults: { _controller: OTBackendBundle:TransactionRecord:adminAccountTransfer }

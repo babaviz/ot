@@ -1,0 +1,36 @@
+{% extends "::two-col.html.twig" %}
+
+{% block title %}{% trans %}Choose Your Course{% endtrans %}{% endblock %}
+
+{% block sidebar %}
+{% include "OTBackendBundle:Learner:sidebar.html.twig" %}
+{% endblock %}
+
+{% block body %}
+	<div class="panel panel-default">
+	{#<div class="panel-heading">{% trans %}Dashboard{% endtrans %}</div>#}
+	<div class="panel-body">
+
+		<a class="btn btn-default pull-right" href="javascript:history.back()">{% trans %}Go Back{% endtrans %}</a>
+		<p class="lead">{% trans %}Book a Time{% endtrans %}<p>
+		<p>{% trans %}Taught by{% endtrans %}<strong> {{ teacher.name }}</strong> 
+		{% trans %}for the course {% endtrans %} <strong>{{ course.name }}</strong>, {% trans %}lasting{% endtrans %}<strong> {{ course.duration }} </strong>{% trans %}minutes{% endtrans %},
+		{% trans %}from{% endtrans %} <strong>{{ event.start|date('l H:m', usertz) }} </strong>{% trans %}to{% endtrans %}<strong> {{ event.end|date('l H:m',usertz) }}</strong>.</p>
+
+		<p>Avoid booking the following time span(s),</p>
+		<ul>
+		<li>XX:XX -- XX:XX</li>
+		</ul>
+		
+		<hr />
+		<p class="lead">{% trans %}When do you want the course begin{% endtrans %}</p>
+		<input type="number"></input>
+		<hr />
+		<a class="btn btn-primary" href="javascript:history.back()">{% trans %}Make this reservation{% endtrans %}</a>
+
+	</div>
+	</div>
+
+<p class="help-block">{% trans %}If you have any questions, please contact school365.{% endtrans %}</p>
+
+{% endblock %}

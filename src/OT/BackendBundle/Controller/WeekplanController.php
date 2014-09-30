@@ -27,10 +27,11 @@ class WeekplanController extends Controller
         $calendar = $this->get('ot_calendar_v2');
         //$calendar->create_or_update_event(null,'1','2014-09-29 05:00','2014-09-29 07:00','status',1,3,2);
         $userid=$this->get('security.context')->getToken()->getUser()->getId();
+        $usertz=$this->getDoctrine()->getRepository('OTBackendBundle:User')->findOneById($userid)->getTimezone();
 
         $is_current_week = ($date_start===null || $date_start=='today')?true:false;
 
-        $date_start = new \Datetime($date_start, new \Datetimezone('Asia/Hong_Kong'));
+        $date_start = new \Datetime($date_start, new \Datetimezone($usertz));
 
         $date_end = clone $date_start;
         $date_end->add(new \DateInterval('P1W'));
@@ -42,7 +43,7 @@ class WeekplanController extends Controller
 
         return $this->render('OTBackendBundle:Teacher:weekplan_list.html.twig',
         	['response'=>$response,
-             'usertz'=>'Asia/Hong_Kong',
+             'usertz'=>$usertz,
              'date_start'=>$date_start,
              'date_end'=>$date_end,
              'previous_week'=>$previous_week->format('Y-m-d H:i:s'),
@@ -56,12 +57,13 @@ class WeekplanController extends Controller
         date_default_timezone_set("UTC");
         $calendar = $this->get('ot_calendar_v2');
         $userid=$this->get('security.context')->getToken()->getUser()->getId();
+        $usertz=$this->getDoctrine()->getRepository('OTBackendBundle:User')->findOneById($userid)->getTimezone();
 
         $start_string = $request->request->get('date_start');
         $end_string = $request->request->get('date_end');
 
-        $start_string = $calendar->convert_time_string_to_another_timezone($start_string, 'Asia/Hong_Kong', 'UTC');
-        $end_string = $calendar->convert_time_string_to_another_timezone($end_string, 'Asia/Hong_Kong', 'UTC');
+        $start_string = $calendar->convert_time_string_to_another_timezone($start_string, $usertz, 'UTC');
+        $end_string = $calendar->convert_time_string_to_another_timezone($end_string, $usertz, 'UTC');
 
         $calendar->create_or_update_event(null, "", $start_string, $end_string,
                                  'FREE', $userid, $userid,null);
@@ -111,7 +113,7 @@ class WeekplanController extends Controller
 
     }
 
-    public function learnerCourseSelectAction(Request $request)
+    public function learnerCourseSelectAction(Request $request, $date_start = null)
     {
 
         $course_selected = $request->request->get('form')['course'];
@@ -162,25 +164,28 @@ class WeekplanController extends Controller
             date_default_timezone_set("UTC");
             $calendar = $this->get('ot_calendar_v2');
             $userid=$this->get('security.context')->getToken()->getUser()->getId();
+            $usertz=$this->getDoctrine()->getRepository('OTBackendBundle:User')->findOneById($userid)->getTimezone();
             $is_current_week = true;
             $date_start = 'today';
             $date_start = new \Datetime($date_start, new \Datetimezone('Asia/Hong_Kong'));
+            $date_start->add(new \DateInterval('P1D'));
             $date_end = clone $date_start;
-            $date_end->add(new \DateInterval('P1W'));
+            $date_end->add(new \DateInterval('P2W'));
             $previous_week = clone $date_start;
-            $previous_week->sub(new \DateInterval('P1W'));
+            $previous_week->sub(new \DateInterval('P2W'));
             $weekplan = $calendar->fetch_events(null,$date_start->format('Y-m-d H:i:s'),$date_end->format('Y-m-d H:i:s'),'FREE', null, $teacher_selected);
 
             return $this->render('OTBackendBundle:Learner:course_selection.html.twig',
             [
              'form'=>$form->createView(),
              'response'=>$weekplan,
-             'usertz'=>'Asia/Hong_Kong',
+             'usertz'=>$usertz,
              'date_start'=>$date_start,
              'date_end'=>$date_end,
              'previous_week'=>$previous_week->format('Y-m-d H:i:s'),
              'next_week'=>$date_end->format('Y-m-d H:i:s'),
              'is_current_week'=>$is_current_week,
+             'course_id'=>$course_selected,
              ]);
 
         }
@@ -189,5 +194,22 @@ class WeekplanController extends Controller
             [
              'form'=>$form->createView(),
              ]);
+    }
+
+    public function learnerTimeSelectAction($event_id, $course_id)
+    {
+        $event=$this->getDoctrine()->getRepository('OTBackendBundle:Event')->findOneById($event_id);
+        $teacher=$event->getTeacherId();
+        $userid=$this->get('security.context')->getToken()->getUser()->getId();
+        $usertz=$this->getDoctrine()->getRepository('OTBackendBundle:User')->findOneById($userid)->getTimezone();
+        $course=$this->getDoctrine()->getRepository('OTBackendBundle:Course')->findOneById($course_id);
+        return $this->render('OTBackendBundle:Learner:time_selection.html.twig',
+            ['event'=>$event,
+             'teacher'=>$teacher,
+             'course'=>$course,
+             'userid'=>$userid,
+             'usertz'=>$usertz,
+            ]
+            );
     }
 }

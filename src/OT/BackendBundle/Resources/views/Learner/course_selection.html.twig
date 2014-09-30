@@ -23,13 +23,11 @@
 		            {{ date_end|date('F jS','Asia/Hong_Kong') }}
 		            <div class="pull-right">
 		                
-		                <a href="{{ path('teacher_weekplan_list', {date_start: previous_week }) }}">{% trans %}Previous {% endtrans %}</a>
-		                 | 
-		                {% if is_current_week == true %}<strong>{% endif %}
-		                <a href="{{ path('teacher_weekplan_list', {date_start:'today'}) }}">{% trans %}7 days coming{% endtrans %}</a>
-		                {% if is_current_week == true %}</strong>{% endif %}
-		                 | 
-		                <a href="{{ path('teacher_weekplan_list', {date_start: next_week }) }}">{% trans %}Next{% endtrans %}</a>
+		                {#<a href="{{ path('learner_weekplan_course_select', {date_start: previous_week }) }}">{% trans %}Previous {% endtrans %}</a>
+		                 | #}
+		                ({% trans %}Coming two weeks from tomorrow{% endtrans %})
+		                {#} | 
+		                <a href="{{ path('learner_weekplan_course_select', {date_start: next_week }) }}">{% trans %}Next{% endtrans %}</a>#}
 		                
 		            </div>
 
@@ -45,28 +43,26 @@
 
 		            </thead>
 		            <tbody>
-		                <tr>
+		                {#<tr>
 		                    <div class="pull-right">
 		                        <form class="form" action="{{ url('teacher_weekplan_event_add') }}" method="post">
 		                                <div>
 		                                  <input size="20" type="text" value="" readonly class="date_start" id="date_start" name="date_start" placeholder="start time">
 		                                  <input size="20" type="text" value="" readonly class="date_end" id="date_end" name="date_end" placeholder="end time">
-		                                  <button class="btn btn-default btn-sm" type="submit">{% trans %}Add a plan{% endtrans %}</button>
+		                                  <button class="btn btn-default btn-sm" type="submit">{% trans %}Book{% endtrans %}</button>
 		                                </div>
 		                            </td>
 		                        </form>
 		                    </div>
-		                </tr>
+		                </tr>#}
 		                {% for event in response %}
 		                    <tr>
 		                        {#<td>{{ event.id }}</td>#}
 		                        <td>{{ event.start|date('l, M jS', usertz) }}</td>
-		                        <td>{{ event.start|date('H:i', usertz) }}</td>
-		                        <td>{{ event.end|date('H:i', usertz) }}</td>
+		                        <td>{{ event.start|date('D H:i', usertz) }}</td>
+		                        <td>{{ event.end|date('D H:i', usertz) }}</td>
 		                        <td>
-		                            <a href="{{ path('teacher_weekplan_event_delete', {'event_id': event.id }) }}">Remove</a> |
-		                            <a href="{{ path('teacher_weekplan_event_copy_to_next_week', {'event_id': event.id }) }}">Copy to next <tt>{{ event.start|date('l') }}</tt></a>
-		                            
+		                            <a href="{{ path('learner_weekplan_time_select', {'event_id': event.id, 'course_id': course_id }) }}">Choose</a>
 		                        </td>
 		                    </tr>
 		                {% endfor %}
