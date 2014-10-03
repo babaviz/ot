@@ -54,6 +54,10 @@ learner_weekplan_time_select:
     path:     /learner/weekplan/time_select/{course_id}/{event_id}
     defaults: { _controller: OTBackendBundle:Weekplan:learnerTimeSelect }
 
+learner_weekplan_time_select_finish:
+    path:     /learner/weekplan/time_select_finish/
+    defaults: { _controller: OTBackendBundle:Weekplan:learnerTimeSelectFinish}
+
 admin_account_transfer:
     path:     /admin/account/transfer
     defaults: { _controller: OTBackendBundle:TransactionRecord:adminAccountTransfer }

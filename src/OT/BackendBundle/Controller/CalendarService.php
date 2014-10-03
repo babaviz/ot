@@ -15,10 +15,10 @@ class CalendarService
     $this->em = $entityManager;
   }
   
-  function convert_time_string_to_another_timezone($time_string, $tz_from_string, $tz_to_string)
+  function convert_time_string_to_another_timezone($time_string, $tz_from_string, $tz_to_string, $format="Y-m-d H:i:s")
   {
   	return date_create($time_string, new \DateTimeZone($tz_from_string))
-		->setTimezone(new \DateTimeZone($tz_to_string))->format("Y-m-d H:i:s");
+		->setTimezone(new \DateTimeZone($tz_to_string))->format($format);
   }
 
   function convert_time_string_to_timestamp_bigint($time_string)

@@ -196,19 +196,78 @@ class WeekplanController extends Controller
              ]);
     }
 
+    public function learnerTimeSelectFinishAction()
+    {
+        $request = $this->getRequest();
+
+        date_default_timezone_set("UTC");
+        $calendar = $this->get('ot_calendar_v2');
+        $time_selected = intval($request->request->get('form')['time_selected']);
+        $userid=$this->get('security.context')->getToken()->getUser()->getId();
+        $event_id = $request->request->get('form')['event_id'];
+        $course_id = $request->request->get('form')['course_id'];
+        $course=$this->getDoctrine()->getRepository('OTBackendBundle:Course')->findOneById($course_id);
+        $event=$this->getDoctrine()->getRepository('OTBackendBundle:Event')->findOneById($event_id);
+        $teacher_id = $event->getTeacherId();
+        $teacher_name=$this->getDoctrine()->getRepository('OTBackendBundle:User')->findOneById($teacher_id)->getName();
+        $learner_name=$this->getDoctrine()->getRepository('OTBackendBundle:User')->findOneById($userid)->getName();
+
+        $calendar->create_or_update_event(null,
+                                         $teacher_name . ' - ' . $learner_name . ': ' . $course->getName() . ' - ' . $course->getDuration() . 'mins',
+                                         gmdate('r', $time_selected),
+                                         gmdate('r', $time_selected),
+                                         'BOOKED',
+                                         $userid,
+                                         $teacher_id,
+                                         $userid);
+
+        return new Response($time_selected.','.$event_id.','.$course_id);
+        
+    }
+
     public function learnerTimeSelectAction($event_id, $course_id)
     {
+        date_default_timezone_set("UTC");
+        $calendar = $this->get('ot_calendar_v2');
+
         $event=$this->getDoctrine()->getRepository('OTBackendBundle:Event')->findOneById($event_id);
         $teacher=$event->getTeacherId();
         $userid=$this->get('security.context')->getToken()->getUser()->getId();
         $usertz=$this->getDoctrine()->getRepository('OTBackendBundle:User')->findOneById($userid)->getTimezone();
         $course=$this->getDoctrine()->getRepository('OTBackendBundle:Course')->findOneById($course_id);
+
+        $start = $event->getStart();
+        $end = $event->getEnd();
+
+        $bookedtime=$calendar->fetch_events(null, $start, $end,
+                                 $status='BOOKED', null ,
+                                 $teacher, null);
+
+        for ($i=$start;$i<=$end-$course->getDuration()*60;$i+=600){
+            $timespans[strval($i)] = $calendar->convert_time_string_to_another_timezone(gmdate('r',strval($i)), 'GMT', $usertz, 'D, m-d, H:i');
+        }
+
+        $timespans=$this->createFormBuilder()
+         ->setAction($this->generateUrl('learner_weekplan_time_select_finish'))
+         ->add('time_selected', 'choice',
+                [
+                    'choices'=>$timespans,
+                    'label'=>' ',
+                ]
+               )
+         ->add('event_id','hidden',['data'=>$event_id])
+         ->add('course_id','hidden',['data'=>$course_id])
+         ->add('submit','submit',['label'=>$this->get('translator')->trans('Make a Reservation')])
+         ->getForm();
+
         return $this->render('OTBackendBundle:Learner:time_selection.html.twig',
             ['event'=>$event,
              'teacher'=>$teacher,
              'course'=>$course,
              'userid'=>$userid,
              'usertz'=>$usertz,
+             'bookedtime'=>$bookedtime,
+             'timespans'=>$timespans->createView(),
             ]
             );
     }

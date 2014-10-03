@@ -15,18 +15,30 @@
 		<p class="lead">{% trans %}Book a Time{% endtrans %}<p>
 		<p>{% trans %}Taught by{% endtrans %}<strong> {{ teacher.name }}</strong> 
 		{% trans %}for the course {% endtrans %} <strong>{{ course.name }}</strong>, {% trans %}lasting{% endtrans %}<strong> {{ course.duration }} </strong>{% trans %}minutes{% endtrans %},
-		{% trans %}from{% endtrans %} <strong>{{ event.start|date('l H:m', usertz) }} </strong>{% trans %}to{% endtrans %}<strong> {{ event.end|date('l H:m',usertz) }}</strong>.</p>
+		{% trans %}from{% endtrans %} <strong>{{ event.start|date('l H:i', usertz) }} </strong>{% trans %}to{% endtrans %}<strong> {{ event.end|date('l H:i',usertz) }}</strong>.</p>
 
-		<p>Avoid booking the following time span(s),</p>
-		<ul>
-		<li>XX:XX -- XX:XX</li>
-		</ul>
+		{% if bookedtime[0] is defined %}
+		<div class="alert alert-warning" role="alert">
+			<strong>Avoid booking the following time span(s),</strong>
+			<ul>
+				{% for bookedtimespan in bookedtime %}
+					<li>
+						{{ bookedtimespan.start|date('l H:i', usertz) }} -- {{ bookedtimespan.end|date('l H:i', usertz) }}
+					</li>
+				{% endfor %}
+			</ul>
+		</div>
+		{% endif %}
 		
 		<hr />
 		<p class="lead">{% trans %}When do you want the course begin{% endtrans %}</p>
-		<input type="number"></input>
-		<hr />
-		<a class="btn btn-primary" href="javascript:history.back()">{% trans %}Make this reservation{% endtrans %}</a>
+		{% if timespans is defined %}
+			{{ form(timespans) }}
+		{% else %}
+			<p>{% trans %}There is no time available now.{% endtrans %}</p>
+		{% endif %}
+		
+		
 
 	</div>
 	</div>
