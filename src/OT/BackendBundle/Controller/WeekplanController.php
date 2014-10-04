@@ -213,9 +213,9 @@ class WeekplanController extends Controller
         $learner_name=$this->getDoctrine()->getRepository('OTBackendBundle:User')->findOneById($userid)->getName();
 
         $calendar->create_or_update_event(null,
-                                         $teacher_name . ' - ' . $learner_name . ': ' . $course->getName() . ' - ' . $course->getDuration() . 'mins',
+                                         $teacher_name . ' - ' . $learner_name . ' - ' . $course->getName() . ' - ' . $course->getDuration() . 'mins',
                                          gmdate('r', $time_selected),
-                                         gmdate('r', $time_selected),
+                                         gmdate('r',$time_selected+$course->getDuration()*60),
                                          'BOOKED',
                                          $userid,
                                          $teacher_id,
@@ -241,10 +241,11 @@ class WeekplanController extends Controller
 
         $bookedtime=$calendar->fetch_events(null, $start, $end,
                                  $status='BOOKED', null ,
-                                 $teacher, null);
+                                 $teacher , null);
 
         for ($i=$start;$i<=$end-$course->getDuration()*60;$i+=600){
-            $timespans[strval($i)] = $calendar->convert_time_string_to_another_timezone(gmdate('r',strval($i)), 'GMT', $usertz, 'D, m-d, H:i');
+            $timespans[strval($i)] = $calendar->convert_time_string_to_another_timezone(gmdate('r',strval($i)), 'GMT', $usertz, 'D, m-d, H:i').' - '.
+                                    $calendar->convert_time_string_to_another_timezone(gmdate('r',strval($i+$course->getDuration()*60)), 'GMT', $usertz, 'H:i');
         }
 
         $timespans=$this->createFormBuilder()

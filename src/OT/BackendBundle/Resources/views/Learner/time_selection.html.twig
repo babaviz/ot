@@ -13,13 +13,16 @@
 
 		<a class="btn btn-default pull-right" href="javascript:history.back()">{% trans %}Go Back{% endtrans %}</a>
 		<p class="lead">{% trans %}Book a Time{% endtrans %}<p>
-		<p>{% trans %}Taught by{% endtrans %}<strong> {{ teacher.name }}</strong> 
-		{% trans %}for the course {% endtrans %} <strong>{{ course.name }}</strong>, {% trans %}lasting{% endtrans %}<strong> {{ course.duration }} </strong>{% trans %}minutes{% endtrans %},
-		{% trans %}from{% endtrans %} <strong>{{ event.start|date('l H:i', usertz) }} </strong>{% trans %}to{% endtrans %}<strong> {{ event.end|date('l H:i',usertz) }}</strong>.</p>
+
+		<div class="alert alert-info" role="alert">
+			<p>{% trans %}Course {% endtrans %} <strong>{{ course.name }}</strong> {% trans %}taught by{% endtrans %}<strong> {{ teacher.name }}</strong> 
+			, {% trans %}lasting{% endtrans %}<strong> {{ course.duration }} </strong>{% trans %}minutes{% endtrans %}</p>
+			<p>{% trans %}You may book a time from{% endtrans %} <strong>{{ event.start|date('l H:i', usertz) }} </strong>{% trans %}to{% endtrans %}<strong> {{ event.end|date('l H:i',usertz) }}</strong>.</p>
+		</div>
 
 		{% if bookedtime[0] is defined %}
 		<div class="alert alert-warning" role="alert">
-			<strong>Avoid booking the following time span(s),</strong>
+			<strong>The following time span(s) were booked by others already,</strong>
 			<ul>
 				{% for bookedtimespan in bookedtime %}
 					<li>

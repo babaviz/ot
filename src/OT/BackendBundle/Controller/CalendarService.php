@@ -110,7 +110,7 @@ class CalendarService
   	}
 
   	if ($teacher_id !== null){
-  		$query->andWhere('e.user_id = :teacher_id')
+  		$query->andWhere('e.teacher_id = :teacher_id')
   			  ->setParameter('teacher_id',$teacher_id);
   	}
 
