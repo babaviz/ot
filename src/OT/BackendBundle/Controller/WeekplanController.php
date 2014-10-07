@@ -204,6 +204,7 @@ class WeekplanController extends Controller
         $calendar = $this->get('ot_calendar_v2');
         $time_selected = intval($request->request->get('form')['time_selected']);
         $userid=$this->get('security.context')->getToken()->getUser()->getId();
+        $usertz=$this->getDoctrine()->getRepository('OTBackendBundle:User')->findOneById($userid)->getTimezone();
         $event_id = $request->request->get('form')['event_id'];
         $course_id = $request->request->get('form')['course_id'];
         $course=$this->getDoctrine()->getRepository('OTBackendBundle:Course')->findOneById($course_id);
@@ -212,7 +213,7 @@ class WeekplanController extends Controller
         $teacher_name=$this->getDoctrine()->getRepository('OTBackendBundle:User')->findOneById($teacher_id)->getName();
         $learner_name=$this->getDoctrine()->getRepository('OTBackendBundle:User')->findOneById($userid)->getName();
 
-        $calendar->create_or_update_event(null,
+        $event_created_id = $calendar->create_or_update_event(null,
                                          $teacher_name . ' - ' . $learner_name . ' - ' . $course->getName() . ' - ' . $course->getDuration() . 'mins',
                                          gmdate('r', $time_selected),
                                          gmdate('r',$time_selected+$course->getDuration()*60),
@@ -221,7 +222,19 @@ class WeekplanController extends Controller
                                          $teacher_id,
                                          $userid);
 
-        return new Response($time_selected.','.$event_id.','.$course_id);
+        #return new Response($time_selected.','.$event_id.','.$course_id);
+        return $this->render('OTBackendBundle:Learner:time_selection_finish.html.twig',
+            [
+                'course_id'=>$course->getCourseId(),
+                'course_name'=>$course->getName(),
+                'teacher_name'=>$teacher_name,
+                'learner_name'=>$learner_name,
+                'date'=>$calendar->convert_time_string_to_another_timezone(gmdate('r', $time_selected),'GMT',$usertz, 'D, Y-m-d'),
+                'time_start'=>$calendar->convert_time_string_to_another_timezone(gmdate('r', $time_selected),'GMT',$usertz, 'H:i'),
+                'time_end'=>$calendar->convert_time_string_to_another_timezone(gmdate('r', $time_selected+$course->getDuration()*60),'GMT',$usertz, 'H:i'),
+                'ref_num'=>base64_encode(str_pad($event_created_id, 6, '0', STR_PAD_LEFT)),
+            ]
+            );
         
     }
 
@@ -239,7 +252,7 @@ class WeekplanController extends Controller
         $start = $event->getStart();
         $end = $event->getEnd();
 
-        $bookedtime=$calendar->fetch_events(null, $start, $end,
+        $bookedtime=$calendar->fetch_events(null, gmdate('r',$start), gmdate('r',$end),
                                  $status='BOOKED', null ,
                                  $teacher , null);
 

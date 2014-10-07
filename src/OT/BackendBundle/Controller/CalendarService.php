@@ -71,6 +71,8 @@ class CalendarService
   	$this->em->persist($event);
   	$this->em->flush();
 
+    return $event->getId();
+
   }
 
   function fetch_events($event_id=null, $start_string=null, $end_string=null,

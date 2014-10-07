@@ -1,0 +1,67 @@
+{% extends "::two-col.html.twig" %}
+
+{% block title %}{% trans %}Choose Your Course{% endtrans %}{% endblock %}
+
+{% block sidebar %}
+{% include "OTBackendBundle:Learner:sidebar.html.twig" %}
+{% endblock %}
+
+{% block body %}
+	<div class="panel panel-default">
+	{#<div class="panel-heading">{% trans %}Dashboard{% endtrans %}</div>#}
+	<div class="panel-body">
+
+		<p class="lead">{% trans %}Booking Successful{% endtrans %}<p>
+		
+		<div class="well" id="printarea">
+			<table class="table">
+				<thead>
+					<th colspan="2">{% trans %}Course Booking Confirmation{% endtrans %} </th>
+				</thead>
+				<tbody>
+					<tr>
+						<td colspan="2"><em class="pull-right">{{ app_title }} <br> Booked on {{ "now"|date("Y-m-d H:i:s") }} UTC <br>
+						Ref # {{ ref_num }} </em> </td>
+					</tr>
+					<tr>
+						<td>{% trans %}Course{% endtrans %}</td>
+						<td>[{{ course_id }}] <br> {{ course_name }}</td>
+					</tr>
+					<tr>
+						<td>{% trans %}Teacher{% endtrans %}</td>
+						<td>{{ teacher_name }}</td>
+					</tr>
+					<tr>
+						<td>{% trans %}Time{% endtrans %}</td>
+						<td> {{ date }} <br> <strong>{{ time_start }} - {{ time_end }}</strong></td>
+					</tr>
+					<tr>
+						<td>{% trans %}Booked by{% endtrans %}</td>
+						<td>{{ learner_name }}</td>
+					</tr>
+					<tr>
+						<td>{% trans %}Link to the course{% endtrans %}</td>
+						<td>-</td>
+					</tr>
+					
+				</tbody>
+			</table>
+		</div>
+		<p>{% trans %}Please log in the system on the time specified to start learning. If you have any questions with regard to this page, please contact us.{% endtrans %}</p>
+		<script>
+			function printContent(el){
+				var restorepage = document.body.innerHTML;
+				var printcontent = document.getElementById(el).innerHTML;
+				document.body.innerHTML = printcontent;
+				window.print();
+				document.body.innerHTML = restorepage;
+			}
+		</script>
+		<button class="btn" onclick="printContent('printarea')">Print</button>
+		
+	</div>
+	</div>
+
+<p class="help-block">{% trans %}If you have any questions, please contact school365.{% endtrans %}</p>
+
+{% endblock %}
